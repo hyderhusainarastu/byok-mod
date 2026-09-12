@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: MIT
+# Managed component manifest for the "main" component. The component manager
+# resolves this (and every other idf_component.yml in the build, e.g. none
+# currently in components/) into managed_components/ on first `idf.py build`
+# / `idf.py reconfigure` -- nothing here is vendored into this tree.
+dependencies:
+  idf: ">=5.0"
+  # esp_tinyusb 2.2.1 (latest as of 2026-09-03) requires idf >=5.0 and pulls
+  # in the "tinyusb" component itself (>=0.17.0~2) as its own dependency --
+  # both become ordinary IDF components in the build, visible to any
+  # component whose CMakeLists.txt REQUIRES/PRIV_REQUIRES them by name
+  # (components/byok_usb_cdc does; this file only needs to be the one place
+  # that names the version). Pinned to an exact version rather than a range
+  # so a rebuild months from now doesn't silently pick up a newer major.
+  espressif/esp_tinyusb: "2.2.1"

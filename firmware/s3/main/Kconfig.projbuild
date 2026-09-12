@@ -1,0 +1,95 @@
+menu "BYOK Mod"
+
+    config BYOK_STOCK_GPIO_PARITY
+        bool "Configure GPIO 35/39/47 OUTPUT-LOW at boot, matching stock exactly"
+        default y
+        help
+            The stock firmware configures GPIOs 17, 35, 39, 42 and 47 as
+            OUTPUT and drives all five LOW in one contiguous block, as the
+            very first GPIO action of SYS_APP init -- well before any I2C
+            bus, the display, or the boot-mode fork (docs/pinout.md
+            Sec.5, evidence offsets there). This firmware already
+            reproduces GPIO 42 (the power latch, init_power_hold_gpio())
+            with the same polarity and boot-time placement; GPIO 17 is
+            reserved for a future PICO-reset implementation and is not yet
+            driven by anything. GPIOs 35, 39 and 47 were, before this
+            option existed, never configured or driven at all -- left in
+            their ESP32-S3 reset state (input, floating) instead of stock's
+            OUTPUT-LOW.
+
+            35 and 47 are STRONGLY INDICATED S3->PICO handshake lines
+            (request/ready-out and transfer-strobe respectively,
+            hw_config.h Sec.5); 39 has NO confirmed function anywhere in
+            either vendor firmware image (hw_config.h Sec.13
+            BYOK_GPIO39_FUNCTION) but is the only one of the three with no
+            OTHER candidate role either, which is why
+            docs/recovery.md §6 and the 2026-09-03
+            blank-display incident (docs/troubleshooting.md) flag it as a
+            POSSIBLE
+            (not confirmed) panel-supply/level-shifter enable line.
+
+            ON (the default, byok-mod 0.1.6+): configures GPIOs 35, 39 and
+            47 as OUTPUT and drives each LOW, in stock's own relative order
+            (35, then 47, then 39 -- see docs/pinout.md §5) and
+            with stock's own timing (a single gpio_config() call covering
+            all three, then three gpio_set_level() calls back-to-back with
+            no delay between them, matching the disassembly exactly), as
+            early in app_main() as GPIO 42's own latch -- immediately after
+            it, before check_boot_button()/byok_power_init()/the SD
+            updater/byok_display_init(). Never touches any pin outside this
+            three-pin set. Each pin's configuration is logged individually.
+
+            This is a stock-parity change, not a claimed display fix: by
+            construction it can never do anything the stock firmware does
+            not already do on every boot of this exact board. It is enabled
+            by default this release specifically to test the panel-enable
+            hypothesis above, alongside the display driver's own ACK probe
+            (components/byok_display's byok_display_init()) -- see
+            docs/display.md for the full reasoning chain.
+
+            OFF: exact 0.1.5 behaviour -- GPIOs 35/39/47 left unconfigured
+            (input, floating), matching every byok-mod release through
+            0.1.5.
+
+    config BYOK_ALLOW_OTADATA_WRITE
+        bool "Allow BOOT_ORIGINAL to actually write otadata (esp_ota_set_boot_partition)"
+        default n
+        help
+            BOOT_ORIGINAL (docs/protocol.md Sec.6.4, type 0x26) and the
+            boot-time EXECUTE-held-3s path (D-011) both call
+            esp_ota_set_boot_partition() on the stock app partition, which
+            writes the `otadata` partition -- one of the flash regions
+            SAFETY.md's hard rules single out as never-erase, never-write
+            until "a verified backup AND a tested recovery path both exist"
+            (see docs/recovery.md).
+
+            With this OFF (the default), both paths still run their full
+            lookup/validation logic but stop just short of the actual OTA
+            write: BOOT_ORIGINAL replies NACK/E_NOT_PERMITTED and the
+            boot-time button hold logs a warning and does nothing. HELLO_ACK
+            and INFO's capability bit 8 (BOOT_ORIGINAL available) also read
+            as 0 while this is off, so a connected host's UI does not offer
+            a control that would always fail.
+
+            Turn this ON only after the project's own recovery-path gate
+            (docs/recovery.md, SAFETY.md §1 / D-003) is actually satisfied
+            for this specific device -- not as a build-time convenience.
+
+    config BYOK_USB_CDC_MIN_UPTIME_MS
+        int "Minimum uptime (ms) before claiming the USB-OTG PHY for CDC-ACM"
+        default 5000
+        help
+            With CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=n (this device has no
+            automatic rollback -- docs/bootloader-analysis.md), esptool over
+            USB-Serial-JTAG is the ONLY recovery from a crash-looping image,
+            and that recovery window is only open until this app claims the
+            native USB-OTG PHY for TinyUSB CDC-ACM (a different USB
+            peripheral -- see byok_usb_cdc.h "Two USB personalities"). This
+            value is app_main's own minimum boot-to-CDC-init delay, enforced
+            with esp_timer_get_time() immediately before
+            byok_usb_cdc_init(), independent of how long the boot self-test
+            animation happens to run. README.md documents the observed ~4 s
+            USJ enumeration window; the default here is set comfortably
+            above that.
+
+endmenu

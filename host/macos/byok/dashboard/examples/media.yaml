@@ -1,0 +1,75 @@
+# media.yaml -- what's playing, the time, and a QR code to scan.
+#
+# Three widgets: a clock, a now-playing line (via the optional
+# `nowplaying-cli` third-party tool -- see widgets/now_playing.py's module
+# docstring; falls back to "Not playing" without it, no install required),
+# and a QR code encoding a configured URL.
+#
+# Renders fully with the offline/fake providers -- `now_playing` degrades
+# to "Not playing" with no real provider behind it, same as every other
+# provider-backed widget here. The QR code itself needs no provider at
+# all: `widgets/qr.py` is a from-scratch, dependency-free encoder (see its
+# module docstring for scope/caveats -- notably, it has been verified by
+# an independent decode round-trip in this repo's own test suite, but
+# *not* by scanning a printed/rendered code with a real phone camera).
+#
+# A 240x80 panel physically cannot fit a large QR code: the bottom two
+# rows here are 32px tall, which limits the rendered code to roughly
+# 25x25 px regardless of how much horizontal room is given (QRWidget
+# scales by the *smaller* of the tile's width/height, in whole-pixel
+# module steps -- see widgets/qr.py's `render()`). That's why the URL
+# below is kept short enough to fit QR version 1 (the smallest possible
+# matrix, 21x21 modules + a 2-module quiet zone each side): a longer URL
+# bumps the version up, which only makes an already-tight fit worse. If
+# you depend on this code actually being scannable, test it with your
+# phone once after installing -- the module docstring's caveat applies
+# here same as anywhere else this encoder is used.
+#
+# Customize: edit `options.data` under the `qr` widget below to your own
+# URL (keep it short -- see the paragraph above).
+#
+# Try it:
+#   byok dashboard --config media
+#   byok dashboard --config examples/media.yaml
+#
+# See docs/host-tools.md for the full widget/option reference.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 15
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  # Clock, top 2 of 5 rows (32px).
+  - type: clock
+    at: [0, 0]
+    span: [12, 2]
+    options:
+      format: "%H:%M"
+
+  # Now playing, 1 row (16px) -- same text_case reasoning as
+  # examples/work.yaml's rows: explicit `upper` rather than relying on the
+  # 12px auto-default boundary, matching
+  # default_dashboard_240x80.yaml's own now_playing row.
+  - type: now_playing
+    at: [0, 2]
+    span: [12, 1]
+    options:
+      text_case: upper
+
+  # QR code, bottom 2 rows (32px) -- centered in the full 240px width even
+  # though (per the header comment above) only ~25px of that height ends
+  # up used; the tile itself is deliberately given more room than the
+  # code can use so it never touches the tile's own edges.
+  - type: qr
+    at: [0, 3]
+    span: [12, 2]
+    options:
+      data: "https://byok.dev"

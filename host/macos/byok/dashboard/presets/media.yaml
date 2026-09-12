@@ -1,0 +1,49 @@
+# media preset -- what's playing + the time. NO QR code.
+#
+# Owner decision: the presets/ media config drops the `qr`
+# widget examples/media.yaml uses -- a device-switchable "media" screen
+# that also handles UP/DOWN/BRIGHTNESS button transport (see
+# dashboard/loop.py's on_button handling, docs/host-tools.md's "Media
+# transport" section) is meant to be looked at and controlled, not
+# scanned; the QR row's screen real estate goes to a bigger now-playing
+# line instead. The `qr` widget class itself is untouched
+# (widgets/qr.py, still registered, still used by examples/media.yaml
+# and any config that wants it) -- this is a per-preset content choice,
+# not a capability removal.
+#
+# Renders fully offline: now_playing degrades to "Not playing" with no
+# `nowplaying-cli` behind it, same as examples/media.yaml.
+#
+# Try it:
+#   byok dashboard --preset media
+#
+# See docs/host-tools.md's "Presets" and "Media transport" sections.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 15
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  # Clock, top 3 of 5 rows (48px) -- more room than examples/media.yaml's
+  # clock gets, since this file has no QR row competing for height.
+  - type: clock
+    at: [0, 0]
+    span: [12, 3]
+    options:
+      format: "%H:%M"
+
+  # Now playing, remaining 2 rows (32px) -- sized to read at a glance
+  # from across a room, which is the point of freeing up the QR row here.
+  - type: now_playing
+    at: [0, 3]
+    span: [12, 2]
+    options:
+      text_case: upper

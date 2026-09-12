@@ -1,0 +1,5 @@
+Filtering the log data using "composedMessage CONTAINS[c] "303a" OR composedMessage CONTAINS[c] "usbmodem" OR composedMessage CONTAINS[c] "terminateDevice""
+Timestamp               Ty Process[PID:TID]
+2026-09-03 02:49:52.714 Df kernel[0:2b9b67] (IOUSBHostFamily) usb-drd0-port-hs@00100000: AppleUSBHostPort::enumerateDeviceComplete_block_invoke: enumerated 0x303a/1001/0101 (USB JTAG/serial debug unit / 1) at 12 Mbps
+2026-09-03 02:50:16.696 Df kernel[0:67e] (IOUSBHostFamily) usb-drd0-port-hs@00100000: AppleUSBHostPort::terminateDevice: destroying 0x303a/1001/0101 (USB JTAG/serial debug unit): hardware connection lost
+2026-09-03 02:50:16.977 Df kernel[0:2c233e] (IOUSBHostFamily) usb-drd0-port-hs@00100000: AppleUSBHostPort::enumerateDeviceComplete_block_invoke: enumerated 0x303a/83b8/0100 (BYOK Mod Display / 1) at 12 Mbps

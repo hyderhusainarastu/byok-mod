@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 1620" width="700" height="1620" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+<style>
+  .title { font-size: 16px; font-weight: 700; fill: #1a1a1a; }
+  .subtitle { fill: #444; }
+  .addr { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 9px; fill: #333; }
+  .band-label { font-weight: 600; fill: #1a1a1a; }
+  .band-size { font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; font-size: 9px; fill: #555; }
+  .band-sub { }
+  .tag-text { font-size: 8.6px; font-weight: 700; fill: #ffffff; }
+  .callout-num { font-size: 10px; font-weight: 700; fill: #ffffff; }
+  .callout-body { }
+  .panel-title { font-size: 12.5px; font-weight: 700; fill: #4a3a10; }
+  .panel-body { }
+  .legend-title { font-size: 9px; font-weight: 700; fill: #555; letter-spacing: 0.5px; }
+  .legend-txt { font-size: 9px; fill: #333; }
+  .footer { font-size: 8.6px; fill: #777; font-style: italic; }
+</style>
+<defs>
+  <pattern id="erasedHatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+    <line x1="0" y1="0" x2="0" y2="7" stroke="#ffffff" stroke-width="3.4" opacity="0.55"/>
+  </pattern>
+  <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0,0 L8,4 L0,8 z" fill="#666"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="700" height="1620" fill="#fbfbfa"/>
+<text x="350.0" y="30" text-anchor="middle" class="title">S3 flash layout, read off the device -- all CONFIRMED</text>
+<text x="350.0" y="52" text-anchor="middle" font-size="10" class="subtitle">
+<tspan x="350.0" dy="0">Chip ESP32-S3 rev v0.2, 16 MiB flash, JEDEC 46 40 18, no flash encryption, no secure boot.</tspan>
+<tspan x="350.0" dy="13.4">The partition table is self-verifying: its stored MD5 matches a recomputation over its own</tspan>
+<tspan x="350.0" dy="13.4">seven entries.</tspan>
+</text>
+<line x1="96" y1="150" x2="330" y2="150" stroke="#2b2b2b" stroke-width="1.6"/>
+<rect x="96" y="150.0" width="234" height="81.4" fill="#eef1f5" stroke="#aab4c0" stroke-width="1.1"/>
+<line x1="96" y1="231.4" x2="330" y2="231.4" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="161.0" text-anchor="end" class="addr">0x000000</text>
+<text x="104" y="163.0" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">2nd-stage bootloader</tspan>
+</text>
+<text x="324" y="163.0" text-anchor="end" class="band-size">32 KiB</text>
+<text x="104" y="178.8" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">ESP-IDF v5.5.3-dirty, unsigned,</tspan>
+<tspan x="104" dy="10.8">plaintext. Occupies 0x000000-0x005270;</tspan>
+<tspan x="104" dy="10.8">0x005270-0x008000 is 0xFF. Described by</tspan>
+<tspan x="104" dy="10.8">no partition entry.</tspan>
+</text>
+<rect x="96" y="231.4" width="234" height="82.8" fill="#eef1f5" stroke="#aab4c0" stroke-width="1.1"/>
+<line x1="96" y1="314.2" x2="330" y2="314.2" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="242.4" text-anchor="end" class="addr">0x008000</text>
+<text x="104" y="244.4" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">partition table</tspan>
+<tspan x="104" dy="12.2">(7 entries + MD5)</tspan>
+</text>
+<text x="324" y="244.4" text-anchor="end" class="band-size">4 KiB</text>
+<text x="104" y="272.4" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Described by no partition entry. Stored</tspan>
+<tspan x="104" dy="10.8">MD5 matches a recomputation over its own</tspan>
+<tspan x="104" dy="10.8">7 entries -- self-verifying.</tspan>
+</text>
+<rect x="96" y="314.2" width="234" height="92.2" fill="#fbe3e3" stroke="#c94b4b" stroke-width="1.1"/>
+<line x1="96" y1="406.4" x2="330" y2="406.4" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="325.2" text-anchor="end" class="addr">0x009000</text>
+<text x="104" y="327.2" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">nvs  (data / nvs)</tspan>
+</text>
+<text x="324" y="327.2" text-anchor="end" class="band-size">16 KiB</text>
+<text x="104" y="343.0" font-size="8.2" fill="#8a2a2a" class="band-sub">
+<tspan x="104" dy="0">The only copy of the device identity:</tspan>
+<tspan x="104" dy="10.8">Wi-Fi credentials, Bluetooth pairing,</tspan>
+<tspan x="104" dy="10.8">device token, user settings, AND the</tspan>
+<tspan x="104" dy="10.8">radio calibration. In no archive, cannot</tspan>
+<tspan x="104" dy="10.8">be regenerated. NEVER write or erase.</tspan>
+</text>
+<rect x="96" y="406.4" width="234" height="92.2" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1.1"/>
+<rect x="96" y="406.4" width="234" height="92.2" fill="url(#erasedHatch)"/>
+<line x1="96" y1="498.6" x2="330" y2="498.6" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="417.4" text-anchor="end" class="addr">0x00D000</text>
+<text x="104" y="419.4" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">unallocated gap, all 0xFF</tspan>
+</text>
+<text x="324" y="419.4" text-anchor="end" class="band-size">8 KiB</text>
+<text x="104" y="435.2" font-size="8.2" fill="#a3372f" class="band-sub">
+<tspan x="104" dy="0">This is NOT otadata. The ESP-IDF default</tspan>
+<tspan x="104" dy="10.8">layout puts otadata here; on this device</tspan>
+<tspan x="104" dy="10.8">it is an empty gap. A procedure written</tspan>
+<tspan x="104" dy="10.8">against default offsets touches the</tspan>
+<tspan x="104" dy="10.8">wrong address.</tspan>
+</text>
+<rect x="96" y="498.6" width="234" height="81.4" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1.1"/>
+<rect x="96" y="498.6" width="234" height="81.4" fill="url(#erasedHatch)"/>
+<line x1="96" y1="580.0" x2="330" y2="580.0" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="509.6" text-anchor="end" class="addr">0x00F000</text>
+<text x="104" y="511.6" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">phy_init</tspan>
+</text>
+<text x="324" y="511.6" text-anchor="end" class="band-size">4 KiB</text>
+<text x="104" y="527.4" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">All 0xFF -- erased and never written;</tspan>
+<tspan x="104" dy="10.8">that is the correct stock state. The</tspan>
+<tspan x="104" dy="10.8">calibration actually used lives in nvs.</tspan>
+<tspan x="104" dy="10.8">Do not populate it.</tspan>
+</text>
+<rect x="96" y="580.0" width="234" height="150.0" fill="#dcf3e1" stroke="#3f9e5e" stroke-width="1.1"/>
+<line x1="96" y1="730.0" x2="330" y2="730.0" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="591.0" text-anchor="end" class="addr">0x010000</text>
+<text x="104" y="593.0" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">factory (app)</tspan>
+</text>
+<text x="324" y="593.0" text-anchor="end" class="band-size">3 MiB</text>
+<rect x="104" y="594.0" width="54" height="14" rx="3" fill="#3f9e5e"/>
+<text x="131" y="604.0" text-anchor="middle" class="tag-text">BOOTED</text>
+<text x="104" y="628.8" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">The stock application, 2,114,864 B</tspan>
+<tspan x="104" dy="10.8">payload, rest erased. This is the</tspan>
+<tspan x="104" dy="10.8">return-to-stock target.</tspan>
+</text>
+<rect x="96" y="730.0" width="234" height="150.0" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1.1"/>
+<rect x="96" y="730.0" width="234" height="150.0" fill="url(#erasedHatch)"/>
+<line x1="96" y1="880.0" x2="330" y2="880.0" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="741.0" text-anchor="end" class="addr">0x310000</text>
+<text x="104" y="743.0" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">ota_0 (app)</tspan>
+</text>
+<text x="324" y="743.0" text-anchor="end" class="band-size">3 MiB</text>
+<text x="104" y="758.8" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Free / all 0xFF at the time of the dump;</tspan>
+<tspan x="104" dy="10.8">the slot the stock updater writes first.</tspan>
+</text>
+<rect x="96" y="880.0" width="234" height="150.0" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1.1"/>
+<rect x="96" y="880.0" width="234" height="150.0" fill="url(#erasedHatch)"/>
+<line x1="96" y1="1030.0" x2="330" y2="1030.0" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="891.0" text-anchor="end" class="addr">0x610000</text>
+<text x="104" y="893.0" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">ota_1 (app)</tspan>
+</text>
+<text x="324" y="893.0" text-anchor="end" class="band-size">3 MiB</text>
+<text x="104" y="908.8" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Free / all 0xFF; the A/B partner.</tspan>
+</text>
+<rect x="96" y="1030.0" width="234" height="81.4" fill="#fdf0d0" stroke="#c99a2e" stroke-width="1.1"/>
+<line x1="96" y1="1111.4" x2="330" y2="1111.4" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="1041.0" text-anchor="end" class="addr">0x910000</text>
+<text x="104" y="1043.0" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">otadata</tspan>
+</text>
+<text x="324" y="1043.0" text-anchor="end" class="band-size">8 KiB</text>
+<text x="104" y="1058.8" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Both ota_select entries all-0xFF, no</tspan>
+<tspan x="104" dy="10.8">valid CRC =&gt; the bootloader ignores</tspan>
+<tspan x="104" dy="10.8">otadata and boots factory. No OTA had</tspan>
+<tspan x="104" dy="10.8">ever run on this unit.</tspan>
+</text>
+<rect x="96" y="1111.4" width="234" height="82.8" fill="#eef1f5" stroke="#aab4c0" stroke-width="1.1"/>
+<line x1="96" y1="1194.2" x2="330" y2="1194.2" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="1122.4" text-anchor="end" class="addr">0x912000</text>
+<text x="104" y="1124.4" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">assets (FAT, subtype 0x81,</tspan>
+<tspan x="104" dy="12.2">wear-levelled)</tspan>
+</text>
+<text x="324" y="1124.4" text-anchor="end" class="band-size">256 KiB</text>
+<text x="104" y="1152.4" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Seven Lua UI files, ~159,744 B free.</tspan>
+<tspan x="104" dy="10.8">Wear-levelling makes a raw image of this</tspan>
+<tspan x="104" dy="10.8">partition a trap.</tspan>
+</text>
+<rect x="96" y="1194.2" width="234" height="223.8" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1.1"/>
+<rect x="96" y="1194.2" width="234" height="223.8" fill="url(#erasedHatch)"/>
+<line x1="96" y1="1418.0" x2="330" y2="1418.0" stroke="#2b2b2b" stroke-width="1"/>
+<text x="88" y="1205.2" text-anchor="end" class="addr">0x952000</text>
+<text x="104" y="1207.2" font-size="10.2" class="band-label">
+<tspan x="104" dy="0">unallocated tail</tspan>
+</text>
+<text x="324" y="1207.2" text-anchor="end" class="band-size">6.68 MiB</text>
+<text x="104" y="1223.0" font-size="8.2" fill="#494949" class="band-sub">
+<tspan x="104" dy="0">Verified entirely 0xFF, up to 0x1000000.</tspan>
+</text>
+<line x1="96" y1="1418.0" x2="330" y2="1418.0" stroke="#2b2b2b" stroke-width="1.6"/>
+<text x="88" y="1422.0" text-anchor="end" class="addr">0x1000000</text>
+<line x1="330" y1="655.0" x2="364" y2="805.0" stroke="#7a7a7a" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+<line x1="330" y1="805.0" x2="364" y2="805.0" stroke="#7a7a7a" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+<line x1="330" y1="955.0" x2="364" y2="805.0" stroke="#7a7a7a" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+<rect x="378" y="766.2" width="288" height="77.6" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1"/>
+<circle cx="392" cy="781.2" r="9" fill="#3a3a3a"/>
+<text x="392" y="784.7" text-anchor="middle" class="callout-num">1</text>
+<text x="406" y="784.2" font-size="8.6" fill="#2b2b2b" class="callout-body">
+<tspan x="406" dy="0">esp_ota_get_next_update_partition(NULL)</tspan>
+<tspan x="406" dy="11.4">returns the slot after the running</tspan>
+<tspan x="406" dy="11.4">one, so the running image is never</tspan>
+<tspan x="406" dy="11.4">overwritten (CONFIRMED).</tspan>
+</text>
+<line x1="330" y1="880.0" x2="364" y2="921.4" stroke="#7a7a7a" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+<rect x="378" y="859.8" width="288" height="123.2" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1"/>
+<circle cx="392" cy="874.8" r="9" fill="#3a3a3a"/>
+<text x="392" y="878.3" text-anchor="middle" class="callout-num">3</text>
+<text x="406" y="877.8" font-size="8.6" fill="#2b2b2b" class="callout-body">
+<tspan x="406" dy="0">A modified image goes here. It</tspan>
+<tspan x="406" dy="11.4">must be a valid ESP32-S3 IDF app</tspan>
+<tspan x="406" dy="11.4">image (magic 0xE9, valid header,</tspan>
+<tspan x="406" dy="11.4">valid appended SHA-256) and at</tspan>
+<tspan x="406" dy="11.4">most 0x300000 bytes. One built</tspan>
+<tspan x="406" dy="11.4">image of the modified firmware</tspan>
+<tspan x="406" dy="11.4">measured 470,752 B -- about 15% of</tspan>
+<tspan x="406" dy="11.4">a slot.</tspan>
+</text>
+<line x1="330" y1="1070.7" x2="364" y2="1070.7" stroke="#7a7a7a" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrow)"/>
+<rect x="378" y="1020.5" width="288" height="100.4" rx="6" fill="#ffffff" stroke="#8a8a8a" stroke-width="1"/>
+<circle cx="392" cy="1035.5" r="9" fill="#3a3a3a"/>
+<text x="392" y="1039.0" text-anchor="middle" class="callout-num">2</text>
+<text x="406" y="1038.5" font-size="8.6" fill="#2b2b2b" class="callout-body">
+<tspan x="406" dy="0">erase_region 0x910000 0x2000</tspan>
+<tspan x="406" dy="11.4">blanks otadata and makes the</tspan>
+<tspan x="406" dy="11.4">bootloader fall through to factory</tspan>
+<tspan x="406" dy="11.4">-- the one-command return to</tspan>
+<tspan x="406" dy="11.4">stock. Nothing else needs</tspan>
+<tspan x="406" dy="11.4">restoring.</tspan>
+</text>
+<rect x="24" y="1444.0" width="652" height="102.4" rx="8" fill="#fdf0d0" stroke="#c99a2e" stroke-width="1.3"/>
+<text x="40" y="1466.0" class="panel-title">No automatic rollback</text>
+<text x="40" y="1484.0" font-size="9.4" fill="#4a3a10" class="panel-body">
+<tspan x="40" dy="0">esp_ota_mark_app_valid_cancel_rollback and esp_ota_check_rollback_is_possible are absent from</tspan>
+<tspan x="40" dy="13.6">the stock image, and the stock bootloader treats ota_state UNDEFINED and VALID identically. If a</tspan>
+<tspan x="40" dy="13.6">written image boots but is broken, nothing reverts it. The recovery routes are (a) the SD</tspan>
+<tspan x="40" dy="13.6">updater with a known-good tar and (b) esptool over USB-Serial-JTAG.  Grade: CONFIRMED.</tspan>
+</text>
+<text x="24" y="1566.4" class="legend-title">LEGEND</text>
+<rect x="40.0" y="1576.4" width="16" height="12" fill="#dcf3e1" stroke="#3f9e5e" stroke-width="1"/>
+<text x="62.0" y="1586.4" class="legend-txt">booted</text>
+<rect x="120.4" y="1576.4" width="16" height="12" fill="#f2f2f2" stroke="#c2c2c2" stroke-width="1"/>
+<text x="142.4" y="1586.4" class="legend-txt">free / erased</text>
+<rect x="238.6" y="1576.4" width="16" height="12" fill="#fbe3e3" stroke="#c94b4b" stroke-width="1"/>
+<text x="260.6" y="1586.4" class="legend-txt">never touch</text>
+<rect x="346.0" y="1576.4" width="16" height="12" fill="#fdf0d0" stroke="#c99a2e" stroke-width="1"/>
+<text x="368.0" y="1586.4" class="legend-txt">writable only through a gated path</text>
+<line x1="24" y1="1590.4" x2="676" y2="1590.4" stroke="#ddd" stroke-width="1"/>
+<text x="350.0" y="1604.4" text-anchor="middle" class="footer">Offsets are device-read, not ESP-IDF defaults and not copied from a template partitions.csv.</text>
+</svg>

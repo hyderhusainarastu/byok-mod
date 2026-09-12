@@ -1,0 +1,298 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1512" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#20221f"/>
+  </marker>
+  <marker id="arrowamber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#5b4a15"/>
+  </marker>
+  <marker id="arrowgray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#6b6b62"/>
+  </marker>
+  <marker id="arrowred" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#a11f1f"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="2000" height="1512" fill="#faf8f1"/>
+<line x1="924.0" y1="390.0" x2="1376.0" y2="390.0" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="1376.0" y1="415.1" x2="924.0" y2="415.1" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="924.0" y1="440.3" x2="1376.0" y2="440.3" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="924.0" y1="465.4" x2="1376.0" y2="465.4" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#arrowamber)"/>
+<line x1="924.0" y1="490.6" x2="1376.0" y2="490.6" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#arrowamber)"/>
+<line x1="1376.0" y1="515.8" x2="924.0" y2="515.8" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="1376.0" y1="540.9" x2="924.0" y2="540.9" stroke="#6b6b62" stroke-width="1.5" stroke-dasharray="1.6,3.2" marker-end="url(#arrowgray)"/>
+<line x1="725.0" y1="400.0" x2="645.0" y2="365.7" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="615.0" y1="250.0" x2="615.0" y2="204.7" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#arrowamber)"/>
+<line x1="615.0" y1="155.0" x2="615.0" y2="139.7" stroke="#6b6b62" stroke-width="1.5" stroke-dasharray="1.6,3.2" marker-end="url(#arrowgray)"/>
+<path d="M 680.0 400.0 Q 887.2 340.0 897.2 316.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="650.0" y1="416.0" x2="300.0" y2="426.4" stroke="#a11f1f" stroke-width="1.5"  marker-end="url(#arrowred)"/>
+<line x1="650.0" y1="450.0" x2="300.0" y2="515.9" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#arrowamber)"/>
+<line x1="650.0" y1="490.0" x2="300.0" y2="598.9" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 300.0 707.0 Q 475.0 687.0 650.0 528.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="490.0" y1="715.0" x2="490.0" y2="731.0" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 620.0 677.9 Q 675.0 617.9 690.0 530.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 680.0 821.5 Q 685.0 781.5 690.0 585.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 680.0 851.5 Q 705.0 801.5 730.0 585.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 755.0 530.9 Q 740.0 595.9 725.0 660.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 825.0 530.9 Q 835.0 605.9 845.0 660.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<rect x="40.0" y="1030.4" width="960.0" height="300.0" rx="14" ry="14" fill="#f4f1e8" stroke="#8a7a3a" stroke-width="1.8" stroke-dasharray="2,3"/>
+<text x="56.0" y="1052.4" font-size="11.5" font-weight="700" fill="#5c4d1a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Power / charge block (bottom-left quadrant)</text>
+<line x1="490.0" y1="761.5" x2="490.0" y2="1060.4" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="126.8" y1="1094.1" x2="148.8" y2="1099.5" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="316.0" y1="1099.5" x2="338.0" y2="1088.7" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="365.2" y1="1088.7" x2="387.2" y2="1099.5" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="453.6" y1="1099.5" x2="475.6" y2="1099.5" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="570.0" y1="1099.5" x2="592.0" y2="1099.5" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="686.4" y1="1099.5" x2="708.4" y2="1099.5" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<circle cx="70.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<circle cx="210.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<circle cx="350.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<circle cx="490.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<circle cx="630.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<circle cx="770.0" cy="1284.4" r="6" fill="#fff" stroke="#16180f" stroke-width="1.6"/>
+<path d="M 1000.0 1090.4 Q 825.0 1000.4 650.0 570.9" fill="none" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" marker-end="url(#arrowamber)"/>
+<line x1="1000.0" y1="1160.4" x2="1150.0" y2="1160.4" stroke="#6b6b62" stroke-width="1.5" stroke-dasharray="1.6,3.2" marker-end="url(#arrowgray)"/>
+<line x1="920.0" y1="514.9" x2="960.0" y2="662.0" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="960.0" y1="662.0" x2="1370.0" y2="662.0" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 960.0 662.0 Q 990.0 728.2 1370.0 794.5" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 1370.0 622.1 Q 1145.0 574.1 920.0 490.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<path d="M 1370.0 943.6 Q 1145.0 973.6 920.0 526.9" fill="none" stroke="#20221f" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<line x1="1684.0" y1="66.0" x2="1740.0" y2="66.0" stroke="#20221f" stroke-width="1.5"  />
+<line x1="1684.0" y1="90.0" x2="1740.0" y2="90.0" stroke="#5b4a15" stroke-width="1.5" stroke-dasharray="7,4" />
+<line x1="1684.0" y1="114.0" x2="1740.0" y2="114.0" stroke="#6b6b62" stroke-width="1.5" stroke-dasharray="1.6,3.2" />
+<text x="26.0" y="32.0" font-size="18" font-weight="700" fill="#14161a" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">BYOK v2.1 — system block diagram</text>
+<text x="26.0" y="51.0" font-size="10.5" font-weight="400" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">ESP32-S3 as application processor / hub; ESP32-PICO-MINI-02 as the Bluetooth-keyboard co-processor</text>
+<rect x="650.0" y="400.0" width="270.0" height="130.9" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="661.0" y="420.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">ESP32-S3-WROOM-1 (MCN16R2)</text>
+<text x="661.0" y="436.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">16 MB flash, 2 MB PSRAM</text>
+<text x="661.0" y="449.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">dual Xtensa LX7 @ 160 MHz</text>
+<text x="661.0" y="462.9" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Wi-Fi + BLE + native USB-OTG</text>
+<text x="661.0" y="476.1" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">application processor: display, SD,</text>
+<text x="661.0" y="489.3" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">USB, RTC, backlight, updater</text>
+<text x="661.0" y="502.5" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">CONFIRMED — silkscreen marking; flash from</text>
+<text x="661.0" y="515.7" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">JEDEC id 46 40 18; PSRAM+160MHz boot log</text>
+<rect x="1380.0" y="370.0" width="260.0" height="144.1" rx="7" ry="7" fill="#f2ecd9" stroke="#3a3a37" stroke-width="1.6" stroke-dasharray="7,4"/>
+<text x="1391.0" y="390.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">ESP32-PICO-MINI-02 (MGN8R2)</text>
+<text x="1391.0" y="406.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">dual Xtensa LX6</text>
+<text x="1391.0" y="419.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">8 MB flash / 2 MB PSRAM</text>
+<text x="1391.0" y="432.9" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(unverified — suffix decode only)</text>
+<text x="1391.0" y="446.1" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">role: Bluetooth-keyboard bridge</text>
+<text x="1391.0" y="459.3" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated)</text>
+<text x="1391.0" y="472.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Bluetooth Classic + BLE — the only part</text>
+<text x="1391.0" y="485.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">on the board with BT Classic</text>
+<text x="1391.0" y="498.9" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">module marking itself CONFIRMED</text>
+<text x="1150.0" y="376.0" font-size="10.4" fill="#3a3a37" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 ↔ PICO inter-MCU link — seven wires, not two</text>
+<rect x="928.0" y="377.7" width="324.7" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="386.0" font-size="8.3" fill="#20221f" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO36  →  PICO RX — UART1, 921600 8N1, no flow ctrl   [CONFIRMED]</text>
+<rect x="928.0" y="402.8" width="166.7" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="411.1" font-size="8.3" fill="#20221f" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO37  ←  PICO TX   [CONFIRMED]</text>
+<rect x="928.0" y="428.0" width="348.0" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="436.3" font-size="8.3" fill="#20221f" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO17  →  PICO RESET — idle LOW, 10 ms active-HIGH pulse   [CONFIRMED]</text>
+<rect x="928.0" y="453.1" width="343.3" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="461.4" font-size="8.3" fill="#5b4a15" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO35  →  PICO REQ — the PICO&#x27;s own &#x27;READY_IN&#x27;   [strongly indicated]</text>
+<rect x="928.0" y="478.3" width="375.8" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="486.6" font-size="8.3" fill="#5b4a15" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO47  →  PICO STROBE — asserted around a framed send   [strongly indicated]</text>
+<rect x="928.0" y="503.4" width="357.2" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="511.8" font-size="8.3" fill="#20221f" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO46  ←  PICO READY — HIGH=ready to receive, any-edge+ISR   [CONFIRMED]</text>
+<rect x="928.0" y="528.6" width="482.7" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="536.9" font-size="8.3" fill="#6b6b62" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO48  ←  ?  — any-edge input, ISR posts unconsumed values   [wiring CONFIRMED, meaning unverified]</text>
+<rect x="926.0" y="558.9" width="448.0" height="40.0" rx="7" ry="7" fill="#fbfbf7" stroke="#7a7a72" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="934.0" y="575.9" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">No IO0/BOOT strap between the two MCUs — the PICO firmware update is an</text>
+<text x="934.0" y="587.9" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">application-level protocol over this same UART (confirmed negative).</text>
+<rect x="465.0" y="250.0" width="300.0" height="115.7" rx="7" ry="7" fill="#eaecf5" stroke="#33345a" stroke-width="1.6" stroke-dasharray="7,4"/>
+<text x="475.0" y="269.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">LCD controller, UC1611/UC1611s class</text>
+<text x="475.0" y="285.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated)</text>
+<text x="475.0" y="298.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">command device 0x38 / data device 0x39</text>
+<text x="475.0" y="311.9" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(7-bit)</text>
+<text x="475.0" y="325.1" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">240 x 80, 1 bpp, 2400-byte RAM</text>
+<text x="475.0" y="338.3" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">one I2C transaction per byte —</text>
+<text x="475.0" y="351.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">no bulk write in stock</text>
+<rect x="465.0" y="155.0" width="300.0" height="49.7" rx="7" ry="7" fill="#eaecf5" stroke="#33345a" stroke-width="1.6" stroke-dasharray="7,4"/>
+<text x="475.0" y="174.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">J5 — 14-contact FPC/ZIF, ~1.0 mm pitch</text>
+<text x="475.0" y="190.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated)</text>
+<rect x="465.0" y="90.0" width="300.0" height="49.7" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="475.0" y="109.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">FSTN panel, 240 x 80</text>
+<text x="475.0" y="125.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(panel technology as seen: unverified)</text>
+<rect x="469.0" y="373.3" width="234.5" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="471.0" y="381.7" font-size="8.4" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">I2C port 0 — SDA GPIO18 / SCL GPIO10, 1 MHz,</text>
+<text x="471.0" y="392.3" font-size="8.4" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">external pull-ups, ACK-check disabled [CONFIRMED]</text>
+<rect x="459.0" y="231.6" width="356.8" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="461.0" y="240.0" font-size="8.4" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">No display reset GPIO anywhere — bring-up is I2C-only (confirmed negative).</text>
+<rect x="805.0" y="256.0" width="184.5" height="60.9" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="814.0" y="274.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Backlight LED driver</text>
+<text x="814.0" y="290.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">LEDC low-speed timer 0 / ch 0,</text>
+<text x="814.0" y="303.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">5 kHz, 13-bit (duty max 8191)</text>
+<rect x="825.2" y="322.5" width="102.8" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="827.2" y="330.9" font-size="8.4" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO2  [CONFIRMED]</text>
+<rect x="40.0" y="396.0" width="260.0" height="60.9" rx="7" ry="7" fill="#fbeaea" stroke="#a11f1f" stroke-width="1.6" />
+<text x="49.0" y="414.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">⚠ external power-hold circuit</text>
+<text x="49.0" y="430.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">OUTPUT, driven LOW at boot = power held</text>
+<text x="49.0" y="443.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">ON; driving it HIGH cuts power</text>
+<rect x="306.0" y="407.6" width="88.7" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="308.0" y="416.0" font-size="8.4" fill="#a11f1f" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">GPIO42 [CONFIRMED]</text>
+<rect x="40.0" y="478.9" width="260.0" height="74.1" rx="7" ry="7" fill="#f2ecd9" stroke="#5b4a15" stroke-width="1.6" stroke-dasharray="7,4"/>
+<text x="49.0" y="496.9" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">UART0 console (IDF defaults,</text>
+<text x="49.0" y="513.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">never re-pinned)</text>
+<text x="49.0" y="526.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated)</text>
+<text x="49.0" y="539.8" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">secondary console on USB-Serial-JTAG</text>
+<rect x="433.0" y="462.5" width="65.2" height="13.6" fill="#faf8f1" opacity="0.9"/>
+<text x="435.0" y="470.9" font-size="8.4" fill="#5b4a15" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">GPIO43/GPIO44</text>
+<rect x="40.0" y="575.0" width="260.0" height="47.7" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="49.0" y="593.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">LED1, 4-terminal part</text>
+<text x="49.0" y="609.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(that it is an LED: possible)</text>
+<rect x="383.0" y="558.8" width="196.9" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="385.0" y="567.0" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO14 → single WS2812 addressable LED,</text>
+<text x="385.0" y="577.6" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">RMT channel 0, clk_div 2  [CONFIRMED]</text>
+<rect x="40.0" y="656.7" width="260.0" height="100.5" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="49.0" y="674.7" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">USB-C receptacle J1</text>
+<text x="49.0" y="691.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(16 contacts countable, 16-pin vs 24-pin</text>
+<text x="49.0" y="704.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unverified)</text>
+<text x="49.0" y="717.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">D−/D+ → S3 GPIO19/GPIO20, native pads,</text>
+<text x="49.0" y="730.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">never gpio_config&#x27;d  [CONFIRMED]</text>
+<text x="49.0" y="744.0" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(PCB pair assignment: unverified)</text>
+<rect x="34.0" y="618.7" width="371.4" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="36.0" y="626.7" font-size="8.0" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">R56/R57 + C43 near the CC contacts may be the 5.1kΩ Rd sink pull-downs (possible).</text>
+<text x="36.0" y="637.3" font-size="8.0" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">VBUS sense GPIO: none. USB power-switch GPIO: none. (confirmed negatives)</text>
+<rect x="360.0" y="640.9" width="260.0" height="74.1" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="369.0" y="658.9" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Li-polymer pouch cell</text>
+<text x="369.0" y="675.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">3.7 V / 2600 mAh / 9.62 Wh</text>
+<text x="369.0" y="688.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">model 357090</text>
+<text x="369.0" y="701.8" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">CONFIRMED — read from the cell label</text>
+<rect x="390.0" y="731.0" width="200.0" height="30.5" rx="7" ry="7" fill="#ffffff" stroke="#16180f" stroke-width="1.6" />
+<text x="397.0" y="747.0" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">J2 (VBAT), 2-pin red/black</text>
+<rect x="358.0" y="584.7" width="297.9" height="34.8" fill="#faf8f1" opacity="0.9"/>
+<text x="360.0" y="592.9" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">battery sense: resistive divider 5/3 (V_pin = 0.6 × V_batt) →</text>
+<text x="360.0" y="603.5" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">ADC1_CH0 = GPIO1, 12-bit, 12 dB atten  [CONFIRMED from firmware;</text>
+<text x="360.0" y="614.1" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">divider not bench-measured]</text>
+<rect x="360.0" y="791.5" width="320.0" height="126.9" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="369.0" y="809.5" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Charger status (GPIO12=CHRG, GPIO13=STDBY,</text>
+<text x="369.0" y="826.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">both input+internal pull-up, polled, active LOW)</text>
+<text x="369.0" y="839.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">12=0,13=1 → charging</text>
+<text x="369.0" y="852.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">12=1,13=0 → charge complete</text>
+<text x="369.0" y="865.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">12=1,13=1 → no charger</text>
+<text x="369.0" y="878.8" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">pin→state mapping CONFIRMED; driving IC is</text>
+<text x="369.0" y="892.0" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">&#x27;TP4056-class&#x27; (strongly indicated) — no part</text>
+<text x="369.0" y="905.2" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">number printed on the block</text>
+<rect x="40.0" y="944.4" width="620.0" height="52.0" rx="7" ry="7" fill="#fbfbf7" stroke="#7a7a72" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="48.0" y="961.4" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">No external USB data mux. The TUSB320 only reports CC/attach state over I2C; the switch</text>
+<text x="48.0" y="973.4" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">between the USB-Serial-JTAG controller and the USB-OTG controller is internal to the S3,</text>
+<text x="48.0" y="985.4" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">on the same D+/D− pads.</text>
+<rect x="625.0" y="660.9" width="320.0" height="34.5" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="634.0" y="678.9" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">microSD socket J3 (push-push)</text>
+<rect x="619.0" y="610.7" width="196.9" height="34.8" fill="#faf8f1" opacity="0.9"/>
+<text x="621.0" y="618.9" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">SDMMC slot 1, 1-bit: CLK GPIO5, CMD GPIO3,</text>
+<text x="621.0" y="629.5" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">D0 GPIO4, 40 MHz max, mounted at /SDCARD</text>
+<text x="621.0" y="640.1" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">[CONFIRMED]</text>
+<rect x="793.0" y="638.7" width="210.6" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="795.0" y="646.9" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">card detect GPIO40, input + internal pull-up,</text>
+<text x="795.0" y="657.5" font-size="8.2" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">LOW = card present  [CONFIRMED]</text>
+<rect x="627.0" y="703.2" width="284.1" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="629.0" y="711.4" font-size="8.2" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">driver cd/wp are both -1: detect is polled on a separate pin,</text>
+<text x="629.0" y="722.0" font-size="8.2" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">not wired into the SDMMC driver.</text>
+<rect x="66.0" y="1076.4" width="60.8" height="35.4" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="72.0" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Q5/Q8 +</text>
+<text x="72.0" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">passives</text>
+<rect x="148.8" y="1076.4" width="167.2" height="46.2" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="154.8" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">IC5 (charge/power-path</text>
+<text x="154.8" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">candidate) top mark AAAC</text>
+<text x="154.8" y="1114.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">2118 — part unread: unknown</text>
+<rect x="338.0" y="1076.4" width="27.2" height="24.6" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="344.0" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">D6</text>
+<rect x="387.2" y="1076.4" width="66.4" height="46.2" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="7,4"/>
+<text x="393.2" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">L1 (1R0)</text>
+<text x="393.2" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">strongly</text>
+<text x="393.2" y="1114.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">indicated</text>
+<rect x="475.6" y="1076.4" width="94.4" height="46.2" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="481.6" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">IC6 (SOT-23-6,</text>
+<text x="481.6" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unmarked)</text>
+<text x="481.6" y="1114.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unknown</text>
+<rect x="592.0" y="1076.4" width="94.4" height="46.2" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="598.0" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">IC7 (SOT-23-6,</text>
+<text x="598.0" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unmarked)</text>
+<text x="598.0" y="1114.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unknown</text>
+<rect x="708.4" y="1076.4" width="66.4" height="46.2" rx="7" ry="7" fill="#fbfbf7" stroke="#4b4b46" stroke-width="1.6" />
+<text x="714.4" y="1091.4" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">L2 (1R0)</text>
+<text x="714.4" y="1104.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">confirmed</text>
+<text x="714.4" y="1114.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">marking</text>
+<text x="796.8" y="1103.5" font-size="10" font-weight="700" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">→ 3V3</text>
+<rect x="58.4" y="1295.8" width="23.3" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="70.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">VBUS</text>
+<rect x="198.4" y="1295.8" width="23.3" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="210.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">CHRG</text>
+<rect x="343.2" y="1295.8" width="13.6" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="350.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">SW</text>
+<rect x="480.8" y="1295.8" width="18.4" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="490.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">3V3</text>
+<rect x="623.2" y="1295.8" width="13.6" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="630.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">5V</text>
+<rect x="760.8" y="1295.8" width="18.4" height="12.6" fill="#faf8f1" opacity="0.9"/>
+<text x="770.0" y="1304.4" font-size="8.6" font-weight="400" fill="#242424" text-anchor="middle" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">GND</text>
+<text x="60.0" y="1270.4" font-size="8.8" font-weight="400" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Test points (all CONFIRMED, gold-plated through-holes):</text>
+<rect x="56.0" y="1340.4" width="560.0" height="37.2" rx="7" ry="7" fill="#fbfbf7" stroke="#7a7a72" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="63.0" y="1356.4" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Two shielded switching inductors ⇒ at least two switching stages</text>
+<text x="63.0" y="1368.0" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated). No PD controller, fuse, PTC or fuel gauge identified.</text>
+<rect x="1008.0" y="1062.0" width="112.2" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="1010.0" y="1070.4" font-size="8.4" fill="#5b4a15" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">3V3 → every logic block</text>
+<text x="1010.0" y="1081.0" font-size="8.4" fill="#5b4a15" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(strongly indicated)</text>
+<rect x="1008.0" y="1144.2" width="206.0" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="1010.0" y="1152.4" font-size="8.2" fill="#6b6b62" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">5V rail — exists (labelled); boost output vs</text>
+<text x="1010.0" y="1163.0" font-size="8.2" fill="#6b6b62" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">VBUS pass-through: unverified</text>
+<rect x="1370.0" y="604.1" width="300.0" height="115.7" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="1380.0" y="623.1" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">TUSB320 USB-C CC / port-role</text>
+<text x="1380.0" y="639.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">controller, addr 0x60  [CONFIRMED]</text>
+<text x="1380.0" y="652.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">only reg 0x09 (status) is ever read; bit</text>
+<text x="1380.0" y="666.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">0x10 written back to clear interrupt</text>
+<text x="1380.0" y="679.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">MODE_SELECT (0x0A) never written —</text>
+<text x="1380.0" y="692.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">CC role is strap-fixed</text>
+<text x="1380.0" y="705.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">used as an attach/charger sensor only</text>
+<rect x="1370.0" y="749.8" width="300.0" height="89.3" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="1380.0" y="768.8" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">PCF8563 real-time clock (NXP),</text>
+<text x="1380.0" y="785.3" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">addr 0x51  [part CONFIRMED — marking</text>
+<text x="1380.0" y="798.5" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">read on the package]</text>
+<text x="1380.0" y="811.7" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Y1 32.768 kHz crystal (strongly indicated</text>
+<text x="1380.0" y="824.9" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">as its timebase)</text>
+<rect x="928.0" y="538.5" width="187.5" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="930.0" y="546.9" font-size="8.4" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">I2C port 1 — SDA GPIO8 / SCL GPIO9,</text>
+<text x="930.0" y="557.5" font-size="8.4" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">400 kHz, external pull-ups  [CONFIRMED]</text>
+<rect x="1178.3" y="647.8" width="187.7" height="24.2" fill="#faf8f1" opacity="0.9"/>
+<text x="1364.0" y="656.0" font-size="8.2" fill="#242424" text-anchor="end" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">S3 GPIO41 ← TUSB320 INT: input, no pull,</text>
+<text x="1364.0" y="666.6" font-size="8.2" fill="#242424" text-anchor="end" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">NEGEDGE + ISR  [CONFIRMED]</text>
+<rect x="1370.0" y="879.1" width="300.0" height="128.9" rx="7" ry="7" fill="#eaf1e6" stroke="#16180f" stroke-width="1.6" />
+<text x="1380.0" y="898.1" font-size="11.2" font-weight="700" fill="#14161a" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">five buttons, active-LOW, no internal pulls</text>
+<text x="1380.0" y="914.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">(board supplies external pull-ups), polled</text>
+<text x="1380.0" y="927.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">WAKE GPIO6 (front power button)</text>
+<text x="1380.0" y="941.0" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">DOWN GPIO7</text>
+<text x="1380.0" y="954.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">BRIGHTNESS GPIO11</text>
+<text x="1380.0" y="967.4" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">UP GPIO15</text>
+<text x="1380.0" y="980.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">EXECUTE GPIO16</text>
+<text x="1380.0" y="993.8" font-size="8.8" font-style="italic" fill="#6b5b1e" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">pins CONFIRMED</text>
+<rect x="1370.0" y="1018.0" width="330.0" height="48.2" rx="7" ry="7" fill="#fbfbf7" stroke="#7a7a72" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="1377.0" y="1034.0" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">which physical switch is which is only partly established: front power =</text>
+<text x="1377.0" y="1045.4" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">WAKE (strongly indicated); the four back switches are not individually</text>
+<text x="1377.0" y="1056.8" font-size="8.6" fill="#555" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">mapped (unverified).</text>
+<rect x="1670" y="20" width="300" height="150" rx="9" fill="#ffffff" stroke="#16180f" stroke-width="1.4"/>
+<text x="1684.0" y="42.0" font-size="12" font-weight="700" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Legend</text>
+<text x="1750.0" y="70.0" font-size="9.6" font-weight="400" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">CONFIRMED</text>
+<text x="1750.0" y="94.0" font-size="9.6" font-weight="400" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">strongly indicated</text>
+<text x="1750.0" y="118.0" font-size="9.6" font-weight="400" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unverified / unknown</text>
+<text x="1684.0" y="148.0" font-size="8.4" font-weight="400" fill="#555" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Box border style follows the same code.</text>
+<rect x="1684" y="156" width="16" height="14" fill="#fbeaea" stroke="#a11f1f" stroke-width="1.6"/>
+<text x="1708.0" y="167.0" font-size="8.8" font-weight="400" fill="#242424" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">hazard / power-hold path</text>
+<rect x="40.0" y="1407.6" width="306.8" height="39.2" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="48.0" y="1424.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">GPIO39 — output, driven LOW once at boot,</text>
+<text x="48.0" y="1436.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">never written again; purpose unknown.</text>
+<rect x="370.8" y="1407.6" width="306.8" height="39.2" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="378.8" y="1424.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">GPIO48 — any-edge input, events unconsumed;</text>
+<text x="378.8" y="1436.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">purpose unknown.</text>
+<rect x="701.6" y="1407.6" width="306.8" height="50.8" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="709.6" y="1424.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">J4 — a second 2-pin red/black connector that is</text>
+<text x="709.6" y="1436.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">NOT labelled VBAT; purpose unknown, do not</text>
+<text x="709.6" y="1447.8" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">assume it is a battery.</text>
+<rect x="1032.4" y="1407.6" width="306.8" height="39.2" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="1040.4" y="1424.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">IC1/IC2/IC4/IC9/IC10 unmarked or unread —</text>
+<text x="1040.4" y="1436.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">unknown.</text>
+<rect x="1363.2" y="1407.6" width="306.8" height="39.2" rx="7" ry="7" fill="#f3f3ee" stroke="#6b6b62" stroke-width="1.6" stroke-dasharray="1.6,3.2"/>
+<text x="1371.2" y="1424.6" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">IC3 top mark reads TPS / 25910 / TI 85I / C400 —</text>
+<text x="1371.2" y="1436.2" font-size="9.5" fill="#242424" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">marking confirmed, device and function unknown.</text>
+<text x="40.0" y="1492.4" font-size="9.2" font-weight="400" fill="#444" text-anchor="start" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif">Every electrical fact here was recovered from the stock firmware image or read off the board; nothing has been measured with an instrument.</text>
+</svg>

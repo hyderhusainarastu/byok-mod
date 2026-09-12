@@ -1,0 +1,33 @@
+# Dashboard presets manifest -- order + display name for each bundled
+# preset (host/macos/byok/dashboard/presets/*.yaml). See presets.py's
+# module docstring for the full contract: this file's list order IS the
+# wire order `SET_PRESETS` sends to the device at connect
+# (`byok dashboard`, cli.py) and the order a `PRESET_CHANGED` event's
+# index is looked up against -- reordering entries here reorders both the
+# device's own menu and what `--preset NAME` can select by name.
+#
+# `display` is what actually goes out over the wire (device.py's
+# _encode_set_presets, presets.py's MAX_DISPLAY_NAME_LEN=20) -- keep it
+# short and legible on the device's own small menu font
+# (docs/protocol.md §6.4a's 30-column grid). `name` is the host-side-only
+# short key `--preset NAME` / `--list-presets` use; it never goes on the
+# wire.
+#
+# See docs/host-tools.md's "Presets" section for what each one shows.
+
+presets:
+  - name: clock
+    display: "CLOCK"
+    file: clock.yaml
+
+  - name: work
+    display: "WORK"
+    file: work.yaml
+
+  - name: media
+    display: "MEDIA"
+    file: media.yaml
+
+  - name: writing
+    display: "WRITING"
+    file: writing.yaml

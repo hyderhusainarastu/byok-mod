@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "byok"
+version = "0.1.0"
+description = "Host-side tool for the BYOK Link protocol (custom BYOK Mod firmware, USB CDC transport)"
+readme = { text = "Mac host tool for BYOK Mod. See docs/protocol.md in the project root for the wire protocol.", content-type = "text/plain" }
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "BYOK mod contributors" }]
+
+dependencies = [
+    "pyserial>=3.5,<4",
+    # Pillow 10.4.0 is the last release line with confirmed cp39 wheels at time of
+    # writing; pin rather than float so `pip install -e .` is reproducible on the
+    # CLT-provided Python 3.9. Bump deliberately (and re-run tests/host) if the
+    # venv is ever rebuilt against a newer interpreter.
+    "Pillow>=10.4.0,<11",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+byok = "byok.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["byok*"]

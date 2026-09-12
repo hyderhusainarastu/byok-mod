@@ -1,0 +1,69 @@
+# work preset -- a compact "what's going on" strip for a dev desk.
+#
+# Same content/layout as examples/work.yaml (a small clock, the next
+# calendar event, an open-reminders count, the configured repo's
+# branch/dirty status, CPU/memory) -- kept as its own file under
+# presets/ rather than pointed at examples/work.yaml so the two
+# directories (device-switchable presets vs. byok dashboard --config
+# demos) stay independently editable, per presets.py's module docstring.
+#
+# Customize:
+#   edit options.repo below (or override at the config-loading layer, the
+#   same way examples/work.yaml's own --repo flag works for that file)
+#   to point the git row at a specific checkout.
+#
+# Try it:
+#   byok dashboard --preset work
+#
+# See docs/host-tools.md's "Presets" section for the full list.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 30
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  - type: clock
+    at: [0, 0]
+    span: [12, 1]
+    options:
+      format: "%H:%M"
+
+  - type: calendar
+    at: [0, 1]
+    span: [12, 1]
+    options:
+      title: ""
+      max_events: 1
+      text_case: upper
+
+  - type: reminders
+    at: [0, 2]
+    span: [12, 1]
+    options:
+      title: ""
+      mode: count
+      text_case: upper
+
+  - type: git
+    at: [0, 3]
+    span: [12, 1]
+    options:
+      title: ""
+      repo: "."
+      text_case: upper
+
+  - type: mac_stats
+    at: [0, 4]
+    span: [12, 1]
+    options:
+      fields: [cpu, mem]
+      title: ""
+      text_case: upper

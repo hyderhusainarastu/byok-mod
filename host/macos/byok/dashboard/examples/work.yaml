@@ -1,0 +1,101 @@
+# work.yaml -- a compact "what's going on" strip for a dev desk.
+#
+# Five widgets, one per 16px row: a small clock, the next calendar event,
+# an open-reminders count, the configured repo's branch/dirty status, and
+# a CPU/memory readout.
+#
+# Renders fully with the offline/fake providers -- every provider-backed
+# widget here (calendar, reminders, git, mac_stats) degrades to a clean
+# placeholder ("No events" / "Nothing pending" / "not a git repo" / "--")
+# rather than raising when there's no real provider behind it, which is
+# exactly what `--offline` (or the bundled tests, which use
+# `providers={}`) exercises.
+#
+# Every widget on this config sits in a 16px-tall row -- right at the
+# `text_case` auto-default's upper/as-is boundary (12px), but each
+# widget's own auto-fit font size still lands small enough at 16px that
+# thin lowercase strokes are worth protecting explicitly rather than
+# leaning on the boundary math alone (the exact situation
+# default_dashboard_240x80.yaml's own mac_stats/now_playing rows are in --
+# see docs/troubleshooting.md). Every row below sets
+# `text_case: upper` explicitly for that reason.
+#
+# Customize:
+#   --repo /path/to/your/repo   overrides the git widget below (byok
+#                                 dashboard/preview.py both accept it)
+#   edit `options.repo` directly in a copy of this file for a permanent
+#                                 change instead
+#
+# Try it:
+#   byok dashboard --config work --repo ~/code/some-project
+#   byok dashboard --config examples/work.yaml
+#
+# See docs/host-tools.md for the full widget/option reference.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 30
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  # Compact clock, no seconds -- this isn't the clock-focus config, just
+  # a corner of one.
+  - type: clock
+    at: [0, 0]
+    span: [12, 1]
+    options:
+      format: "%H:%M"
+
+  # Next event today. `max_events: 1` plus CalendarWidget's own
+  # chronological sort (earliest event first, all-day events first) is
+  # what makes "next" actually mean next rather than whichever event
+  # Calendar.app's own per-calendar iteration order happened to return
+  # first. `title: ""` skips the "Today" header this compact a row can't
+  # spare the vertical room for.
+  - type: calendar
+    at: [0, 1]
+    span: [12, 1]
+    options:
+      title: ""
+      max_events: 1
+      text_case: upper
+
+  # Open-reminders count, not a list -- `mode: count` renders a single
+  # "N pending" / "Nothing pending" line instead of RemindersWidget's
+  # default per-item list (which needs more vertical room than one row).
+  - type: reminders
+    at: [0, 2]
+    span: [12, 1]
+    options:
+      title: ""
+      mode: count
+      text_case: upper
+
+  # Branch + dirty-flag ("*" suffix if `git status --porcelain` is
+  # non-empty) for the configured repo. `repo: "."` means "wherever the
+  # `byok dashboard` / preview process is run from" -- override with
+  # --repo, or edit this value directly, to point at a specific checkout.
+  - type: git
+    at: [0, 3]
+    span: [12, 1]
+    options:
+      title: ""
+      repo: "."
+      text_case: upper
+
+  # CPU + memory. Battery is left out here (clock-focus.yaml already
+  # covers it) to keep this row from needing four fields' worth of width.
+  - type: mac_stats
+    at: [0, 4]
+    span: [12, 1]
+    options:
+      fields: [cpu, mem]
+      title: ""
+      text_case: upper

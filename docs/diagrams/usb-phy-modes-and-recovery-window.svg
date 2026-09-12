@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1910" font-family="system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#1c2430"/>
+  </marker>
+  <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/>
+  </marker>
+</defs>
+<rect x="0" y="0" width="1200" height="1910" fill="#ffffff"/>
+<text x="30" y="34" font-size="23" font-weight="700" fill="#1c2430">USB PHY ownership and the boot recovery window</text>
+<text x="30" y="54" font-size="12.5" fill="#4a5568">One shared USB PHY, two controllers that fight over it, and the millisecond window that decides whether esptool recovery is reachable.</text>
+<line x1="30" y1="66" x2="1170" y2="66" stroke="#c7cfd9" stroke-width="1"/>
+<rect x="12" y="78" width="1176" height="411.5" rx="10" fill="#f7f9fb" stroke="#d7dee6"/>
+<text x="30" y="104" font-size="15.5" font-weight="700" fill="#1c2430">One PHY, two controllers</text>
+<rect x="60" y="120" width="430" height="82" rx="8" fill="#e7f0f8" stroke="#2f6fa8" stroke-width="1.4"/>
+<text x="275" y="144" font-size="12.5" font-weight="700" text-anchor="middle" fill="#1c2430">USB-Serial-JTAG controller</text>
+<text x="275" y="164" font-size="11" text-anchor="middle" fill="#4a5568"><tspan x="275.0" dy="0">enumerates as 303A:1001, carries the boot log</tspan><tspan x="275.0" dy="15">and esptool's download mode</tspan></text>
+<rect x="660" y="120" width="430" height="82" rx="8" fill="#e7f0f8" stroke="#2f6fa8" stroke-width="1.4"/>
+<text x="875" y="144" font-size="12.5" font-weight="700" text-anchor="middle" fill="#1c2430">USB-OTG controller</text>
+<text x="875" y="166" font-size="11" text-anchor="middle" fill="#4a5568">TinyUSB (device) or the USB host stack</text>
+<rect x="470" y="236" width="260" height="50" rx="8" fill="#ffffff" stroke="#1c2430" stroke-width="1.4" stroke-dasharray="4,3"/>
+<text x="600" y="256" font-size="11.5" font-weight="700" text-anchor="middle" fill="#1c2430">internal PHY selector</text>
+<text x="600" y="272" font-size="10" text-anchor="middle" fill="#4a5568">no external mux — one owner at a time</text>
+<line x1="275.0" y1="202" x2="470" y2="261" stroke="#1c2430" stroke-width="1.4" marker-end="url(#arrow)"/>
+<line x1="875.0" y1="202" x2="730" y2="261" stroke="#1c2430" stroke-width="1.4" marker-end="url(#arrow)"/>
+<rect x="300" y="320" width="600" height="44" rx="8" fill="#1c2430"/>
+<text x="600" y="347" font-size="12" font-weight="600" text-anchor="middle" fill="#ffffff">shared internal USB PHY → D-/D+ pads (GPIO19/20) → USB-C J1</text>
+<line x1="600.0" y1="286" x2="600.0" y2="320" stroke="#1c2430" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="30" y="390" font-size="11.5" fill="#4a5568"><tspan x="30" dy="0">Only one can own the pads at a time. The switch is internal to the SoC — there is no external mux. The hand-over happens the moment code calls</tspan><tspan x="30" dy="16">usb_new_phy(), which has exactly two callers in the stock image: tinyusb_driver_install (Disk Mode) and usb_host_install (normal-mode keyboard</tspan><tspan x="30" dy="16">host).</tspan></text>
+<rect x="30.0" y="444.0" width="74.6" height="27.5" rx="6" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1"/><text x="38.0" y="457.0" font-size="10.5" font-weight="600" fill="#2f8f5b"><tspan x="38" dy="0">CONFIRMED</tspan></text>
+<rect x="12" y="511.5" width="1176" height="447.0" rx="10" fill="#ffffff" stroke="#d7dee6"/>
+<text x="30" y="537.5" font-size="15.5" font-weight="700" fill="#1c2430">Boot mode &#8594; who ends up owning the PHY</text>
+<rect x="30" y="553.5" width="1140" height="30" fill="#1c2430"/>
+<text x="38" y="572.5" font-size="11" font-weight="700" fill="#ffffff">boot mode</text>
+<text x="166" y="572.5" font-size="11" font-weight="700" fill="#ffffff">how it is entered</text>
+<text x="334" y="572.5" font-size="11" font-weight="700" fill="#ffffff">PHY ends up owned by</text>
+<text x="524" y="572.5" font-size="11" font-weight="700" fill="#ffffff">what a host sees</text>
+<text x="986" y="572.5" font-size="11" font-weight="700" fill="#ffffff">grade</text>
+<rect x="30" y="583.5" width="1140" height="46.4" fill="#ffffff" stroke="#c7cfd9" stroke-width="0.6"/>
+<text x="38" y="603.1" font-size="10.6" font-weight="600" fill="#1c2430"><tspan x="38" dy="0">normal</tspan></text>
+<text x="166" y="603.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="166" dy="0">no SD update pending, no</tspan><tspan x="166" dy="14.2">button held</tspan></text>
+<text x="334" y="603.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="334" dy="0">USB-OTG, host role</tspan></text>
+<text x="524" y="603.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="524" dy="0">USB-Serial-JTAG enumerates as 303A:1001 and is then dropped at ~4.24 s;</tspan><tspan x="524" dy="14.2">nothing else appears</tspan></text>
+<text x="986" y="603.1" font-size="10.6" font-weight="700" fill="#2f8f5b"><tspan x="986" dy="0">CONFIRMED</tspan></text>
+<rect x="30" y="629.9" width="1140" height="60.6" fill="#f7f9fb" stroke="#c7cfd9" stroke-width="0.6"/>
+<text x="38" y="649.5" font-size="10.6" font-weight="600" fill="#1c2430"><tspan x="38" dy="0">Disk Mode</tspan><tspan x="38" dy="14.2">(boot-mode word =</tspan><tspan x="38" dy="14.2">1)</tspan></text>
+<text x="166" y="649.5" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="166" dy="0">entered from the UI</tspan></text>
+<text x="334" y="649.5" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="334" dy="0">USB-OTG, device role (TinyUSB</tspan><tspan x="334" dy="14.2">MSC)</tspan></text>
+<text x="524" y="649.5" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="524" dy="0">one composite device, VID 0x303A, PID 0x4002, class EF/02/01, single</tspan><tspan x="524" dy="14.2">interface 08/06/50 bulk-only mass storage, full-speed, strings ‘TinyUSB’ /</tspan><tspan x="524" dy="14.2">‘TinyUSB Device’ / ‘123456’, SCSI product ‘TEST MSC Storage’</tspan></text>
+<text x="986" y="649.5" font-size="10.6" font-weight="700" fill="#2f8f5b"><tspan x="986" dy="0">CONFIRMED</tspan></text>
+<rect x="30" y="690.5" width="1140" height="89.0" fill="#ffffff" stroke="#c7cfd9" stroke-width="0.6"/>
+<text x="38" y="710.1" font-size="10.6" font-weight="600" fill="#1c2430"><tspan x="38" dy="0">USB console</tspan><tspan x="38" dy="14.2">(boot-mode word =</tspan><tspan x="38" dy="14.2">3)</tspan></text>
+<text x="166" y="710.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="166" dy="0">UP button (GPIO15) held</tspan><tspan x="166" dy="14.2">at boot</tspan></text>
+<text x="334" y="710.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="334" dy="0">stays with USB-Serial-JTAG</tspan></text>
+<text x="524" y="710.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="524" dy="0">USJ stays enumerated with no cut-off, because usb_host_install is never</tspan><tspan x="524" dy="14.2">reached on that arm</tspan></text>
+<text x="986" y="710.1" font-size="10.6" font-weight="700" fill="#b8860b"><tspan x="986" dy="0">strongly indicated —</tspan><tspan x="986" dy="14.2">the arm is confirmed</tspan><tspan x="986" dy="14.2">in the code; the</tspan><tspan x="986" dy="14.2">persistent window has</tspan><tspan x="986" dy="14.2">not been observed</tspan></text>
+<rect x="30" y="779.5" width="1140" height="60.6" fill="#f7f9fb" stroke="#c7cfd9" stroke-width="0.6"/>
+<text x="38" y="799.1" font-size="10.6" font-weight="600" fill="#1c2430"><tspan x="38" dy="0">SD missing</tspan><tspan x="38" dy="14.2">(boot-mode word =</tspan><tspan x="38" dy="14.2">4)</tspan></text>
+<text x="166" y="799.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="166" dy="0">no card present</tspan></text>
+<text x="334" y="799.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="334" dy="0">never handed over — the</tspan><tspan x="334" dy="14.2">device logs ‘SD card missing’</tspan><tspan x="334" dy="14.2">and shuts down</tspan></text>
+<text x="524" y="799.1" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="524" dy="0">USJ stays up until power is cut</tspan></text>
+<text x="986" y="799.1" font-size="10.6" font-weight="700" fill="#b8860b"><tspan x="986" dy="0">strongly indicated</tspan></text>
+<rect x="30" y="840.1" width="1140" height="46.4" fill="#ffffff" stroke="#c7cfd9" stroke-width="0.6"/>
+<text x="38" y="859.7" font-size="10.6" font-weight="600" fill="#1c2430"><tspan x="38" dy="0">modified firmware</tspan></text>
+<text x="166" y="859.7" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="166" dy="0">normal boot of the</tspan><tspan x="166" dy="14.2">replacement image</tspan></text>
+<text x="334" y="859.7" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="334" dy="0">USB-OTG, device role</tspan><tspan x="334" dy="14.2">(CDC-ACM)</tspan></text>
+<text x="524" y="859.7" font-size="10.6" font-weight="400" fill="#4a5568"><tspan x="524" dy="0">a CDC serial node; VID 0x303A, PID 0x83B8 (self-assigned, deliberately</tspan><tspan x="524" dy="14.2">avoiding 0x1001 and 0x4002; not registered)</tspan></text>
+<text x="986" y="859.7" font-size="10.6" font-weight="700" fill="#2f8f5b"><tspan x="986" dy="0">CONFIRMED for the code</tspan><tspan x="986" dy="14.2">path</tspan></text>
+<line x1="158" y1="553.5" x2="158" y2="886.5" stroke="#c7cfd9" stroke-width="0.6"/>
+<line x1="326" y1="553.5" x2="326" y2="886.5" stroke="#c7cfd9" stroke-width="0.6"/>
+<line x1="516" y1="553.5" x2="516" y2="886.5" stroke="#c7cfd9" stroke-width="0.6"/>
+<line x1="978" y1="553.5" x2="978" y2="886.5" stroke="#c7cfd9" stroke-width="0.6"/>
+<rect x="30" y="553.5" width="1140" height="333.0" fill="none" stroke="#d7dee6" stroke-width="1.2"/>
+<rect x="30" y="892.5" width="1140" height="50.0" rx="6" fill="#eef1f4"/>
+<text x="42" y="908.5" font-size="11" font-style="italic" fill="#4a5568"><tspan x="42" dy="0">The boot-mode word lives in RAM only and is never persisted. The CC-role controller plays no part in any of this — its MODE_SELECT register is never</tspan><tspan x="42" dy="16">written, so the CC role is strap-fixed and identical in every mode.</tspan></text><rect x="12" y="980.5" width="1176" height="658.2" rx="10" fill="#f7f9fb" stroke="#d7dee6"/>
+<line x1="304.8" y1="1065.5" x2="304.8" y2="1594.7" stroke="#c7cfd9" stroke-width="0.6" stroke-dasharray="2,3"/>
+<line x1="513.6" y1="1065.5" x2="513.6" y2="1594.7" stroke="#c7cfd9" stroke-width="0.6" stroke-dasharray="2,3"/>
+<line x1="722.4" y1="1065.5" x2="722.4" y2="1594.7" stroke="#c7cfd9" stroke-width="0.6" stroke-dasharray="2,3"/>
+<line x1="931.2" y1="1065.5" x2="931.2" y2="1594.7" stroke="#c7cfd9" stroke-width="0.6" stroke-dasharray="2,3"/>
+<text x="30" y="1006.5" font-size="15.5" font-weight="700" fill="#1c2430">Boot timeline: stock vs. modified firmware</text>
+<text x="30" y="1024.5" font-size="11" fill="#4a5568">0 &#8594; 5000 ms since reset. Numbered ticks key to the event list beneath each lane; closely spaced ticks are stacked so none are hidden.</text>
+<text x="30" y="1052.5" font-size="12.5" font-weight="700" fill="#1c2430">Lane A &#8212; stock firmware</text>
+<rect x="96.0" y="1147.5" width="864.4" height="34" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1.2"/>
+<rect x="960.4" y="1147.5" width="179.6" height="34" fill="#fbe7e4" stroke="#c0392b" stroke-width="1.2"/>
+<text x="528.2" y="1168.5" font-size="10" text-anchor="middle" fill="#2f8f5b" font-weight="700">USB-Serial-JTAG owns the PHY &#8212; esptool download mode reachable</text>
+<text x="1050.2" y="1168.5" font-size="9.4" text-anchor="middle" fill="#c0392b" font-weight="700"><tspan x="1050.216" dy="-5">USB-OTG host stack owns the</tspan><tspan x="1050.216" dy="11">PHY — USJ gone</tspan></text>
+<line x1="96.0" y1="1147.5" x2="96.0" y2="1142.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="96.0" cy="1135.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="96.0" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">1</text>
+<line x1="108.9" y1="1147.5" x2="108.9" y2="1112.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="108.9" cy="1105.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="108.9" y="1108.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">2</text>
+<line x1="96.0" y1="1147.5" x2="96.0" y2="1127.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="96.0" cy="1120.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="96.0" y="1123.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">3</text>
+<line x1="165.5" y1="1147.5" x2="165.5" y2="1142.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="165.5" cy="1135.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="165.5" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">4</text>
+<line x1="248.4" y1="1147.5" x2="248.4" y2="1142.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="248.4" cy="1135.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="248.4" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">5</text>
+<line x1="252.6" y1="1147.5" x2="252.6" y2="1127.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="252.6" cy="1120.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="252.6" y="1123.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">6</text>
+<line x1="277.7" y1="1147.5" x2="277.7" y2="1142.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="277.7" cy="1135.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="277.7" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">7</text>
+<line x1="281.8" y1="1147.5" x2="281.8" y2="1127.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="281.8" cy="1120.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="281.8" y="1123.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">8</text>
+<line x1="286.0" y1="1147.5" x2="286.0" y2="1112.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="286.0" cy="1105.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="286.0" y="1108.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">9</text>
+<line x1="288.1" y1="1147.5" x2="288.1" y2="1097.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="288.1" cy="1090.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="288.1" y="1093.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">10</text>
+<line x1="290.2" y1="1147.5" x2="290.2" y2="1082.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="290.2" cy="1075.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="290.2" y="1078.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">11</text>
+<line x1="309.0" y1="1147.5" x2="309.0" y2="1142.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="309.0" cy="1135.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="309.0" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">12</text>
+<line x1="311.1" y1="1147.5" x2="311.1" y2="1127.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="311.1" cy="1120.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="311.1" y="1123.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">13</text>
+<line x1="313.2" y1="1147.5" x2="313.2" y2="1112.5" stroke="#1c2430" stroke-width="0.9"/>
+<circle cx="313.2" cy="1105.5" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="313.2" y="1108.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">14</text>
+<line x1="960.4" y1="1147.5" x2="960.4" y2="1142.5" stroke="#c0392b" stroke-width="0.9"/>
+<circle cx="960.4" cy="1135.5" r="7" fill="#ffffff" stroke="#c0392b" stroke-width="1.3"/>
+<text x="960.4" y="1138.3" font-size="8.2" font-weight="700" text-anchor="middle" fill="#c0392b">15</text>
+<text x="30" y="1205.5" font-size="11" font-weight="700" fill="#1c2430">Lane A key</text>
+<circle cx="37" cy="1220.0" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="37" y="1223.2" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">1</text>
+<text x="50" y="1223.5" font-size="9.6" fill="#4a5568"><tspan x="50" dy="0">0 ms — reset (VBUS attach powers the device on)</tspan></text>
+<circle cx="37" cy="1238.6" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="37" y="1241.8" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">2</text>
+<text x="50" y="1242.1" font-size="9.6" fill="#4a5568"><tspan x="50" dy="0">~62 ms — USJ device enumerates on the host</tspan></text>
+<circle cx="37" cy="1257.1999999999998" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="37" y="1260.4" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">3</text>
+<text x="50" y="1260.7" font-size="9.6" fill="#4a5568"><tspan x="50" dy="0">0–333 ms — ROM + 2nd-stage bootloader output,</tspan><tspan x="50" dy="12.6">structurally uncapturable over USJ</tspan></text>
+<circle cx="37" cy="1288.3999999999999" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="37" y="1291.6" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">4</text>
+<text x="50" y="1291.9" font-size="9.6" fill="#4a5568"><tspan x="50" dy="0">333–671 ms — core bring-up: 2 MB PSRAM found, UART0</tspan><tspan x="50" dy="12.6">console on GPIO43/44, CPU 160 MHz, chip rev v0.2</tspan></text>
+<circle cx="37" cy="1319.6" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="37" y="1322.8" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">5</text>
+<text x="50" y="1323.1" font-size="9.6" fill="#4a5568"><tspan x="50" dy="0">730 ms — application version banner</tspan></text>
+<circle cx="427" cy="1220.0" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="427" y="1223.2" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">6</text>
+<text x="440" y="1223.5" font-size="9.6" fill="#4a5568"><tspan x="440" dy="0">750 ms — assets partition mounted (~159,744 B free)</tspan></text>
+<circle cx="427" cy="1238.6" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="427" y="1241.8" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">7</text>
+<text x="440" y="1242.1" font-size="9.6" fill="#4a5568"><tspan x="440" dy="0">870–880 ms — Lua UI bundle loaded from the assets</tspan><tspan x="440" dy="12.6">partition</tspan></text>
+<circle cx="427" cy="1269.8" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="427" y="1273.0" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">8</text>
+<text x="440" y="1273.3" font-size="9.6" fill="#4a5568"><tspan x="440" dy="0">890 ms — first i2c_new_master_bus (sensor bus)</tspan></text>
+<circle cx="427" cy="1288.3999999999999" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="427" y="1291.6" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">9</text>
+<text x="440" y="1291.9" font-size="9.6" fill="#4a5568"><tspan x="440" dy="0">910 ms — CC status read: device is the sink, host is</tspan><tspan x="440" dy="12.6">the source</tspan></text>
+<circle cx="427" cy="1319.6" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="427" y="1322.8" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">10</text>
+<text x="440" y="1323.1" font-size="9.6" fill="#4a5568"><tspan x="440" dy="0">920–930 ms — RTC initialised and responding</tspan></text>
+<circle cx="807" cy="1220.0" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="807" y="1223.2" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">11</text>
+<text x="820" y="1223.5" font-size="9.6" fill="#4a5568"><tspan x="820" dy="0">930–1020 ms — microSD mounted, 1-bit bus, 40 MHz</tspan></text>
+<circle cx="807" cy="1238.6" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="807" y="1241.8" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">12</text>
+<text x="820" y="1242.1" font-size="9.6" fill="#4a5568"><tspan x="820" dy="0">1020 ms — “checking for update” — the SD updater scan</tspan><tspan x="820" dy="12.6">runs on every boot, before the display is up</tspan></text>
+<circle cx="807" cy="1269.8" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="807" y="1273.0" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">13</text>
+<text x="820" y="1273.3" font-size="9.6" fill="#4a5568"><tspan x="820" dy="0">1030 ms — backlight initialised and display driver</tspan><tspan x="820" dy="12.6">reset, second i2c_new_master_bus (panel bus)</tspan></text>
+<circle cx="807" cy="1301.0" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.2"/>
+<text x="807" y="1304.2" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">14</text>
+<text x="820" y="1304.5" font-size="9.6" fill="#4a5568"><tspan x="820" dy="0">1040–4080 ms — 3.04 s block of silence: display</tspan><tspan x="820" dy="12.6">bring-up. This one gap is 74% of the window</tspan></text>
+<circle cx="807" cy="1332.2" r="7" fill="#ffffff" stroke="#c0392b" stroke-width="1.2"/>
+<text x="807" y="1335.4" font-size="8.2" font-weight="700" text-anchor="middle" fill="#c0392b">15</text>
+<text x="820" y="1335.7" font-size="9.6" fill="#4a5568"><tspan x="820" dy="0">4140 ms — the hand-over: HID host init →</tspan><tspan x="820" dy="12.6">usb_host_install → usb_new_phy(host). Host-side</tspan><tspan x="820" dy="12.6">symptom: clean enumeration, then a</tspan><tspan x="820" dy="12.6">hardware-connection-lost teardown, with no enumeration</tspan><tspan x="820" dy="12.6">failure beforehand.</tspan></text>
+<text x="30" y="1434.7" font-size="12.5" font-weight="700" fill="#1c2430">Lane B &#8212; modified firmware</text>
+<rect x="96.0" y="1468.7" width="1044.0" height="34" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1.2"/>
+<text x="618.0" y="1485.7" font-size="9.6" text-anchor="middle" fill="#2f8f5b" font-weight="700"><tspan x="618.0" dy="-11.0">USJ window held open deliberately: the PHY is handed back to the USB-Serial-JTAG</tspan><tspan x="618.0" dy="11">controller as the third action of boot, and TinyUSB is not started until a</tspan><tspan x="618.0" dy="11">configured minimum uptime (5000 ms as shipped)</tspan></text>
+<line x1="96.0" y1="1468.7" x2="96.0" y2="1458.7" stroke="#1c2430" stroke-width="1"/>
+<circle cx="96.0" cy="1451.7" r="7" fill="#ffffff" stroke="#1c2430" stroke-width="1.3"/>
+<text x="96.0" y="1454.5" font-size="8.2" font-weight="700" text-anchor="middle" fill="#1c2430">A</text>
+<text x="110.0" y="1454.7" font-size="9.4" fill="#4a5568">0 ms — power latch driven LOW, stock GPIO parity block, PHY handed back to USJ</text>
+<line x1="1140.0" y1="1468.7" x2="1140.0" y2="1502.7" stroke="#c0392b" stroke-width="2.4"/>
+<path d="M1140.0,1504.7 l 8,10 l -16,0 z" fill="#c0392b"/>
+<text x="1136.0" y="1528.7" font-size="9.4" text-anchor="end" fill="#c0392b"><tspan x="1136.0" dy="0">5000 ms — TinyUSB claims the USB-OTG PHY; the CDC</tspan><tspan x="1136.0" dy="12">link comes up (continues past the edge of this</tspan><tspan x="1136.0" dy="12">axis)</tspan></text>
+<line x1="96" y1="1594.7" x2="1140" y2="1594.7" stroke="#1c2430" stroke-width="1.2"/>
+<line x1="96.0" y1="1590.7" x2="96.0" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="96.0" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">0 ms</text>
+<line x1="304.8" y1="1590.7" x2="304.8" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="304.8" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">1000 ms</text>
+<line x1="513.6" y1="1590.7" x2="513.6" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="513.6" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">2000 ms</text>
+<line x1="722.4" y1="1590.7" x2="722.4" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="722.4" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">3000 ms</text>
+<line x1="931.2" y1="1590.7" x2="931.2" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="931.2" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">4000 ms</text>
+<line x1="1140.0" y1="1590.7" x2="1140.0" y2="1598.7" stroke="#1c2430" stroke-width="1.2"/>
+<text x="1140.0" y="1612.7" font-size="10" text-anchor="middle" fill="#4a5568">5000 ms</text>
+<line x1="981.7" y1="1065.5" x2="981.7" y2="1594.7" stroke="#c0392b" stroke-width="3"/>
+<rect x="761.7" y="1061.5" width="214" height="66" fill="#ffffff" stroke="#c0392b" stroke-width="1"/>
+<text x="767.7" y="1074.5" font-size="9.6" font-weight="700" fill="#c0392b"><tspan x="767.7296" dy="0">measured 4.242 / 4.242 / 4.243 s</tspan><tspan x="767.7296" dy="13.4">across three trials — near-zero</tspan><tspan x="767.7296" dy="13.4">jitter, therefore deterministic</tspan><tspan x="767.7296" dy="13.4">code, not a cable fault</tspan></text><rect x="12" y="1660.7" width="1176" height="78" rx="10" fill="#fbe7e4" stroke="#c0392b" stroke-width="1.4"/>
+<text x="30" y="1686.7" font-size="13" font-weight="700" fill="#c0392b">&#9888; Warm-reset trap</text>
+<text x="30" y="1704.7" font-size="11.3" fill="#1c2430"><tspan x="30" dy="0">On this chip a software restart resets neither the RTC sub-system holding the PHY mux nor the USB peripherals. Without the explicit hand-back, any</tspan><tspan x="30" dy="16">reboot taken after TinyUSB started would come back with the PHY still on USB-OTG — no console and no esptool recovery until a physical power cycle.</tspan></text>
+<rect x="1074" y="1674.7" width="96" height="20" rx="5" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1"/>
+<text x="1122.0" y="1688.7" font-size="10" font-weight="700" text-anchor="middle" fill="#2f8f5b">CONFIRMED</text>
+<rect x="12" y="1758.7" width="1176" height="78" rx="10" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1.4"/>
+<text x="30" y="1784.7" font-size="13" font-weight="700" fill="#2f8f5b">&#8635; Recovery mechanism</text>
+<text x="30" y="1802.7" font-size="11.3" fill="#1c2430"><tspan x="30" dy="0">Download mode over USB-Serial-JTAG needs no GPIO0/BOOT pin — esptool has a VID/PID-detected reset strategy that drives it over DTR/RTS, as long as</tspan><tspan x="30" dy="16">the USJ peripheral, not the application, owns the pads. That is what this window is for.</tspan></text>
+<rect x="1074" y="1772.7" width="96" height="20" rx="5" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1"/>
+<text x="1122.0" y="1786.7" font-size="10" font-weight="700" text-anchor="middle" fill="#2f8f5b">CONFIRMED</text>
+<line x1="30" y1="1856.7" x2="1170" y2="1856.7" stroke="#c7cfd9" stroke-width="1"/>
+<text x="30" y="1876.7" font-size="10.5" font-weight="700" fill="#4a5568">Confidence key:</text>
+<rect x="150" y="1863.7" width="73.8" height="18" rx="5" fill="#e5f3ea" stroke="#2f8f5b" stroke-width="1"/>
+<text x="159" y="1876.7" font-size="10" font-weight="600" fill="#2f8f5b">CONFIRMED</text>
+<rect x="245.8" y="1863.7" width="129.6" height="18" rx="5" fill="#faf1dc" stroke="#b8860b" stroke-width="1"/>
+<text x="254.8" y="1876.7" font-size="10" font-weight="600" fill="#b8860b">strongly indicated</text>
+<rect x="397.40000000000003" y="1863.7" width="148.2" height="18" rx="5" fill="#eee" stroke="#7a8699" stroke-width="1"/>
+<text x="406.40000000000003" y="1876.7" font-size="10" font-weight="600" fill="#7a8699">unverified / POSSIBLE</text></svg>

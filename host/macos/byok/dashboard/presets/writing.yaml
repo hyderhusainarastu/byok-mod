@@ -1,0 +1,48 @@
+# writing preset -- manuscript stats read from the device (GET_DOCSTATS).
+#
+# A small clock row on top, then the writing widget across the remaining
+# 4 rows (64px) -- above its own 22px two-line/goal-bar layout threshold
+# (widgets/writing.py's render()).
+#
+# Renders fully offline (no device / firmware without GET_DOCSTATS):
+# writing.NullProvider degrades to "-- words", never an error tile. See
+# widgets/writing.py's module docstring for the GET_DOCSTATS PROPOSED
+# wire message this widget is built against, and docs/host-tools.md's
+# "Protocol reconciliation" note for how that got checked against
+# docs/protocol.md at the end of that release.
+#
+# Customize:
+#   options.daily_goal_words below sets the goal bar's denominator
+#   (default 500 if omitted).
+#
+# Try it:
+#   byok dashboard --preset writing
+#
+# See docs/host-tools.md's "Presets" section for the full list.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 30
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  - type: clock
+    at: [0, 0]
+    span: [12, 1]
+    options:
+      format: "%H:%M"
+      text_case: upper
+
+  - type: writing
+    at: [0, 1]
+    span: [12, 4]
+    options:
+      title: ""
+      daily_goal_words: 500

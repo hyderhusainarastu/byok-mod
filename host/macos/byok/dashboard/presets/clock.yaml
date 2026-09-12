@@ -1,0 +1,45 @@
+# clock preset -- a big clock is the whole point of the panel.
+#
+# Same shape as examples/clock-focus.yaml (kept as a separate file here
+# deliberately -- presets/ is the device-switchable set wired through
+# SET_PRESETS/PRESET_CHANGED, examples/ is the byok dashboard --config
+# demo set; the two directories are allowed to drift independently, and
+# do here in `refresh_seconds` only, tuned slower since a device cycling
+# through presets doesn't need clock.yaml's own second-hand as fast as a
+# dedicated single-config run would).
+#
+# Try it:
+#   byok dashboard --preset clock
+#
+# See docs/host-tools.md's "Presets" section for the full list.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 5
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  - type: clock
+    at: [0, 0]
+    span: [12, 3]
+    options:
+      format: "%H:%M:%S"
+
+  - type: date
+    at: [0, 3]
+    span: [6, 2]
+    options:
+      format: "%a, %b %-d"
+
+  - type: mac_stats
+    at: [6, 3]
+    span: [6, 2]
+    options:
+      fields: [battery]

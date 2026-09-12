@@ -1,0 +1,47 @@
+[
+  {
+    "name": "PING",
+    "type": 7,
+    "flags": 0,
+    "seq": 1,
+    "payload_hex": "",
+    "crc32": 1632943613,
+    "frame_hex": "424b01070001000000fdbd5461"
+  },
+  {
+    "name": "HELLO",
+    "type": 1,
+    "flags": 1,
+    "seq": 2,
+    "payload_hex": "010100100f000000",
+    "crc32": 1625319495,
+    "frame_hex": "424b01010102000800010100100f0000004768e060"
+  },
+  {
+    "name": "CLEAR",
+    "type": 16,
+    "flags": 0,
+    "seq": 3,
+    "payload_hex": "00",
+    "crc32": 3356798598,
+    "frame_hex": "424b011000030001000086ae14c8"
+  },
+  {
+    "name": "SET_BACKLIGHT",
+    "type": 33,
+    "flags": 1,
+    "seq": 4,
+    "payload_hex": "80f401",
+    "crc32": 2970344839,
+    "frame_hex": "424b0121010400030080f40187dd0bb1"
+  },
+  {
+    "name": "DRAW_TEXT",
+    "type": 17,
+    "flags": 1,
+    "seq": 5,
+    "payload_hex": "040008000100040042594f4b",
+    "crc32": 348596456,
+    "frame_hex": "424b01110105000c00040008000100040042594f4be828c714"
+  }
+]

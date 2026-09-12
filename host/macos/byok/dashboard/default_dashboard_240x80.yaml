@@ -1,0 +1,68 @@
+# BYOK Mod dashboard, tuned for the device's actual native panel: 240x80
+# (see docs/display.md / host/tools/testpatterns.py's own 240x80 default).
+#
+# `default_dashboard.yaml`'s 8-row grid gives ~10px rows at this height,
+# which is too small to read on the real panel -- see docs/host-tools.md's
+# 240x80 preview screenshot. This config uses a 5-row grid instead: one
+# big clock (with seconds, so `byok dashboard --interval 1` visibly ticks)
+# fills the top ~48px, a line of date + a compact stats readout fills the
+# next ~16px, and a full-width now-playing line fills the last ~16px.
+# Everything else default_dashboard.yaml ships (calendar, reminders, QR)
+# needs more vertical room than an 80px panel has and is intentionally
+# left out here rather than shown unreadably small.
+#
+# This is `byok dashboard`'s default config (see
+# byok.dashboard.config.default_config_path()) -- `--config PATH`
+# overrides it.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 60
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  # Big clock, fills most of the panel. Seconds included on purpose: at
+  # `--interval 1` this is what makes every frame actually differ from the
+  # last one, so the dashboard loop has something real to diff each cycle.
+  - type: clock
+    at: [0, 0]
+    span: [12, 3]
+    options:
+      format: "%H:%M:%S"
+
+  # Date, left half of the stats row.
+  - type: date
+    at: [0, 3]
+    span: [6, 1]
+    options:
+      format: "%a %-d"
+      align: left
+
+  # Compact stats readout, right half of the stats row.
+  # `text_case: upper` below: this row is 16px tall, at or above the 12px
+  # auto-default threshold in byok.dashboard.fonts.resolve_text_case, so it
+  # needs the explicit override to get uppercase -- the row's own auto-fit
+  # font size still lands small enough that thin lowercase strokes (the 'c'
+  # in "chg") lose the fight against 1-bit thresholding. See
+  # the dashboard-garble entry in docs/troubleshooting.md.
+  - type: mac_stats
+    at: [6, 3]
+    span: [6, 1]
+    options:
+      fields: [cpu, battery]
+      text_case: upper
+
+  # Now-playing footer, full width along the bottom. Same text_case note as
+  # mac_stats above.
+  - type: now_playing
+    at: [0, 4]
+    span: [12, 1]
+    options:
+      text_case: upper

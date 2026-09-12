@@ -1,0 +1,23 @@
+menu "BYOK hardware unknowns (RE placeholders, hw_config.h Sec.13)"
+
+    # BYOK_HW_BATT_DIVIDER_RATIO_X1000 and BYOK_HW_CHARGER_STAT_POLARITY used
+    # to live here as guessed placeholders. Both were resolved CONFIRMED
+    # from the stock image's own readBatteryVoltage()/getChargerStatus()
+    # disassembly and are now baked directly into hw_config.h Sec.9 as
+    # BYOK_BATT_DIVIDER_RATIO_X1000 / BYOK_CHARGER_STAT_POLARITY -- no longer
+    # a per-build guess, so removed from here.
+
+    config BYOK_HW_LCD_FB_BIT_ORDER_LSB_TOP
+        bool "Assume LCD framebuffer bit order is LSB = top row of the page"
+        default y
+        help
+            hw_config.h Sec.13 BYOK_LCD_FB_BIT_ORDER: the framebuffer BYTE
+            index is CONFIRMED ((y>>3)*240+x) but which bit within that byte
+            is the panel's topmost row of its 8-row page is only STRONGLY
+            INDICATED (the UC1611 family's usual RAM format), never actually
+            observed on this panel. Leave this enabled (the documented best
+            guess) until the display has been driven and a real image
+            checked; disable it if the picture comes up vertically mirrored
+            within each 8-row band.
+
+endmenu

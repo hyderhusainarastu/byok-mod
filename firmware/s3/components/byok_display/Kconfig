@@ -1,0 +1,188 @@
+menu "BYOK display driver"
+
+    config BYOK_DISPLAY_TRUE_SYSTEM_RESET
+        bool "Send a real UC1611 System Reset command before the vendor init preamble"
+        default y
+        help
+            The vendor's own reset preamble sends 0xE1 to the panel's
+            COMMAND address (0x38) followed by 0xE2 to its DATA address
+            (0x39) -- a double-byte opcode whose meaning is UNKNOWN
+            (hw_config.h Sec.3.1/13). It never sends 0xE2 as an actual
+            command (CD=0), which on the UC1611/UC1611s command set is
+            "Set System Reset", a genuine single-byte controller reset.
+
+            The panel has no reset GPIO and is not power-cycled by an S3
+            warm reset (docs/recovery.md §6, CONFIRMED
+            from both the vendor disassembly and this driver's own code).
+            On a cold boot that is invisible -- the controller's own
+            power-on reset has already put it in a known state before the
+            21-entry init table runs. On a warm reset (RESET S3, or any
+            esp_restart()) the controller is NOT reset, so the init table
+            is written over whatever state the previous run left: display
+            RAM, the VBIAS/contrast register if changed at runtime, scroll
+            position, the partial-window, the inverse-display flag, the
+            charge-pump state -- a STRONGLY INDICATED mechanism for the
+            "display artifacts, wrong contrast" symptom observed after
+            RESET S3 (observed during bring-up, reproduced on stock too).
+
+            ON (the default, byok-mod 0.1.2+): before the vendor's
+            unchanged 0xE1/0xE2 pair, send 0xE2 to the COMMAND address (a
+            real System Reset) followed by a >=150 ms settle delay. Strictly
+            additive -- the vendor sequence after it is byte-identical to
+            before this option existed, so this is trivially revertible.
+
+            OFF: exact vendor/stock parity, byte-for-byte -- the original
+            0.1.0/0.1.1 behaviour.
+
+    config BYOK_DISPLAY_FORCE_SCROLL_LINE_ZERO
+        bool "Explicitly zero the UC1611 Set Scroll Line register at bring-up"
+        default y
+        help
+            docs/troubleshooting.md: the first on-device
+            photograph of BYOK-Mod's own output (0.1.8) showed the whole
+            resting-screen image displayed 15 rows too high -- the 1-px top border and the "BYOK LAB" line
+            pushed off the top of the glass, and the 15 glass rows they
+            vacate at the bottom showing never-written controller RAM, not
+            wrapped content. The shift is not a multiple of 8 (not a
+            page/window-program error) and the image is not mirrored
+            within its 8-row pages (not a framebuffer bit-order error).
+
+            An exhaustive encode-and-match scan of every `call8 sim_send`
+            site in the vendor's 1.1.0 IROM (20 sites total, all
+            accounted for) found no byte in 0x40-0x7F sent anywhere in the
+            vendor image, ever -- not at init, not at runtime; the 21-entry
+            DROM init table this driver replays verbatim contains none
+            either. 0x40 | SL[3:0] / 0x50 | SL[7:4] is the UC1611 "Set
+            Scroll Line" pair, the controller's only row-granular vertical
+            display origin. Neither the vendor firmware nor byok-mod ever
+            programs it, and nothing in bring-up resets the controller
+            (no display reset GPIO -- BYOK_LCD_HAS_RESET_GPIO 0; the
+            vendor's 0xE1/DATA 0xE2 preamble is a RAM write, not a System
+            Reset; CONFIG_BYOK_DISPLAY_TRUE_SYSTEM_RESET=n) -- so both
+            firmwares simply inherit whatever the register holds coming
+            out of its own power-on reset, which on this unit measured 15.
+
+            Cause graded STRONGLY INDICATED, not CONFIRMED: Set Scroll
+            Line is the only row-granular vertical origin in the public
+            UC1611 Rev-0.81 command map, but this board is a UC1611s (I2C
+            variant, outside that revision) and three opcodes (0xC9, 0x95,
+            0xE1) remain unplaced -- see docs/troubleshooting.md Sec.2.
+
+            ON (the default, byok-mod 0.1.9+): at the end of
+            lcd_hw_reset_and_init(), immediately after the vendor's
+            21-entry init table, send CMD 0x50 (Set Scroll Line MSB) then
+            CMD 0x40 (Set Scroll Line LSB), both to the command address
+            (0x38), programming SL=0. MSB before LSB is deliberate -- see
+            the comment at the call site in byok_display.c for why that
+            order is safe under either a UC1611 two-register decode or a
+            UC1610-style single 6-bit decode. Strictly additive -- after
+            the vendor's own unchanged init table, same policy as 0.1.2's
+            TRUE_SYSTEM_RESET addition -- so this is trivially revertible.
+
+            OFF: exact vendor/stock parity, byte-for-byte -- the register
+            is left at whatever value it holds coming out of reset, as in
+            every release through 0.1.8.
+
+    config BYOK_DISPLAY_BULK_WRITES
+        bool "Use bulk I2C transfers for panel data writes"
+        default y
+        help
+            The stock vendor driver sends every framebuffer byte as its own
+            one-byte I2C transaction to the data address (0x39) --
+            BYOK_LCD_I2C_BYTES_PER_XFER == 1 in firmware/common/hw_config.h,
+            CONFIRMED from the disassembly, and reproduced faithfully by
+            this driver's fallback path (see below). That is 2400
+            transactions for one full-panel refresh.
+
+            The UC1611 auto-increments its column address after each data
+            byte written inside the programmed window (hw_config.h Sec.3.3),
+            so a full page row -- or, when the window spans the full panel
+            width, the ENTIRE window -- can instead be sent as one single
+            i2c_master_transmit() call to the data address. This is a
+            protocol-level optimisation on top of CONFIRMED controller
+            behaviour, not a guess about undocumented hardware, but it has
+            never been exercised on the real panel -- that measurement is
+            still pending.
+
+            ON (the default): byok_display uses the bulk path. Full-width
+            windows (PARTIAL_REFRESH/FULL_REFRESH covering x=0..239) are
+            sent in one transaction; narrower partial windows are sent one
+            transaction per 8-row page (still far fewer than one per byte).
+
+            OFF: byok_display reproduces the stock per-byte behaviour
+            exactly (one i2c_master_transmit() per framebuffer byte) --
+            keep this as the fallback if bulk transfers ever prove
+            unreliable on the real controller/wiring.
+
+            Commands (the reset preamble, the 21-entry init table, window-
+            program addressing, contrast) are ALWAYS sent one byte per
+            transaction regardless of this setting -- SAFETY.md's own
+            evidence-preservation stance and hw_config.h's own comment
+            ("replay verbatim") apply to the init sequence specifically,
+            and command traffic is a tiny fraction of a refresh's total
+            byte count anyway, so there is nothing to gain by batching it.
+
+    config BYOK_DISPLAY_POLARITY_EXPERIMENT
+        bool "Run the command/data address polarity A/B/C experiment at boot"
+        default n
+        help
+            0.1.8: default flipped back to n. The vendor's sim_send()/
+            sim_reset() were disassembled end-to-end (docs/display.md Sec.6) (the vendor functions this whole
+            experiment was testing an alternative theory of) and found
+            byok-mod's transport ALREADY vendor-exact -- one 1-byte I2C
+            write per LCD byte to 0x38 (command) / 0x39 (data), no strobe,
+            no control byte, no read path, exactly what this option's own
+            "pass A"/unswapped mapping already does. The 0.1.7 on-device
+            read-back that motivated this experiment (0xFF -> 0x00,
+            identical from both addresses) turned out to be one electrical
+            node (SDA), not two expander latches -- see that analysis's
+            Sec.6. This option and its A/B/C runner are KEPT, not
+            removed -- an independent on-device polarity check remains
+            cheap and the finding above does not itself explain why the
+            panel stays blank -- but it no longer runs by default now that
+            its motivating hypothesis has a documented, instruction-level
+            answer. Flip back to y to re-run it manually.
+
+            docs/display.md Sec.6 re-derived the command(0x38)/data(0x39)
+            address polarity from the vendor disassembly AND the real
+            UltraChip UC1611 datasheet (16/19 init-table opcodes match
+            exactly, C/D bit included) and found NO inversion -- the
+            current mapping is CONFIRMED correct. This option exists
+            regardless of that outcome, by deliberate choice, to also
+            gather on-device evidence: with the panel
+            still blank on real hardware despite a byte-for-byte,
+            opcode-correct vendor-identical stream, an on-device A/B
+            comparison costs little and is independent confirming (or,
+            if it surprises us, falsifying) evidence for Sec.6's verdict.
+
+            ON: byok_display_run_boot_selftest() is REPLACED, for this
+            build only, by byok_display_run_polarity_experiment(), which
+            runs three full reset+init+window-program passes in sequence,
+            each preceded/followed by a UC1611 STATUS READ attempt
+            (i2c_master_receive()) on both 0x38 and 0x39, logged either
+            way:
+              Pass A: current mapping, cmd=0x38 / data=0x39 (vendor
+                      parity) -- 8px checkerboard held 3 s, logged
+                      "POLARITY A: cmd=0x38 data=0x39".
+              Pass B: SWAPPED mapping, cmd=0x39 / data=0x38 -- full
+                      re-init under the swapped mapping, checkerboard
+                      held 3 s, logged "POLARITY B: cmd=0x39 data=0x38".
+              Pass C: whichever docs/display.md Sec.6 says is correct
+                      (= pass A's mapping, per that section's verdict) --
+                      full re-init, then a "POLARITY A OK?" banner left
+                      up as the resting screen, same as the normal
+                      self-test's resting state.
+
+            OFF: normal byok_display_run_boot_selftest() (checkerboard,
+            border+banner, line test, boot-original-gate screen, resting
+            screen) runs as before -- this option's default in every
+            release before 0.1.7 and after this experiment's evidence has
+            been gathered.
+
+            The command/data mapping is a runtime variable
+            (byok_display_set_polarity()), not a rebuild -- both I2C
+            device handles already exist at both addresses; only which
+            handle byok_display's internal lcd_send()/lcd_send_bulk_data()
+            treat as "command" vs "data" changes.
+
+endmenu

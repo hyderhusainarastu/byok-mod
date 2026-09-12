@@ -1,0 +1,358 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1328" width="900" height="1328" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <rect x="0" y="0" width="900" height="1328" fill="#ffffff"/>
+  <text x="450.0" y="34.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="19" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">ESP32-S3 pin assignments, recovered from the stock firmware image</text>
+  <text x="450.0" y="54.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10.5" font-weight="normal" font-style="italic" fill="#666" text-anchor="middle">gpio-peripheral-map — sources: firmware/common/hw_config.h, docs/pinout.md</text>
+  <rect x="40.0" y="67.0" width="13.0" height="11.0" rx="2" fill="#fbe4c8" stroke="#c9711a" stroke-width="1"/>
+  <text x="57.0" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">power / status</text>
+  <rect x="169.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#d9e8fb" stroke="#2b6fd9" stroke-width="1"/>
+  <text x="186.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">display bus (I2C0)</text>
+  <rect x="329.0" y="67.0" width="13.0" height="11.0" rx="2" fill="#dff5df" stroke="#2f9e2f" stroke-width="1"/>
+  <text x="346.0" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">SD</text>
+  <rect x="368.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="385.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">buttons</text>
+  <rect x="445.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#d7f5ef" stroke="#1f9c85" stroke-width="1"/>
+  <text x="462.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">sensor bus (I2C1)</text>
+  <rect x="597.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="614.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">inter-MCU (PICO link)</text>
+  <rect x="779.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#e7e7ea" stroke="#6b6b73" stroke-width="1"/>
+  <text x="796.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">USB</text>
+  <rect x="826.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#fbdcef" stroke="#c93f96" stroke-width="1"/>
+  <text x="843.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">console</text>
+  <rect x="903.5" y="67.0" width="13.0" height="11.0" rx="2" fill="#eeeeee" stroke="#8a8a8a" stroke-width="1"/>
+  <text x="920.5" y="76.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#333" text-anchor="start">unknown</text>
+  <rect x="40.0" y="102.0" width="820.0" height="24.0" rx="3" fill="#2b2b33" stroke="#2b2b33" stroke-width="1"/>
+  <text x="48.0" y="118.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10.5" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">GPIO</text>
+  <text x="101.0" y="118.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10.5" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">DIRECTION / CONFIGURATION</text>
+  <text x="331.0" y="118.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10.5" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">FUNCTION</text>
+  <text x="686.0" y="118.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10.5" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">CONFIDENCE</text>
+  <rect x="40.0" y="126.0" width="820.0" height="22.5" rx="0" fill="#fbe4c8" stroke="#c9711a" stroke-width="1"/>
+  <text x="67.5" y="140.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">1</text>
+  <text x="103.0" y="140.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">ADC1_CH0, never gpio_config'd</text>
+  <text x="333.0" y="140.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">battery voltage sense, 12-bit, 12 dB atten</text>
+  <text x="688.0" y="140.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="126.0" x2="95.0" y2="148.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="126.0" x2="325.0" y2="148.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="126.0" x2="680.0" y2="148.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="148.5" width="820.0" height="22.5" rx="0" fill="#d9e8fb" stroke="#2b6fd9" stroke-width="1"/>
+  <text x="67.5" y="163.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">2</text>
+  <text x="103.0" y="163.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">LEDC low-speed timer 0 / ch 0</text>
+  <text x="333.0" y="163.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">LCD backlight PWM, 5 kHz, 13-bit</text>
+  <text x="688.0" y="162.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="148.5" x2="95.0" y2="171.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="148.5" x2="325.0" y2="171.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="148.5" x2="680.0" y2="171.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="171.0" width="820.0" height="22.5" rx="0" fill="#dff5df" stroke="#2f9e2f" stroke-width="1"/>
+  <text x="67.5" y="185.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">3</text>
+  <text x="103.0" y="185.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SDMMC slot 1</text>
+  <text x="333.0" y="185.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SD CMD</text>
+  <text x="688.0" y="185.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="171.0" x2="95.0" y2="193.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="171.0" x2="325.0" y2="193.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="171.0" x2="680.0" y2="193.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="193.5" width="820.0" height="22.5" rx="0" fill="#dff5df" stroke="#2f9e2f" stroke-width="1"/>
+  <text x="67.5" y="208.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">4</text>
+  <text x="103.0" y="208.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SDMMC slot 1</text>
+  <text x="333.0" y="208.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SD D0</text>
+  <text x="688.0" y="207.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="193.5" x2="95.0" y2="216.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="193.5" x2="325.0" y2="216.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="193.5" x2="680.0" y2="216.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="216.0" width="820.0" height="22.5" rx="0" fill="#dff5df" stroke="#2f9e2f" stroke-width="1"/>
+  <text x="67.5" y="230.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">5</text>
+  <text x="103.0" y="230.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SDMMC slot 1</text>
+  <text x="333.0" y="230.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SD CLK</text>
+  <text x="688.0" y="230.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="216.0" x2="95.0" y2="238.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="216.0" x2="325.0" y2="238.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="216.0" x2="680.0" y2="238.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="238.5" width="820.0" height="22.5" rx="0" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="67.5" y="253.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">6</text>
+  <text x="103.0" y="253.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, polled</text>
+  <text x="333.0" y="253.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">button WAKE (front power)</text>
+  <text x="688.0" y="252.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED (pin)</text>
+  <line x1="95.0" y1="238.5" x2="95.0" y2="261.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="238.5" x2="325.0" y2="261.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="238.5" x2="680.0" y2="261.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="261.0" width="820.0" height="22.5" rx="0" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="67.5" y="275.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">7</text>
+  <text x="103.0" y="275.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, polled</text>
+  <text x="333.0" y="275.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">button DOWN; held at boot = updater escape hatch</text>
+  <text x="688.0" y="275.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="261.0" x2="95.0" y2="283.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="261.0" x2="325.0" y2="283.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="261.0" x2="680.0" y2="283.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="283.5" width="820.0" height="22.5" rx="0" fill="#d7f5ef" stroke="#1f9c85" stroke-width="1"/>
+  <text x="67.5" y="298.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">8</text>
+  <text x="103.0" y="298.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">I2C port 1</text>
+  <text x="333.0" y="298.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SDA — TUSB320 0x60 + PCF8563 0x51</text>
+  <text x="688.0" y="297.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="283.5" x2="95.0" y2="306.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="283.5" x2="325.0" y2="306.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="283.5" x2="680.0" y2="306.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="306.0" width="820.0" height="22.5" rx="0" fill="#d7f5ef" stroke="#1f9c85" stroke-width="1"/>
+  <text x="67.5" y="320.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">9</text>
+  <text x="103.0" y="320.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">I2C port 1</text>
+  <text x="333.0" y="320.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SCL — same bus</text>
+  <text x="688.0" y="320.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="306.0" x2="95.0" y2="328.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="306.0" x2="325.0" y2="328.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="306.0" x2="680.0" y2="328.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="328.5" width="820.0" height="22.5" rx="0" fill="#d9e8fb" stroke="#2b6fd9" stroke-width="1"/>
+  <text x="67.5" y="343.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">10</text>
+  <text x="103.0" y="343.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">I2C port 0</text>
+  <text x="333.0" y="343.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SCL — display only</text>
+  <text x="688.0" y="342.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="328.5" x2="95.0" y2="351.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="328.5" x2="325.0" y2="351.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="328.5" x2="680.0" y2="351.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="351.0" width="820.0" height="22.5" rx="0" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="67.5" y="365.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">11</text>
+  <text x="103.0" y="365.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, polled</text>
+  <text x="333.0" y="365.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">button BRIGHTNESS</text>
+  <text x="688.0" y="365.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="351.0" x2="95.0" y2="373.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="351.0" x2="325.0" y2="373.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="351.0" x2="680.0" y2="373.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="373.5" width="820.0" height="34.0" rx="0" fill="#fbe4c8" stroke="#c9711a" stroke-width="1"/>
+  <text x="67.5" y="394.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">12</text>
+  <text x="103.0" y="394.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, internal pull-up, polled</text>
+  <text x="333.0" y="394.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">charger CHRG, active LOW</text>
+  <text x="688.0" y="388.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">CONFIRMED (pin→state); part-level</text>
+  <text x="688.0" y="398.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">naming strongly indicated</text>
+  <line x1="95.0" y1="373.5" x2="95.0" y2="407.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="373.5" x2="325.0" y2="407.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="373.5" x2="680.0" y2="407.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="407.5" width="820.0" height="34.0" rx="0" fill="#fbe4c8" stroke="#c9711a" stroke-width="1"/>
+  <text x="67.5" y="428.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">13</text>
+  <text x="103.0" y="428.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, internal pull-up, polled</text>
+  <text x="333.0" y="428.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">charger STDBY, active LOW</text>
+  <text x="688.0" y="422.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">CONFIRMED (pin→state); part-level</text>
+  <text x="688.0" y="432.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">naming strongly indicated</text>
+  <line x1="95.0" y1="407.5" x2="95.0" y2="441.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="407.5" x2="325.0" y2="441.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="407.5" x2="680.0" y2="441.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="441.5" width="820.0" height="22.5" rx="0" fill="#fbe4c8" stroke="#c9711a" stroke-width="1"/>
+  <text x="67.5" y="456.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">14</text>
+  <text x="103.0" y="456.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">RMT channel 0</text>
+  <text x="333.0" y="456.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">WS2812 data, 1 LED, clk_div 2</text>
+  <text x="688.0" y="455.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="441.5" x2="95.0" y2="464.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="441.5" x2="325.0" y2="464.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="441.5" x2="680.0" y2="464.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="464.0" width="820.0" height="22.5" rx="0" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="67.5" y="478.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">15</text>
+  <text x="103.0" y="478.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, polled</text>
+  <text x="333.0" y="478.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">button UP; held at boot = USB console mode</text>
+  <text x="688.0" y="478.4" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="464.0" x2="95.0" y2="486.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="464.0" x2="325.0" y2="486.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="464.0" x2="680.0" y2="486.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="486.5" width="820.0" height="22.5" rx="0" fill="#ece0fb" stroke="#7a3fc9" stroke-width="1"/>
+  <text x="67.5" y="501.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">16</text>
+  <text x="103.0" y="501.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, polled</text>
+  <text x="333.0" y="501.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">button EXECUTE</text>
+  <text x="688.0" y="500.9" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED (pin)</text>
+  <line x1="95.0" y1="486.5" x2="95.0" y2="509.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="486.5" x2="325.0" y2="509.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="486.5" x2="680.0" y2="509.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="509.0" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="523.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">17</text>
+  <text x="103.0" y="523.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">OUTPUT, LOW at boot</text>
+  <text x="333.0" y="523.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">PICO reset, 10 ms active-HIGH pulse</text>
+  <text x="688.0" y="523.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="509.0" x2="95.0" y2="531.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="509.0" x2="325.0" y2="531.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="509.0" x2="680.0" y2="531.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="531.5" width="820.0" height="22.5" rx="0" fill="#d9e8fb" stroke="#2b6fd9" stroke-width="1"/>
+  <text x="67.5" y="546.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">18</text>
+  <text x="103.0" y="546.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">I2C port 0</text>
+  <text x="333.0" y="546.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SDA — display only</text>
+  <text x="688.0" y="546.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="531.5" x2="95.0" y2="554.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="531.5" x2="325.0" y2="554.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="531.5" x2="680.0" y2="554.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="554.0" width="820.0" height="22.5" rx="0" fill="#e7e7ea" stroke="#6b6b73" stroke-width="1"/>
+  <text x="67.5" y="568.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">19</text>
+  <text x="103.0" y="568.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">never gpio_config'd</text>
+  <text x="333.0" y="568.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">native USB D-</text>
+  <text x="688.0" y="568.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="554.0" x2="95.0" y2="576.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="554.0" x2="325.0" y2="576.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="554.0" x2="680.0" y2="576.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="576.5" width="820.0" height="22.5" rx="0" fill="#e7e7ea" stroke="#6b6b73" stroke-width="1"/>
+  <text x="67.5" y="591.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">20</text>
+  <text x="103.0" y="591.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">never gpio_config'd</text>
+  <text x="333.0" y="591.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">native USB D+</text>
+  <text x="688.0" y="591.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="576.5" x2="95.0" y2="599.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="576.5" x2="325.0" y2="599.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="576.5" x2="680.0" y2="599.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="599.0" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="613.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">35</text>
+  <text x="103.0" y="613.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">OUTPUT, LOW at boot</text>
+  <text x="333.0" y="613.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">PICO request / ready-out</text>
+  <text x="688.0" y="613.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">strongly indicated</text>
+  <line x1="95.0" y1="599.0" x2="95.0" y2="621.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="599.0" x2="325.0" y2="621.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="599.0" x2="680.0" y2="621.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="621.5" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="636.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">36</text>
+  <text x="103.0" y="636.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">UART1 TX</text>
+  <text x="333.0" y="636.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">to PICO RX, 921600 8N1</text>
+  <text x="688.0" y="636.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="621.5" x2="95.0" y2="644.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="621.5" x2="325.0" y2="644.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="621.5" x2="680.0" y2="644.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="644.0" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="658.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">37</text>
+  <text x="103.0" y="658.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">UART1 RX</text>
+  <text x="333.0" y="658.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">from PICO TX</text>
+  <text x="688.0" y="658.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="644.0" x2="95.0" y2="666.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="644.0" x2="325.0" y2="666.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="644.0" x2="680.0" y2="666.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="666.5" width="820.0" height="22.5" rx="0" fill="#eeeeee" stroke="#8a8a8a" stroke-width="1"/>
+  <text x="67.5" y="681.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">39</text>
+  <text x="103.0" y="681.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">OUTPUT, LOW at boot, never written again</text>
+  <text x="333.0" y="681.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">purpose UNKNOWN</text>
+  <text x="688.0" y="681.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#a4291d" text-anchor="start">unverified</text>
+  <line x1="95.0" y1="666.5" x2="95.0" y2="689.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="666.5" x2="325.0" y2="689.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="666.5" x2="680.0" y2="689.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="689.0" width="820.0" height="22.5" rx="0" fill="#dff5df" stroke="#2f9e2f" stroke-width="1"/>
+  <text x="67.5" y="703.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">40</text>
+  <text x="103.0" y="703.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, internal pull-up, polled</text>
+  <text x="333.0" y="703.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">SD card detect, LOW = card present</text>
+  <text x="688.0" y="703.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="689.0" x2="95.0" y2="711.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="689.0" x2="325.0" y2="711.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="689.0" x2="680.0" y2="711.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="711.5" width="820.0" height="22.5" rx="0" fill="#e7e7ea" stroke="#6b6b73" stroke-width="1"/>
+  <text x="67.5" y="726.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">41</text>
+  <text x="103.0" y="726.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, no pull, NEGEDGE + ISR</text>
+  <text x="333.0" y="726.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">TUSB320 interrupt</text>
+  <text x="688.0" y="726.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="711.5" x2="95.0" y2="734.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="711.5" x2="325.0" y2="734.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="711.5" x2="680.0" y2="734.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="734.0" width="820.0" height="22.5" rx="0" fill="#f6a9a4" stroke="#a4291d" stroke-width="1"/>
+  <text x="67.5" y="748.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#7a1a10" text-anchor="middle">42 ⚠</text>
+  <text x="103.0" y="748.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">OUTPUT, LOW at boot</text>
+  <text x="333.0" y="748.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="700" font-style="normal" fill="#5a0f08" text-anchor="start">POWER LATCH — HIGH cuts power</text>
+  <text x="688.0" y="748.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="734.0" x2="95.0" y2="756.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="734.0" x2="325.0" y2="756.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="734.0" x2="680.0" y2="756.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="756.5" width="820.0" height="22.5" rx="0" fill="#fbdcef" stroke="#c93f96" stroke-width="1"/>
+  <text x="67.5" y="771.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">43</text>
+  <text x="103.0" y="771.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">UART0 TX (IDF default)</text>
+  <text x="333.0" y="771.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">console / boot log</text>
+  <text x="688.0" y="771.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">strongly indicated</text>
+  <line x1="95.0" y1="756.5" x2="95.0" y2="779.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="756.5" x2="325.0" y2="779.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="756.5" x2="680.0" y2="779.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="779.0" width="820.0" height="22.5" rx="0" fill="#fbdcef" stroke="#c93f96" stroke-width="1"/>
+  <text x="67.5" y="793.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">44</text>
+  <text x="103.0" y="793.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">UART0 RX (IDF default)</text>
+  <text x="333.0" y="793.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">console</text>
+  <text x="688.0" y="793.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">strongly indicated</text>
+  <line x1="95.0" y1="779.0" x2="95.0" y2="801.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="779.0" x2="325.0" y2="801.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="779.0" x2="680.0" y2="801.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="801.5" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="816.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">46</text>
+  <text x="103.0" y="816.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, pull-DOWN, ANYEDGE + ISR</text>
+  <text x="333.0" y="816.2" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">PICO READY, HIGH = ready</text>
+  <text x="688.0" y="816.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#1a7a3c" text-anchor="start">CONFIRMED</text>
+  <line x1="95.0" y1="801.5" x2="95.0" y2="824.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="801.5" x2="325.0" y2="824.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="801.5" x2="680.0" y2="824.0" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="824.0" width="820.0" height="22.5" rx="0" fill="#fff6c9" stroke="#b3960a" stroke-width="1"/>
+  <text x="67.5" y="838.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">47</text>
+  <text x="103.0" y="838.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">OUTPUT, LOW at boot</text>
+  <text x="333.0" y="838.8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">PICO transfer strobe</text>
+  <text x="688.0" y="838.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#8a6d00" text-anchor="start">strongly indicated</text>
+  <line x1="95.0" y1="824.0" x2="95.0" y2="846.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="824.0" x2="325.0" y2="846.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="824.0" x2="680.0" y2="846.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="846.5" width="820.0" height="34.0" rx="0" fill="#eeeeee" stroke="#8a8a8a" stroke-width="1"/>
+  <text x="67.5" y="867.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="middle">48</text>
+  <text x="103.0" y="867.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">input, pull-DOWN, ANYEDGE + ISR</text>
+  <text x="333.0" y="867.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">second status line, meaning UNKNOWN</text>
+  <text x="688.0" y="861.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#a4291d" text-anchor="start">wiring CONFIRMED, meaning</text>
+  <text x="688.0" y="872.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="600" font-style="normal" fill="#a4291d" text-anchor="start">unverified</text>
+  <line x1="95.0" y1="846.5" x2="95.0" y2="880.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="325.0" y1="846.5" x2="325.0" y2="880.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="680.0" y1="846.5" x2="680.0" y2="880.5" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <rect x="40.0" y="902.5" width="400.0" height="182.0" rx="6" fill="#fbfbfd" stroke="#333" stroke-width="1.2"/>
+  <rect x="40.0" y="902.5" width="400.0" height="22.0" rx="6" fill="#333" stroke="#333" stroke-width="1"/>
+  <rect x="40.0" y="913.5" width="400.0" height="11.0" rx="0" fill="#333" stroke="#333" stroke-width="1"/>
+  <text x="52.0" y="918.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">The list is closed</text>
+  <text x="54.0" y="940.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">• gpio_config() names exactly</text>
+  <text x="54.0" y="953.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">   {6,7,11,12,13,15,16,17,35,39,40,41,42,46,47,48} across six call sites</text>
+  <text x="54.0" y="969.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">• gpio_set_level() names exactly {17,35,39,42,47}</text>
+  <text x="54.0" y="986.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">• gpio_get_level() names exactly {6,12,13,16,40} plus the ISR argument</text>
+  <text x="54.0" y="1002.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">• The remaining pins (1,2,3,4,5,8,9,10,14,18,36,37,43,44) are claimed by</text>
+  <text x="54.0" y="1015.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="normal" fill="#222" text-anchor="start">   peripheral drivers, which is why they never appear in a gpio_config().</text>
+  <rect x="460.0" y="902.5" width="400.0" height="182.0" rx="6" fill="#fbfbfd" stroke="#333" stroke-width="1.2"/>
+  <rect x="460.0" y="902.5" width="400.0" height="22.0" rx="6" fill="#333" stroke="#333" stroke-width="1"/>
+  <rect x="460.0" y="913.5" width="400.0" height="11.0" rx="0" fill="#333" stroke="#333" stroke-width="1"/>
+  <text x="472.0" y="918.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="700" font-style="normal" fill="#fff" text-anchor="start">Two I²C masters, side by side</text>
+  <text x="474.0" y="939.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0b3d78" text-anchor="start">Bus 0 (display only): port 0, SDA 18 / SCL 10, 1 MHz, XTAL clock source,</text>
+  <text x="474.0" y="951.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0b3d78" text-anchor="start">glitch-ignore 7, internal pull-up OFF in stock (external pull-ups required</text>
+  <text x="474.0" y="963.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0b3d78" text-anchor="start">at 1 MHz), devices 0x38 (command) and 0x39 (data), disable_ack_check set on</text>
+  <text x="474.0" y="975.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0b3d78" text-anchor="start">both, one byte per transaction, 1000 ms timeout.</text>
+  <text x="474.0" y="995.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0f6a5a" text-anchor="start">Bus 1 (sensors): port 1, SDA 8 / SCL 9, 400 kHz, XTAL clock source, glitch-</text>
+  <text x="474.0" y="1007.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.0" font-weight="normal" font-style="normal" fill="#0f6a5a" text-anchor="start">ignore 7, internal pull-up OFF, devices 0x60 (TUSB320) and 0x51 (PCF8563).</text>
+  <line x1="474.0" y1="1025.5" x2="846.0" y2="1025.5" stroke="#ccc" stroke-width="1"/>
+  <text x="474.0" y="1037.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.7" font-weight="normal" font-style="normal" fill="#555" text-anchor="start">Footnote: the display bus runs with the SoC's internal pull-ups disabled —</text>
+  <text x="474.0" y="1049.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.7" font-weight="normal" font-style="normal" fill="#555" text-anchor="start">the board must carry external pull-ups on GPIO18/GPIO10 to meet the 1 MHz</text>
+  <text x="474.0" y="1061.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.7" font-weight="normal" font-style="normal" fill="#555" text-anchor="start">rise time.</text>
+  <text x="40.0" y="1110.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="700" font-style="normal" fill="#111" text-anchor="start">Stock boot-time GPIO drive order (not numeric pin order)</text>
+  <rect x="52.5" y="1124.5" width="190.0" height="66.0" rx="5" fill="#fff6c9" stroke="#b3960a" stroke-width="1.3"/>
+  <text x="62.5" y="1140.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="600" font-style="normal" fill="#4d3f00" text-anchor="start">gpio_config()</text>
+  <text x="62.5" y="1153.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="600" font-style="normal" fill="#4d3f00" text-anchor="start">pins 17, 35, 39, 42, 47</text>
+  <text x="62.5" y="1165.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="600" font-style="normal" fill="#4d3f00" text-anchor="start">OUTPUT – no pulls,</text>
+  <text x="62.5" y="1178.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.2" font-weight="600" font-style="normal" fill="#4d3f00" text-anchor="start">no interrupt</text>
+  <line x1="244.5" y1="1157.5" x2="253.5" y2="1157.5" stroke="#555" stroke-width="1.6"/>
+  <polygon points="253.5,1153.5 258.5,1157.5 253.5,1161.5" fill="#555"/>
+  <rect x="255.5" y="1124.5" width="108.0" height="66.0" rx="5" fill="#fdeec9" stroke="#b3960a" stroke-width="1.3"/>
+  <text x="309.5" y="1139.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#555" text-anchor="middle">step 1</text>
+  <text x="309.5" y="1155.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" font-style="normal" fill="#222" text-anchor="middle">GPIO 17</text>
+  <text x="309.5" y="1170.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">set_level(</text>
+  <text x="309.5" y="1181.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">17, 0)</text>
+  <line x1="365.5" y1="1157.5" x2="374.5" y2="1157.5" stroke="#555" stroke-width="1.6"/>
+  <polygon points="374.5,1153.5 379.5,1157.5 374.5,1161.5" fill="#555"/>
+  <rect x="376.5" y="1124.5" width="108.0" height="66.0" rx="5" fill="#fdeec9" stroke="#b3960a" stroke-width="1.3"/>
+  <text x="430.5" y="1139.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#555" text-anchor="middle">step 2</text>
+  <text x="430.5" y="1155.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" font-style="normal" fill="#222" text-anchor="middle">GPIO 35</text>
+  <text x="430.5" y="1170.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">set_level(</text>
+  <text x="430.5" y="1181.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">35, 0)</text>
+  <line x1="486.5" y1="1157.5" x2="495.5" y2="1157.5" stroke="#555" stroke-width="1.6"/>
+  <polygon points="495.5,1153.5 500.5,1157.5 495.5,1161.5" fill="#555"/>
+  <rect x="497.5" y="1124.5" width="108.0" height="66.0" rx="5" fill="#fdeec9" stroke="#b3960a" stroke-width="1.3"/>
+  <text x="551.5" y="1139.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#555" text-anchor="middle">step 3</text>
+  <text x="551.5" y="1155.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" font-style="normal" fill="#222" text-anchor="middle">GPIO 47</text>
+  <text x="551.5" y="1170.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">set_level(</text>
+  <text x="551.5" y="1181.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">47, 0)</text>
+  <line x1="607.5" y1="1157.5" x2="616.5" y2="1157.5" stroke="#555" stroke-width="1.6"/>
+  <polygon points="616.5,1153.5 621.5,1157.5 616.5,1161.5" fill="#555"/>
+  <rect x="618.5" y="1124.5" width="108.0" height="66.0" rx="5" fill="#fdeec9" stroke="#b3960a" stroke-width="1.3"/>
+  <text x="672.5" y="1139.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#555" text-anchor="middle">step 4</text>
+  <text x="672.5" y="1155.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" font-style="normal" fill="#222" text-anchor="middle">GPIO 39</text>
+  <text x="672.5" y="1170.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">set_level(</text>
+  <text x="672.5" y="1181.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">39, 0)</text>
+  <line x1="728.5" y1="1157.5" x2="737.5" y2="1157.5" stroke="#555" stroke-width="1.6"/>
+  <polygon points="737.5,1153.5 742.5,1157.5 737.5,1161.5" fill="#555"/>
+  <rect x="739.5" y="1124.5" width="108.0" height="66.0" rx="5" fill="#f6a9a4" stroke="#a4291d" stroke-width="1.3"/>
+  <text x="793.5" y="1139.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.6" font-weight="normal" font-style="normal" fill="#555" text-anchor="middle">step 5</text>
+  <text x="793.5" y="1155.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12.5" font-weight="700" font-style="normal" fill="#7a1a10" text-anchor="middle">GPIO 42</text>
+  <text x="793.5" y="1170.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">set_level(</text>
+  <text x="793.5" y="1181.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="8.4" font-weight="normal" font-style="normal" fill="#444" text-anchor="middle">42, 0)</text>
+  <text x="835.5" y="1138.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="11" font-weight="normal" font-style="normal" fill="#7a1a10" text-anchor="middle">⚠</text>
+  <text x="450.0" y="1208.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="600" font-style="normal" fill="#333" text-anchor="middle">this is the earliest hardware GPIO action of the whole boot, before the I²C buses, the RTC, the boot-mode fork and the display, on every boot path</text>
+  <text x="450.0" y="1221.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.6" font-weight="600" font-style="normal" fill="#333" text-anchor="middle">(CONFIRMED).</text>
+  <rect x="40.0" y="1251.5" width="820.0" height="53.0" rx="5" fill="#f2f2f2" stroke="#999" stroke-width="1"/>
+  <text x="54.0" y="1268.5" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="italic" fill="#444" text-anchor="start">Every value is what the firmware writes, not what a meter reads. No pin here has been mapped to a pad on the J6/J7 spring-pin footprints, to a test</text>
+  <text x="54.0" y="1281.0" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9.4" font-weight="normal" font-style="italic" fill="#444" text-anchor="start">point, or to a connector contact; that mapping has no evidence and is out of scope.</text>
+</svg>

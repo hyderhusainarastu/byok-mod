@@ -1,0 +1,235 @@
+<svg viewBox="0 0 1100 850" xmlns="http://www.w3.org/2000/svg" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <style>
+    .title { font-size: 22px; font-weight: 700; fill: #1a1a2e; }
+    .subtitle { font-size: 12px; fill: #555; }
+    .panel-title { font-size: 13px; font-weight: 700; fill: #1a1a2e; }
+    .cell { fill: #eef2ff; stroke: #3b4b8a; stroke-width: 1; }
+    .cell-hdr { fill: #dbe4ff; stroke: #3b4b8a; stroke-width: 1; }
+    .cell-crc { fill: #ffe9cc; stroke: #9a5b00; stroke-width: 1; }
+    .cell-payload { fill: #e6f7ec; stroke: #1f7a44; stroke-width: 1; }
+    .cell-label { font-size: 11px; font-weight: 600; fill: #1a1a2e; text-anchor: middle; }
+    .cell-sub { font-size: 9px; fill: #444; text-anchor: middle; }
+    .offset-label { font-size: 9.5px; fill: #666; text-anchor: middle; }
+    .brace-label { font-size: 10.5px; fill: #333; text-anchor: middle; font-weight: 600; }
+    .caption { font-size: 11.5px; fill: #222; }
+    .body-text { font-size: 11px; fill: #222; }
+    .mono { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; fill: #1a1a2e; }
+    .mono-em { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 10.5px; fill: #1a1a2e; font-weight: 700; }
+    .box { fill: #fbfbfd; stroke: #ccc; stroke-width: 1; rx: 6; }
+    .footer { font-size: 10px; fill: #666; }
+    .bit-box { fill: #f5f5fa; stroke: #555; stroke-width: 1; }
+    .bit-label { font-size: 9.5px; text-anchor: middle; fill: #1a1a2e; font-weight: 600; }
+    .bit-mask { font-size: 8.5px; text-anchor: middle; fill: #666; }
+    .state-box { fill: #eef2ff; stroke: #3b4b8a; stroke-width: 1.2; rx: 5; }
+    .state-label { font-size: 11px; font-weight: 700; text-anchor: middle; fill: #1a1a2e; }
+    .arrow { stroke: #3b4b8a; stroke-width: 1.4; fill: none; marker-end: url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#3b4b8a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="850" fill="#ffffff"/>
+
+  <text x="20" y="28" class="title">Host link frame format, byte for byte</text>
+  <text x="20" y="46" class="subtitle">Spec document — every field below is normative; no confidence labels apply on this page.</text>
+
+  <!-- ===================== BYTE RULER ===================== -->
+  <!-- Header cells: offsets 0-8, 9 bytes, then PAYLOAD, then CRC32 (4 bytes) -->
+  <!-- Layout: start x=30, each header byte cell 46px wide, y=70, height=34 -->
+
+  <g id="ruler">
+    <!-- MAGIC0 -->
+    <rect x="30" y="70" width="46" height="34" class="cell-hdr"/>
+    <text x="53" y="84" class="cell-label">MAGIC0</text>
+    <text x="53" y="96" class="cell-sub">0x42 'B'</text>
+    <text x="53" y="118" class="offset-label">0</text>
+
+    <!-- MAGIC1 -->
+    <rect x="76" y="70" width="46" height="34" class="cell-hdr"/>
+    <text x="99" y="84" class="cell-label">MAGIC1</text>
+    <text x="99" y="96" class="cell-sub">0x4B 'K'</text>
+    <text x="99" y="118" class="offset-label">1</text>
+
+    <!-- VERSION -->
+    <rect x="122" y="70" width="46" height="34" class="cell-hdr"/>
+    <text x="145" y="84" class="cell-label">VERSION</text>
+    <text x="145" y="96" class="cell-sub">0x01</text>
+    <text x="145" y="118" class="offset-label">2</text>
+
+    <!-- TYPE -->
+    <rect x="168" y="70" width="46" height="34" class="cell-hdr"/>
+    <text x="191" y="84" class="cell-label">TYPE</text>
+    <text x="191" y="96" class="cell-sub">msg type</text>
+    <text x="191" y="118" class="offset-label">3</text>
+
+    <!-- FLAGS -->
+    <rect x="214" y="70" width="46" height="34" class="cell-hdr"/>
+    <text x="237" y="84" class="cell-label">FLAGS</text>
+    <text x="237" y="96" class="cell-sub">bitmap</text>
+    <text x="237" y="118" class="offset-label">4</text>
+
+    <!-- SEQ (2 bytes) -->
+    <rect x="260" y="70" width="92" height="34" class="cell-hdr"/>
+    <text x="306" y="84" class="cell-label">SEQ (LE u16)</text>
+    <text x="306" y="96" class="cell-sub">sender-scoped, wraps 0xFFFF&#8594;0x0000</text>
+    <text x="306" y="118" class="offset-label">5&#8211;6</text>
+
+    <!-- LEN (2 bytes) -->
+    <rect x="352" y="70" width="92" height="34" class="cell-hdr"/>
+    <text x="398" y="84" class="cell-label">LEN (LE u16)</text>
+    <text x="398" y="96" class="cell-sub">payload len, max 4096</text>
+    <text x="398" y="118" class="offset-label">7&#8211;8</text>
+
+    <!-- PAYLOAD (wide) -->
+    <rect x="444" y="70" width="220" height="34" class="cell-payload"/>
+    <text x="554" y="84" class="cell-label">PAYLOAD (LEN bytes)</text>
+    <text x="554" y="96" class="cell-sub">type-specific; ints LE; coords px, origin top-left</text>
+    <text x="554" y="118" class="offset-label">9 .. 9+LEN-1</text>
+
+    <!-- CRC32 (4 bytes) -->
+    <rect x="664" y="70" width="92" height="34" class="cell-crc"/>
+    <text x="710" y="84" class="cell-label">CRC32 (LE u32)</text>
+    <text x="710" y="96" class="cell-sub">over header+payload</text>
+    <text x="710" y="118" class="offset-label">9+LEN .. 9+LEN+3</text>
+
+    <!-- Header brace: offsets 0-8 (x=30 to x=260 covers bytes 0-4, need through offset 8 i.e. x=444) -->
+    <path d="M 30 132 Q 30 140 38 140 L 229 140 Q 237 140 237 148" fill="none" stroke="#3b4b8a" stroke-width="1.2"/>
+    <path d="M 237 148 Q 237 140 245 140 L 436 140 Q 444 140 444 132" fill="none" stroke="#3b4b8a" stroke-width="1.2"/>
+    <text x="237" y="160" class="brace-label">header (9 bytes)</text>
+
+    <!-- CRC input brace: offsets 0 through 9+LEN-1, i.e. header+payload -->
+    <path d="M 30 172 Q 30 180 38 180 L 546 180 Q 554 180 554 188" fill="none" stroke="#9a5b00" stroke-width="1.2"/>
+    <path d="M 554 188 Q 554 180 562 180 L 656 180 Q 664 180 664 172" fill="none" stroke="#9a5b00" stroke-width="1.2"/>
+    <text x="347" y="200" class="brace-label" fill="#9a5b00">CRC input (header || payload)</text>
+  </g>
+
+  <text x="30" y="222" class="caption">frame length = 9 + LEN + 4 &#8658; <tspan font-weight="700">13 bytes minimum, 4109 bytes maximum.</tspan></text>
+
+  <!-- ===================== CRC PANEL ===================== -->
+  <rect x="30" y="238" width="500" height="96" class="box"/>
+  <text x="42" y="256" class="panel-title">CRC32 definition</text>
+  <text x="42" y="273" class="body-text">IEEE 802.3 / zlib CRC-32 — reflected polynomial <tspan class="mono">0xEDB88320</tspan>, init <tspan class="mono">0xFFFFFFFF</tspan>,</text>
+  <text x="42" y="289" class="body-text">input and output reflected, final XOR <tspan class="mono">0xFFFFFFFF</tspan>. Computed over the nine header</text>
+  <text x="42" y="305" class="body-text">bytes followed by the payload. The magic and version are inside the CRC;</text>
+  <text x="42" y="321" class="body-text">the CRC field itself is not.</text>
+
+  <!-- ===================== SIZE LIMITS STRIP ===================== -->
+  <rect x="546" y="238" width="524" height="96" class="box"/>
+  <text x="558" y="256" class="panel-title">Size limits</text>
+  <text x="558" y="273" class="body-text">max payload <tspan class="mono-em">4096 B</tspan> &#183; max frame on wire <tspan class="mono-em">4109 B</tspan> &#183; min frame <tspan class="mono-em">13 B</tspan></text>
+  <text x="558" y="290" class="body-text">max <tspan class="mono">DRAW_TEXT</tspan> text <tspan class="mono-em">4088 B</tspan> &#183; max <tspan class="mono">FRAME_DATA</tspan> chunk <tspan class="mono-em">4092 B</tspan></text>
+  <text x="558" y="307" class="body-text">max declared frame buffer <tspan class="mono-em">256 KiB</tspan></text>
+  <text x="558" y="324" class="body-text">at most <tspan class="mono-em">one</tspan> frame transaction open at a time</text>
+
+  <!-- ===================== FLAGS PANEL ===================== -->
+  <rect x="30" y="350" width="500" height="196" class="box"/>
+  <text x="42" y="368" class="panel-title">FLAGS — 8-bit map</text>
+
+  <!-- 8 bit boxes -->
+  <g>
+    <!-- bits shown MSB(7) to LSB(0) left to right for readability, but label each with its bit number -->
+    <rect x="42" y="378" width="56" height="24" class="bit-box"/>
+    <text x="70" y="394" class="bit-label">7</text>
+    <rect x="98" y="378" width="56" height="24" class="bit-box"/>
+    <text x="126" y="394" class="bit-label">6</text>
+    <rect x="154" y="378" width="56" height="24" class="bit-box"/>
+    <text x="182" y="394" class="bit-label">5</text>
+    <rect x="210" y="378" width="56" height="24" class="bit-box" fill="#ffe9cc"/>
+    <text x="238" y="394" class="bit-label">4</text>
+    <rect x="266" y="378" width="56" height="24" class="bit-box" fill="#e6f7ec"/>
+    <text x="294" y="394" class="bit-label">3</text>
+    <rect x="322" y="378" width="56" height="24" class="bit-box" fill="#e6f7ec"/>
+    <text x="350" y="394" class="bit-label">2</text>
+    <rect x="378" y="378" width="56" height="24" class="bit-box" fill="#dbe4ff"/>
+    <text x="406" y="394" class="bit-label">1</text>
+    <rect x="434" y="378" width="56" height="24" class="bit-box" fill="#dbe4ff"/>
+    <text x="462" y="394" class="bit-label">0</text>
+    <text x="70" y="410" class="bit-mask">0xE0</text>
+    <text x="126" y="410" class="bit-mask"></text>
+    <text x="182" y="410" class="bit-mask"></text>
+    <text x="238" y="410" class="bit-mask">0x10</text>
+    <text x="294" y="410" class="bit-mask">0x08</text>
+    <text x="350" y="410" class="bit-mask">0x04</text>
+    <text x="406" y="410" class="bit-mask">0x02</text>
+    <text x="462" y="410" class="bit-mask">0x01</text>
+  </g>
+
+  <text x="42" y="428" class="body-text"><tspan font-weight="700">bit 0 (0x01) ACK_REQ</tspan> — sender wants an explicit ACK or typed reply for this SEQ</text>
+  <text x="42" y="444" class="body-text"><tspan font-weight="700">bit 1 (0x02) IS_REPLY</tspan> — this frame answers an earlier one, echoes that frame's SEQ</text>
+  <text x="42" y="460" class="body-text"><tspan font-weight="700">bit 2 (0x04) MORE</tspan> — non-final fragment of a logical message</text>
+  <text x="42" y="476" class="body-text"><tspan font-weight="700">bit 3 (0x08) RLE</tspan> — payload is run-length compressed; legal only on frame-data and bitmap types</text>
+  <text x="42" y="492" class="body-text"><tspan font-weight="700">bit 4 (0x10) EVENT</tspan> — unsolicited device&#8594;host notification; never acknowledged, never retried</text>
+  <text x="42" y="512" class="body-text"><tspan font-weight="700">bits 5&#8211;7 reserved</tspan> — send 0, ignore on receipt; do NOT reject a frame for a set reserved bit</text>
+
+  <!-- ===================== RESYNC PANEL ===================== -->
+  <rect x="546" y="350" width="524" height="196" class="box"/>
+  <text x="558" y="368" class="panel-title">Resync state machine</text>
+
+  <g>
+    <rect x="558" y="382" width="90" height="30" class="state-box"/>
+    <text x="603" y="401" class="state-label">HUNT</text>
+
+    <path d="M 648 397 L 674 397" class="arrow"/>
+    <rect x="676" y="382" width="90" height="30" class="state-box"/>
+    <text x="721" y="401" class="state-label">HEADER</text>
+
+    <path d="M 766 397 L 792 397" class="arrow"/>
+    <rect x="794" y="382" width="90" height="30" class="state-box"/>
+    <text x="839" y="401" class="state-label">PAYLOAD</text>
+
+    <path d="M 884 397 L 910 397" class="arrow"/>
+    <rect x="912" y="382" width="90" height="30" class="state-box"/>
+    <text x="957" y="401" class="state-label">VERIFY</text>
+
+    <!-- VERIFY -> dispatch or reject -> back to HUNT -->
+    <path d="M 957 412 L 957 432 L 603 432 L 603 412" class="arrow"/>
+    <text x="780" y="428" class="bit-mask" font-size="9.5">dispatch or reject</text>
+  </g>
+
+  <text x="558" y="452" class="body-text" font-size="10.3">HUNT reads bytes until 0x42 0x4B, discards everything before it.</text>
+  <text x="558" y="466" class="body-text" font-size="10.3">HEADER reads 7 more bytes; rejects an unknown VERSION or LEN &gt; 4096.</text>
+  <text x="558" y="480" class="body-text" font-size="10.3">PAYLOAD reads LEN bytes then 4 CRC bytes, under a 200 ms stall timeout.</text>
+  <text x="558" y="494" class="body-text" font-size="10.3">VERIFY rejects on CRC mismatch.</text>
+  <text x="558" y="512" class="body-text" font-size="10.1" font-style="italic">A literal BK inside a payload is harmless — HUNT is entered only when</text>
+  <text x="558" y="526" class="body-text" font-size="10.1" font-style="italic">the receiver is not inside a frame, and a frame's extent is fixed by LEN.</text>
+
+  <!-- ===================== WORKED EXAMPLE PANEL ===================== -->
+  <rect x="30" y="560" width="1040" height="176" class="box"/>
+  <text x="42" y="578" class="panel-title">Worked example — the 25-byte DRAW_TEXT frame</text>
+
+  <text x="42" y="598" class="body-text">Draw "BYOK" at (4, 8), font 1, no style, ACK requested, sequence 5:</text>
+
+  <!-- field breakdown -->
+  <g font-family="SF Mono, Menlo, Consolas, monospace" font-size="10.3" fill="#1a1a2e">
+    <text x="42" y="616">MAGIC <tspan fill="#555">42 4B</tspan> &#183; VERSION <tspan fill="#555">01</tspan> &#183; TYPE <tspan fill="#555">11</tspan> (DRAW_TEXT) &#183; FLAGS <tspan fill="#555">01</tspan> (ACK_REQ) &#183; SEQ <tspan fill="#555">05 00</tspan> &#183; LEN <tspan fill="#555">0C 00</tspan> (12)</text>
+    <text x="42" y="634">x <tspan fill="#555">04 00</tspan> &#183; y <tspan fill="#555">08 00</tspan> &#183; font <tspan fill="#555">01</tspan> &#183; style <tspan fill="#555">00</tspan> &#183; text_len <tspan fill="#555">04 00</tspan> &#183; text <tspan fill="#555">42 59 4F 4B</tspan> ("BYOK") &#183; CRC32 <tspan fill="#555">E8 28 C7 14</tspan></text>
+  </g>
+
+  <text x="42" y="656" class="body-text">Raw frame, 25 bytes:</text>
+  <rect x="42" y="664" width="990" height="24" fill="#f5f5f8" stroke="#ddd"/>
+  <text x="50" y="680" class="mono">42 4B 01 11 01 05 00 0C 00 04 00 08 00 01 00 04 00 42 59 4F 4B E8 28 C7 14</text>
+
+  <text x="42" y="706" class="body-text">Reply:</text>
+  <rect x="42" y="712" width="520" height="22" fill="#f5f5f8" stroke="#ddd"/>
+  <text x="50" y="727" class="mono">42 4B 01 09 02 05 00 00 00 &lt;crc32&gt;</text>
+
+  <text x="580" y="722" class="body-text" font-size="10.3">TYPE <tspan class="mono-em">09</tspan> = ACK &#183; FLAGS <tspan class="mono-em">02</tspan> = IS_REPLY &#183; SEQ <tspan class="mono-em">05 00</tspan> echoed from the request</text>
+
+  <!-- ===================== TRANSPORT NOTE + SCOPE BOX ===================== -->
+  <rect x="30" y="746" width="500" height="70" class="box"/>
+  <text x="42" y="763" class="panel-title">Transport</text>
+  <text x="42" y="780" class="body-text" font-size="10.3">Primary transport is USB CDC-ACM on the native USB PHY. Baud rate is</text>
+  <text x="42" y="794" class="body-text" font-size="10.3">irrelevant; the host must not assert DTR-toggle reset behaviour. The</text>
+  <text x="42" y="808" class="body-text" font-size="10.3">USB-Serial-JTAG interface is the debug console — no protocol bytes, ever.</text>
+
+  <rect x="546" y="746" width="524" height="70" fill="#fff7f0" stroke="#b5651d" stroke-width="1.2" rx="6"/>
+  <text x="558" y="763" class="panel-title" fill="#7a3d0a">Scope</text>
+  <text x="558" y="780" class="body-text" font-size="10.1">No memory/flash/NVS/register/I2C/GPIO access, no code execution, no</text>
+  <text x="558" y="794" class="body-text" font-size="10.1">filesystem access, no message takes an address. A hostile host can show</text>
+  <text x="558" y="808" class="body-text" font-size="10.1">the wrong thing, drain the battery via backlight, or reboot — nothing else.</text>
+
+  <text x="30" y="838" class="footer">This page specifies the link between the host tool and the replacement firmware; it is not the vendor's own inter-processor protocol.</text>
+</svg>

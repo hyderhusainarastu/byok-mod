@@ -1,0 +1,97 @@
+# Default BYOK Mod Mac dashboard.
+#
+# Geometry-agnostic: `layout.grid` divides the canvas into a percentage
+# grid, and every widget's `at`/`span` is a grid cell, not a pixel
+# coordinate -- this same file renders sensibly on a 240x160 panel, a
+# 320x240 panel, or the `preview.py` PNG at any size you ask for.
+#
+# NOTE: it does NOT fit the device's actual native panel, 240x80 -- the
+# 8-row grid gives ~10px rows, too small for anything but the clock. Use
+# `default_dashboard_240x80.yaml` for that size; see docs/host-tools.md
+# §10 for a side-by-side preview.
+#
+# `display.width`/`display.height` below are just this file's own
+# defaults for when nothing else specifies a size; `preview.py --width
+# --height` (and any future device-side caller) overrides them.
+
+display:
+  width: 320
+  height: 240
+  bpp: 1
+
+refresh_seconds: 60
+
+layout:
+  grid:
+    cols: 12
+    rows: 8
+
+widgets:
+  # Big clock, top-left quadrant.
+  - type: clock
+    at: [0, 0]
+    span: [7, 4]
+    options:
+      format: "%H:%M"
+
+  # Date, right under the clock.
+  - type: date
+    at: [0, 4]
+    span: [7, 1]
+    options:
+      format: "%a, %b %-d"
+      align: left
+
+  # System stats strip, under the date.
+  - type: mac_stats
+    at: [0, 5]
+    span: [7, 1]
+    options:
+      fields: [cpu, mem, disk, battery]
+
+  # Network, bottom-left.
+  - type: network
+    at: [0, 6]
+    span: [4, 1]
+    options:
+      interface: en0
+
+  # Git status for the project repo, next to it.
+  - type: git
+    at: [4, 6]
+    span: [3, 1]
+    options:
+      title: "byok"
+      repo: "."
+
+  # Today's calendar, right column.
+  - type: calendar
+    at: [7, 0]
+    span: [5, 4]
+    options:
+      title: "Today"
+      max_events: 6
+
+  # Open reminders, right column, under the calendar.
+  - type: reminders
+    at: [7, 4]
+    span: [5, 2]
+    options:
+      title: "To do"
+      max_items: 5
+
+  # A small QR code in the bottom-right corner -- point it at whatever's
+  # useful (a Wi-Fi join string, a URL, ...). Empty by default so it
+  # renders as a blank tile until configured.
+  - type: qr
+    at: [9, 6]
+    span: [3, 2]
+    options:
+      data: ""
+      border: 1
+
+  # Now-playing footer, along the bottom (leaves the QR corner clear).
+  - type: now_playing
+    at: [0, 7]
+    span: [9, 1]
+    options: {}

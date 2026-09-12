@@ -1,0 +1,29 @@
+menu "BYOK clock mode"
+
+    config BYOK_CLOCK_IDLE_TIMEOUT_MS
+        int "No-host idle timeout before switching to the on-device CLOCK screen (ms)"
+        default 30000
+        range 1000 3600000
+        help
+            byok_modes.h's CLOCK mode (a device-local PCF8563-driven clock
+            face, byok_clock component) is entered automatically once this
+            many milliseconds pass with no frame received from a connected
+            host -- covering BOTH "the host went away/asleep" and "no host
+            has ever connected since boot" with the one mechanism, since
+            byok_clock's own idle timer starts at the same t=0 either way
+            (esp_timer's own boot-relative clock) rather than needing a
+            separate "at boot" special case. Any frame received from a host
+            afterwards switches the device straight back to DASHBOARD_USB
+            (byok_clock_notify_host_frame(), called from app_main.c's
+            byok_on_frame() on every frame that reaches the dispatcher) --
+            this value only controls how long the device waits before
+            giving up on a host that has gone quiet, not how long CLOCK
+            itself stays up once entered.
+
+            30 s (the default) is long enough that a host's own brief
+            connect/HELLO/GET_INFO handshake never trips it, short enough
+            that unplugging the cable (or the host app quitting) shows a
+            useful screen well within the time an owner glances at the
+            device expecting either a dashboard or the time.
+
+endmenu

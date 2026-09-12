@@ -1,0 +1,20 @@
+# extras/doom/WAD.sha256 — identity record for extras/doom/wad/DOOM1.WAD
+# (the WAD itself is gitignored; this record is tracked)
+#
+# file:   DOOM1.WAD (shareware, v1.9)
+# size:   4196020 bytes
+# sha1:   5b2e249b9c5133ec987b3ea77596381dc0d6bc1d
+# md5:    f0cefca49926d00903cf57551d901abe
+# sha256: 1d7d43be501e67d927e415e0b8f3e29c3bf33075e859721816f652a526cac771
+#
+# NOTE: the value 5b2e249b9c5133ec987b3ea77596381, published across many
+# Doom-community sources as this file's "MD5" (docs/sample-projects/doom.md
+# §3 covers the mix-up), is actually the first 32 hex chars of the SHA1 above
+# (5b2e249b9c5133ec987b3ea77596381dc0d6bc1d), not a real MD5. Confirmed
+# against two independent public sources (github.com/rommapp/romm and
+# github.com/sysprog21/rv32emu, both explicitly labeling it "sha1"). The
+# actual MD5 is the value recorded above.
+#
+# Verify a local copy with:
+#   shasum -a 256 -c <(echo "1d7d43be501e67d927e415e0b8f3e29c3bf33075e859721816f652a526cac771  extras/doom/wad/DOOM1.WAD")
+1d7d43be501e67d927e415e0b8f3e29c3bf33075e859721816f652a526cac771  DOOM1.WAD

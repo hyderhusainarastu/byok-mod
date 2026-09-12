@@ -1,0 +1,89 @@
+menu "BYOK SD-card updater"
+
+    config BYOK_ENABLE_SD_UPDATER
+        bool "Scan /SDCARD/Updates/BYOK.tar at boot (stock-compatible SD updater)"
+        default y
+        help
+            Mirrors the stock firmware's own SD `Updates/` install mechanism
+            (docs/flash-layout-and-updater.md, D-011, D-015) closely enough that
+            dropping the pristine stock BYOK.tar back on the card and
+            power-cycling always works, regardless of which app (stock or
+            ours) currently boots -- see components/byok_sd_updater's own
+            header comment for the full step-by-step and the safety gating.
+
+            With this on (the default), every boot mounts the SD card (if
+            present and DOWN is not held) and checks for the update tar;
+            with it off, byok_sd_updater_check_and_run() is a no-op and the
+            SD card is never touched by this component at all.
+
+            NOTE: this only controls whether the scan/validate path runs.
+            The actual OTA flash write it can trigger is a SEPARATE gate,
+            CONFIG_BYOK_SD_UPDATER_ARMED (below) -- see that option's help
+            text and byok_sd_updater.h for why the two are deliberately not
+            the same flag.
+
+    config BYOK_SD_UPDATER_ARMED
+        bool "Arm the SD updater's OTA write (esp_ota_begin/write/end + esp_ota_set_boot_partition)"
+        default n
+        depends on BYOK_ENABLE_SD_UPDATER
+        help
+            Decision record: docs/design-rationale.md D-017.
+
+            With this ON, a validated `/SDCARD/Updates/BYOK.tar` ->
+            `BYOK.bin` member is actually installed: esp_ota_begin() into
+            esp_ota_get_next_update_partition(NULL), streamed esp_ota_write(),
+            esp_ota_end() (which validates the image -- bad checksum/hash
+            fails here, before anything is selected to boot), then
+            esp_ota_set_boot_partition() and a reboot. This reproduces
+            exactly the STOCK updater's own operation on this device (the
+            maker-documented recovery path, D-011/D-015) -- not a new or
+            different write, the same one the stock app already performs
+            with the same tar format at the same call sequence.
+
+            This is a SEPARATE gate from CONFIG_BYOK_ALLOW_OTADATA_WRITE
+            (main/Kconfig.projbuild): that flag continues to gate
+            BOOT_ORIGINAL (the protocol command), the boot-time EXECUTE-
+            held-3s hatch, and esp_ota_mark_app_valid_cancel_rollback() --
+            none of those are affected by this option, and this option
+            does not affect them. D-017 arms the SD-updater OTA write on
+            its own gate while deliberately leaving those three behind
+            CONFIG_BYOK_ALLOW_OTADATA_WRITE=n until the SD path has
+            actually been exercised on the device.
+
+            With this OFF (the default), every step through image
+            validation still runs and is logged (target partition, target
+            size), but the write itself is skipped -- the log says what it
+            "would install" -- and no esp_ota_* call is made. The tar is
+            left on the card either way in this case (nothing is deleted
+            unless a write actually happens -- see byok_sd_updater.h step 7).
+
+            NOTE: firmware/s3/sdkconfig.defaults overrides this option's
+            default to `y` for this PoC build (docs/design-rationale.md D-017) --
+            `idf.py build` in this tree therefore produces an ARMED image
+            even though `n` remains this Kconfig entry's own default.
+
+            Arming this means every boot with a `BYOK.tar` present on the
+            card erases and rewrites whatever the OTHER OTA slot currently
+            holds -- there is no confirmation step and no on-glass
+            indication (the status callback is log-only; this runs before
+            byok_display_init()), only the DOWN-hold as an opt-out. This is
+            exact parity with the stock updater, which has no target-slot
+            content guard either (docs/design-rationale.md D-019); recovery of an
+            overwritten OTA slot is always possible by re-applying the
+            corresponding vendor tar or our own tar.
+
+            Never arms a write to `factory`, `nvs`, `phy_init`, the
+            bootloader, or the partition table --
+            esp_ota_get_next_update_partition() can only ever return an
+            OTA app slot by construction, and install_member() additionally
+            asserts the returned partition's type/subtype before writing
+            anything. A corrupt/mismatched image is refused by
+            esp_ota_end()'s own validation (or by this component's own
+            size/magic/chip_id checks) before esp_ota_set_boot_partition()
+            is ever called, and CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=n
+            means esp_ota_begin() never touches the other otadata sector
+            (docs/bootloader-analysis.md). `esptool erase_region 0x910000
+            0x2000` remains the ultimate off-device fallback regardless of
+            this flag's value.
+
+endmenu

@@ -1,0 +1,347 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 1180" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1150" height="1180" fill="#faf9f6"/>
+
+  <!-- title -->
+  <text x="575" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="#15181c">Panel geometry, framebuffer packing and the refresh window</text>
+
+  <!-- confidence legend -->
+  <g font-size="11.5">
+    <rect x="700" y="34" width="11" height="11" fill="#1a7d3a"/>
+    <text x="715" y="43" fill="#333">CONFIRMED</text>
+    <rect x="800" y="34" width="11" height="11" fill="#a9720b"/>
+    <text x="815" y="43" fill="#333">strongly indicated</text>
+    <rect x="930" y="34" width="11" height="11" fill="#7a5cc0"/>
+    <text x="945" y="43" fill="#333">possible</text>
+    <rect x="1010" y="34" width="11" height="11" fill="#b23b3b"/>
+    <text x="1025" y="43" fill="#333">unverified / unknown</text>
+  </g>
+
+  <!-- =========================== ROW 1: PANEL RECTANGLE =========================== -->
+  <text x="20" y="65" font-size="14.5" font-weight="700" fill="#15181c">Panel rectangle — 240 × 80 px, 1 bpp (drawn at 3×)</text>
+
+  <!-- axis labels -->
+  <text x="785" y="88" font-size="11" fill="#5b6470">x →</text>
+  <text x="20" y="215" font-size="11" fill="#5b6470" transform="rotate(-90 20 215)">y ↓</text>
+
+  <!-- x ticks -->
+  <g font-size="10" fill="#5b6470">
+    <text x="55" y="88">0</text>
+    <text x="200" y="88">50</text>
+    <text x="350" y="88">100</text>
+    <text x="500" y="88">150</text>
+    <text x="650" y="88">200</text>
+    <text x="762" y="88">239</text>
+  </g>
+
+  <!-- page bands: gx=55 gy=95 scale=3 -> 720x240 -->
+  <g stroke="#c7d2e0" stroke-width="1">
+    <rect x="55" y="95"  width="720" height="24" fill="#eef3fb"/>
+    <rect x="55" y="119" width="720" height="24" fill="#ffffff"/>
+    <rect x="55" y="143" width="720" height="24" fill="#eef3fb"/>
+    <rect x="55" y="167" width="720" height="24" fill="#ffffff"/>
+    <rect x="55" y="191" width="720" height="24" fill="#eef3fb"/>
+    <rect x="55" y="215" width="720" height="24" fill="#ffffff"/>
+    <rect x="55" y="239" width="720" height="24" fill="#eef3fb"/>
+    <rect x="55" y="263" width="720" height="24" fill="#ffffff"/>
+    <rect x="55" y="287" width="720" height="24" fill="#eef3fb"/>
+    <rect x="55" y="311" width="720" height="24" fill="#ffffff"/>
+  </g>
+  <rect x="55" y="95" width="720" height="240" fill="none" stroke="#333" stroke-width="1.5"/>
+  <g font-size="11.5" fill="#333">
+    <text x="783" y="111">page 0</text>
+    <text x="783" y="135">page 1</text>
+    <text x="783" y="159">page 2</text>
+    <text x="783" y="183">page 3</text>
+    <text x="783" y="207">page 4</text>
+    <text x="783" y="231">page 5</text>
+    <text x="783" y="255">page 6</text>
+    <text x="783" y="279">page 7</text>
+    <text x="783" y="303">page 8</text>
+    <text x="783" y="327">page 9</text>
+  </g>
+
+  <!-- dirty rect: px x30..150 y20..45 -> x145 y155 w360 h75 -->
+  <rect x="145" y="155" width="360" height="75" fill="none" stroke="#d9480f" stroke-width="2.5"/>
+  <!-- snapped window: px x30..150 y16..47 (pages 2-5) -> x145 y143 w360 h93 -->
+  <rect x="145" y="143" width="360" height="93" fill="none" stroke="#2f6fed" stroke-width="2.5" stroke-dasharray="7,5"/>
+
+  <!-- legend -->
+  <g font-size="11.5">
+    <line x1="55" y1="352" x2="80" y2="352" stroke="#d9480f" stroke-width="2.5"/>
+    <text x="86" y="356" fill="#333">dirty rectangle (x 30–150, y 20–45)</text>
+    <line x1="55" y1="370" x2="80" y2="370" stroke="#2f6fed" stroke-width="2.5" stroke-dasharray="7,5"/>
+    <text x="86" y="374" fill="#333">snapped refresh window → pages 2 through 5</text>
+  </g>
+  <text x="55" y="393" font-size="12.5" font-style="italic" fill="#3a3f46">The y start is snapped DOWN to a page boundary; vertical granularity is 8 rows,</text>
+  <text x="55" y="409" font-size="12.5" font-style="italic" fill="#3a3f46">horizontal granularity is one column.</text>
+
+  <!-- =========================== ROW 1: FRAMEBUFFER PANEL =========================== -->
+  <rect x="868" y="55" width="272" height="365" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="880" y="72" font-size="14.5" font-weight="700" fill="#15181c">Framebuffer packing</text>
+
+  <text x="880" y="94" font-size="12">byte index = (y &gt;&gt; 3) × 240 + x<tspan fill="#1a7d3a" font-size="10.5"> (CONFIRMED)</tspan></text>
+  <text x="880" y="113" font-size="12" fill="#333">stride: 240 bytes / page row</text>
+  <text x="880" y="130" font-size="12" fill="#333">10 page rows → 2400 bytes total</text>
+
+  <!-- blown up byte: 8 stacked cells -->
+  <g>
+    <rect x="905" y="150" width="130" height="128" fill="none" stroke="#333" stroke-width="1.5"/>
+    <line x1="905" y1="166" x2="1035" y2="166" stroke="#888"/>
+    <line x1="905" y1="182" x2="1035" y2="182" stroke="#888"/>
+    <line x1="905" y1="198" x2="1035" y2="198" stroke="#888"/>
+    <line x1="905" y1="214" x2="1035" y2="214" stroke="#888"/>
+    <line x1="905" y1="230" x2="1035" y2="230" stroke="#888"/>
+    <line x1="905" y1="246" x2="1035" y2="246" stroke="#888"/>
+    <line x1="905" y1="262" x2="1035" y2="262" stroke="#888"/>
+    <g font-size="10.5" fill="#333">
+      <text x="880" y="161">bit 0</text>
+      <text x="880" y="177">bit 1</text>
+      <text x="880" y="193">bit 2</text>
+      <text x="880" y="209">bit 3</text>
+      <text x="880" y="225">bit 4</text>
+      <text x="880" y="241">bit 5</text>
+      <text x="880" y="257">bit 6</text>
+      <text x="880" y="273">bit 7</text>
+    </g>
+    <g font-size="9.5" fill="#5b6470">
+      <text x="1040" y="161">top row of page</text>
+      <text x="1040" y="273">bottom row of page</text>
+    </g>
+  </g>
+
+  <g font-size="10.3" font-style="italic" fill="#3a3f46">
+    <text x="880" y="298">LSB = topmost row of the page — carried</text>
+    <text x="880" y="311">as strongly indicated from the controller's</text>
+    <text x="880" y="324">RAM format, then upgraded to CONFIRMED</text>
+    <text x="880" y="337">once real glyphs rendered upright and</text>
+    <text x="880" y="350">continuous across page boundaries.</text>
+  </g>
+  <text x="880" y="373" font-size="11.5" fill="#333">buffer cleared to 0xFF at init; inverse</text>
+  <text x="880" y="388" font-size="11.5" fill="#333">display ON → 0xFF is the BLANK pattern.<tspan fill="#1a7d3a" font-size="10.5"> (CONFIRMED)</tspan></text>
+
+  <!-- =========================== ROW 2 =========================== -->
+  <!-- Window-program panel -->
+  <rect x="20" y="440" width="410" height="190" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="32" y="458" font-size="14" font-weight="700" fill="#15181c">Window-program sequence (every partial update)</text>
+
+  <g font-size="9.6">
+    <!-- row 1: 4 boxes -->
+    <rect x="30" y="475" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="75" y="490" text-anchor="middle" font-weight="700">CMD 0x89</text>
+    <text x="75" y="503" text-anchor="middle">RAM addr</text>
+    <text x="75" y="515" text-anchor="middle">control</text>
+
+    <rect x="130" y="475" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="175" y="490" text-anchor="middle" font-weight="700">CMD 0xF8</text>
+    <text x="175" y="503" text-anchor="middle">window mode</text>
+    <text x="175" y="515" text-anchor="middle">OFF</text>
+
+    <rect x="230" y="475" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="275" y="488" text-anchor="middle" font-weight="700">CMD 0xF5</text>
+    <text x="275" y="500" text-anchor="middle">+data (y0&gt;&gt;3)</text>
+    <text x="275" y="512" text-anchor="middle">window start page</text>
+
+    <rect x="330" y="475" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="375" y="488" text-anchor="middle" font-weight="700">CMD 0xF7</text>
+    <text x="375" y="500" text-anchor="middle">+data (y1&gt;&gt;3)</text>
+    <text x="375" y="512" text-anchor="middle">window end page</text>
+
+    <line x1="120" y1="500" x2="130" y2="500" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="220" y1="500" x2="230" y2="500" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="320" y1="500" x2="330" y2="500" stroke="#333" marker-end="url(#arrow)"/>
+    <path d="M375,525 L375,535 L75,535 L75,545" fill="none" stroke="#333" marker-end="url(#arrow)"/>
+
+    <!-- row 2: 4 boxes -->
+    <rect x="30" y="547" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="75" y="562" text-anchor="middle" font-weight="700">CMD 0xF4</text>
+    <text x="75" y="574" text-anchor="middle">+data (x0)</text>
+    <text x="75" y="586" text-anchor="middle">window start col</text>
+
+    <rect x="130" y="547" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="175" y="562" text-anchor="middle" font-weight="700">CMD 0xF6</text>
+    <text x="175" y="574" text-anchor="middle">+data (x1)</text>
+    <text x="175" y="586" text-anchor="middle">window end col</text>
+
+    <rect x="230" y="547" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="275" y="562" text-anchor="middle" font-weight="700">CMD 0xF9</text>
+    <text x="275" y="574" text-anchor="middle">window mode</text>
+    <text x="275" y="586" text-anchor="middle">ON</text>
+
+    <rect x="330" y="547" width="90" height="50" fill="#fff" stroke="#333"/>
+    <text x="375" y="562" text-anchor="middle" font-weight="700">CMD 0x01</text>
+    <text x="375" y="574" text-anchor="middle">trailer</text>
+    <text x="375" y="586" text-anchor="middle" fill="#7a5cc0">(possible)</text>
+
+    <line x1="120" y1="572" x2="130" y2="572" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="220" y1="572" x2="230" y2="572" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="320" y1="572" x2="330" y2="572" stroke="#333" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- Contrast / text panel -->
+  <rect x="445" y="440" width="365" height="190" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="457" y="458" font-size="14" font-weight="700" fill="#15181c">Contrast &amp; text metrics</text>
+  <g font-size="12" fill="#333">
+    <text x="457" y="481">contrast = CMD 0x81 then DATA</text>
+    <text x="457" y="497">(percent × 255 / 99), percent</text>
+    <text x="457" y="513">clamped to 0..99, init default</text>
+    <text x="457" y="529">register 0x50.<tspan fill="#1a7d3a" font-size="10.5"> (CONFIRMED)</tspan></text>
+
+    <text x="457" y="558">stock font: 6 × 8 px → 40 × 10</text>
+    <text x="457" y="574">character cells at 240 × 80;</text>
+    <text x="457" y="590">cursor y = BOTTOM row of the cell.<tspan fill="#1a7d3a" font-size="10.5"> (CONFIRMED)</tspan></text>
+  </g>
+
+  <!-- Cost table -->
+  <rect x="825" y="440" width="315" height="190" fill="none" stroke="#ccc" stroke-width="1"/>
+  <text x="837" y="458" font-size="14" font-weight="700" fill="#15181c">Transaction cost</text>
+  <g font-size="11" fill="#333">
+    <text x="837" y="478" font-weight="700">operation</text>
+    <text x="1080" y="478" font-weight="700" text-anchor="end">transactions</text>
+    <line x1="837" y1="483" x2="1128" y2="483" stroke="#bbb"/>
+    <text x="837" y="499">one command byte</text><text x="1080" y="499" text-anchor="end">1</text>
+    <text x="837" y="516">one double-byte command</text><text x="1080" y="516" text-anchor="end">2</text>
+    <text x="837" y="533">one pixel byte</text><text x="1080" y="533" text-anchor="end">1</text>
+    <text x="837" y="550">window_program()</text><text x="1080" y="550" text-anchor="end">12</text>
+    <text x="837" y="567">full-screen refresh (2400 B)</text><text x="1080" y="567" text-anchor="end">2412</text>
+    <text x="837" y="584">power-on init</text><text x="1080" y="584" text-anchor="end">23</text>
+  </g>
+  <text x="837" y="605" font-size="10.3" fill="#333">measured: 220,459 µs / full refresh ≈ 91 µs / transaction —</text>
+  <text x="837" y="618" font-size="10.3" fill="#333">per-call overhead, not bus time.<tspan fill="#1a7d3a" font-size="10"> (CONFIRMED)</tspan></text>
+
+  <!-- =========================== BRING-UP SEQUENCE =========================== -->
+  <text x="20" y="655" font-size="15" font-weight="700" fill="#15181c">Bring-up sequence — power-on to first refresh</text>
+
+  <!-- row A: steps 1-4 -->
+  <g font-size="10.6">
+    <rect x="30" y="670" width="260" height="95" fill="#fff" stroke="#333"/>
+    <text x="42" y="686" font-weight="700">1. Create I2C bus + handles</text>
+    <text x="42" y="702">Command handle 0x38, data</text>
+    <text x="42" y="716">handle 0x39. No GPIO touched —</text>
+    <text x="42" y="730">no display reset line anywhere.</text>
+    <text x="42" y="748" fill="#1a7d3a">(confirmed negative)</text>
+
+    <rect x="305" y="670" width="150" height="95" fill="#fff" stroke="#333"/>
+    <text x="380" y="700" text-anchor="middle" font-weight="700">2. Delay</text>
+    <text x="380" y="720" text-anchor="middle" font-size="13">150 ms</text>
+
+    <rect x="470" y="670" width="290" height="95" fill="#fff" stroke="#333"/>
+    <text x="482" y="686" font-weight="700">3. Send reset preamble</text>
+    <text x="482" y="702">CMD 0xE1 then DATA 0xE2 —</text>
+    <text x="482" y="716">replay verbatim. Whether 0xE1 is a</text>
+    <text x="482" y="730">double-byte opcode taking 0xE2 as</text>
+    <text x="482" y="744">its parameter is UNKNOWN.</text>
+    <text x="482" y="758" fill="#b23b3b">(unverified)</text>
+
+    <rect x="775" y="670" width="150" height="95" fill="#fff" stroke="#333"/>
+    <text x="850" y="700" text-anchor="middle" font-weight="700">4. Delay</text>
+    <text x="850" y="720" text-anchor="middle" font-size="13">150 ms</text>
+
+    <rect x="940" y="670" width="175" height="95" fill="#fff" stroke="#333"/>
+    <text x="952" y="686" font-weight="700">5. Replay 21-entry</text>
+    <text x="952" y="700" font-weight="700">init table, verbatim,</text>
+    <text x="952" y="714" font-weight="700">in order — see below</text>
+    <text x="952" y="734" fill="#1a7d3a">(CONFIRMED)</text>
+
+    <line x1="290" y1="717" x2="305" y2="717" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="455" y1="717" x2="470" y2="717" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="760" y1="717" x2="775" y2="717" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="925" y1="717" x2="940" y2="717" stroke="#333" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- init table detail -->
+  <rect x="30" y="780" width="1085" height="110" fill="#fbfbf8" stroke="#333"/>
+  <text x="42" y="797" font-size="11.5" font-weight="700" fill="#15181c">21-entry init table, replayed byte-for-byte, in order</text>
+  <g font-size="10.4" fill="#333">
+    <text x="42"  y="816">CMD 0xC9 + DATA 0xAC <tspan fill="#7a5cc0">(double-byte command, meaning possible)</tspan></text>
+    <text x="42"  y="832">CMD 0x2D — set pump control</text>
+    <text x="42"  y="848">CMD 0x24 — set temperature compensation</text>
+    <text x="42"  y="864">CMD 0xE9 — set LCD bias ratio</text>
+    <text x="42"  y="880">CMD 0xA3 — set line rate</text>
+
+    <text x="415" y="816">CMD 0xC4 — set LCD mapping control</text>
+    <text x="415" y="832">CMD 0x88 — set RAM address control</text>
+    <text x="415" y="848">CMD 0x81 + DATA 0x50 — contrast register = 0x50</text>
+    <text x="415" y="864">CMD 0xC8 + DATA 0x39 — set N-line inversion</text>
+    <text x="415" y="880">CMD 0xF1 + DATA 0x4F — set COM end = 79 (80 rows)</text>
+
+    <text x="795" y="816">CMD 0xF2 + DATA 0x00 — partial display start</text>
+    <text x="795" y="832">CMD 0xF3 + DATA 0x4F — partial display end</text>
+    <text x="795" y="848">CMD 0x85 <tspan fill="#7a5cc0">(possible)</tspan></text>
+    <text x="795" y="864">CMD 0x95 <tspan fill="#7a5cc0">(possible)</tspan></text>
+    <text x="795" y="880">CMD 0xA7 — set inverse display ON</text>
+  </g>
+
+  <!-- row C: steps 6,7,8,A,B -->
+  <g font-size="10.6">
+    <line x1="575" y1="765" x2="575" y2="780" stroke="#333"/>
+    <path d="M62,890 L62,905" stroke="#333" marker-end="url(#arrow)"/>
+
+    <rect x="35" y="905" width="180" height="105" fill="#fff" stroke="#333"/>
+    <text x="47" y="924" font-weight="700">6. Blank framebuffer</text>
+    <text x="47" y="942">Fill all 2400 bytes</text>
+    <text x="47" y="956">with 0xFF.</text>
+
+    <rect x="230" y="905" width="180" height="105" fill="#fff" stroke="#333"/>
+    <text x="242" y="924" font-weight="700">7. One full-screen</text>
+    <text x="242" y="938" font-weight="700">refresh</text>
+    <text x="242" y="956">Window program over</text>
+    <text x="242" y="970">(0,0)..(239,79) plus</text>
+    <text x="242" y="984">all 2400 data bytes.</text>
+
+    <!-- flagged step 8 -->
+    <rect x="425" y="905" width="300" height="105" fill="#fff5f0" stroke="#b23b3b" stroke-width="2.5"/>
+    <text x="437" y="922" font-weight="700" fill="#b23b3b">⚠ 8. Display-enable step</text>
+    <text x="437" y="938">CMD 0xC9 + DATA 0xAD.</text>
+    <text x="437" y="952">Bytes &amp; position <tspan fill="#1a7d3a">(CONFIRMED)</tspan>; meaning</text>
+    <text x="437" y="966">"display enable after RAM is</text>
+    <text x="437" y="980">valid" <tspan fill="#a9720b">(strongly indicated)</tspan>. Omitting it</text>
+    <text x="437" y="994">leaves an init'd, fed panel dark —</text>
+    <text x="437" y="1006">the observed blank-panel cause.</text>
+
+    <rect x="740" y="905" width="180" height="105" fill="#f5fbf6" stroke="#2f6b3f" stroke-width="1.5" stroke-dasharray="5,4"/>
+    <text x="752" y="922" font-weight="700">A. System reset</text>
+    <text x="752" y="938">Actual UC1611 System</text>
+    <text x="752" y="952">Reset: CMD 0xE2, CD=0,</text>
+    <text x="752" y="966">ahead of the preamble.</text>
+    <text x="752" y="980">5 ms settle before,</text>
+    <text x="752" y="994">150 ms after.</text>
+    <text x="752" y="1008" fill="#2f6b3f">(optional, additive)</text>
+
+    <rect x="935" y="905" width="180" height="105" fill="#f5fbf6" stroke="#2f6b3f" stroke-width="1.5" stroke-dasharray="5,4"/>
+    <text x="947" y="922" font-weight="700">B. Zero scroll line</text>
+    <text x="947" y="938">Force vertical origin to</text>
+    <text x="947" y="952">0: send CMD 0x50 then</text>
+    <text x="947" y="966">CMD 0x40 (MSB then</text>
+    <text x="947" y="980">LSB) at end of bring-up.</text>
+    <text x="947" y="1008" fill="#2f6b3f">(additive — note below)</text>
+
+    <line x1="215" y1="957" x2="230" y2="957" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="410" y1="957" x2="425" y2="957" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="725" y1="957" x2="740" y2="957" stroke="#333" marker-end="url(#arrow)"/>
+    <line x1="920" y1="957" x2="935" y2="957" stroke="#333" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- note on B -->
+  <rect x="30" y="1025" width="1085" height="70" fill="#fdfaf0" stroke="#a9720b" stroke-width="1.2"/>
+  <text x="42" y="1043" font-size="11.5" font-weight="700" fill="#a9720b">Note on step B — why the scroll line matters</text>
+  <g font-size="11.3" fill="#333">
+    <text x="42" y="1060">Neither firmware ever programs the controller's row-granular vertical origin, so both inherit whatever the register holds out</text>
+    <text x="42" y="1074">of its own power-on reset. On the observed unit that value was 15, and the whole image displayed 15 rows too high — not a</text>
+    <text x="42" y="1088">multiple of 8, therefore not a page or window error. <tspan fill="#a9720b">(strongly indicated)</tspan></text>
+  </g>
+
+  <!-- footer -->
+  <line x1="20" y1="1108" x2="1130" y2="1108" stroke="#ccc"/>
+  <g font-size="11.5" fill="#3a3f46">
+    <text x="20" y="1128">Controller family is UC1611/UC1611s-class <tspan fill="#a9720b">(strongly indicated)</tspan> — every opcode used lands in that command map, but three bytes</text>
+    <text x="20" y="1145">(0xC9, 0x95 and the 0xE1 preamble) have no row in the public revision of that command table, so they are replayed verbatim</text>
+    <text x="20" y="1162">rather than paraphrased. Panel technology, physical size and dot pitch as seen rather than inferred remain <tspan fill="#b23b3b">unverified</tspan>.</text>
+  </g>
+</svg>

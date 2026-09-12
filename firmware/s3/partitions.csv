@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: MIT
+# ==============================================================================
+# BYOK Mod S3 partition table -- reproduces the DEVICE's ACTUAL table
+# ==============================================================================
+# This is NOT a partition table we design or ever flash. It exists so that
+# idf.py build's own reasoning about partitions (the app-image-must-fit
+# check against `ota_1`'s size, esp_ota_* validating slots at runtime,
+# `idf.py partition-table` output for a human to sanity-check against
+# docs/recovery.md) agrees with the table that is ALREADY, PERMANENTLY on
+# the physical device -- verified by reading the device's own flash at
+# 0x8000 on 2026-09-02 (docs/recovery.md "Partition map -- VERIFIED FROM
+# DEVICE"; the table's own stored MD5 self-validated against a
+# recomputation over its 7 entries, so this is a device read, not an
+# inference from the vendor's release archive or an IDF default layout).
+#
+# SAFETY.md's hard rules forbid writing bootloader/partition-table/nvs/
+# phy_init/otadata at all, and this project's own hard rules restrict our
+# own images to whichever slot esp_ota_get_next_update_partition() picks
+# (ota_0 on a virgin/all-0xFF otadata -- no OTA has ever run -- otherwise
+# ota_1) or the stock SD updater path. NOT always ota_1: a freshly
+# first-installed BYOK image can itself be sitting in ota_0 (see
+# firmware/s3/main/app_main.c's byok_find_stock_partition() comment and
+# docs/bootloader-analysis.md). This file is CONFIG_PARTITION_TABLE_CUSTOM's
+# input to `idf.py build`
+# only -- `idf.py flash` (which would write this table's bytes to 0x8000)
+# must NEVER be run against this device. See README.md.
+#
+# If this file and the device ever disagree, the device is correct --
+# re-derive this file from docs/recovery.md, never the reverse.
+#
+# Name,     Type, SubType,  Offset,    Size,      Flags
+nvs,        data, nvs,      0x9000,    0x4000,
+phy_init,   data, phy,      0xF000,    0x1000,
+factory,    app,  factory,  0x10000,   0x300000,
+ota_0,      app,  ota_0,    0x310000,  0x300000,
+ota_1,      app,  ota_1,    0x610000,  0x300000,
+otadata,    data, ota,      0x910000,  0x2000,
+assets,     data, fat,      0x912000,  0x40000,
+# 0x952000..0x1000000 (6.68 MiB) is unallocated on the device -- deliberately
+# not represented by a partition entry here, matching docs/recovery.md
+# exactly. Do not add an entry to "reclaim" it.

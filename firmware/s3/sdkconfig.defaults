@@ -1,0 +1,333 @@
+# SPDX-License-Identifier: MIT
+# ==============================================================================
+# BYOK Mod S3 -- sdkconfig defaults
+# ==============================================================================
+# Applied on `idf.py set-target esp32s3` / `idf.py reconfigure` against a
+# fresh sdkconfig. Never hand-edit the generated `sdkconfig` in this repo --
+# change this file (or menuconfig, then copy the changed symbol back here)
+# so a clean checkout reproduces the same build.
+
+# ------------------------------------------------------------------------------
+# Target / flash
+# ------------------------------------------------------------------------------
+CONFIG_IDF_TARGET="esp32s3"
+
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+CONFIG_ESPTOOLPY_FLASHMODE_DIO=y
+CONFIG_ESPTOOLPY_FLASHMODE="dio"
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_ESPTOOLPY_FLASHFREQ="80m"
+# DECISION (PoC review pass, closing the discrepancy this comment used to
+# flag rather than carrying it forward): DIO, matching the vendor's OWN
+# image -- firmware/common/hw_config.h Sec.0 records [CONFIRMED] "esptool
+# image_info of both images: ... flash 16 MB, DIO, 80 MHz". The bootloader
+# half of the original "very likely inert" claim is correct (the second-
+# stage bootloader configures the MSPI once from ITS OWN header, and we
+# never touch or reflash the bootloader -- SAFETY.md hard rules). The app
+# half is NOT inert: CONFIG_ESPTOOLPY_FLASHMODE_QIO sets
+# default_chip.read_mode = SPI_FLASH_QIO (IDF esp_flash_spi_init.c), and
+# esp_flash_init_main() -> chip->chip_drv->set_io_mode() programs the
+# flash's non-volatile QE status bit when it is not already set --
+# a real (if here harmless) flash write triggered by our own app on the one
+# boot with no rollback. Measured mitigating fact: this unit's QE bit is
+# already 1 (docs/flash-layout-and-updater.md, read_flash_status --bytes 3 =
+# 0x200200, SR2 bit1) and the WROOM-1 module is quad-wired, so QIO would not
+# actually have written anything here -- but DIO removes the untested
+# variable entirely, at zero throughput cost (nothing in this firmware is
+# flash-throughput sensitive), so it is the deliberate choice for the first
+# install. See firmware/s3/README.md "Guesses" item 1 for the prior
+# open-question framing this supersedes.
+
+# ------------------------------------------------------------------------------
+# PSRAM -- N16R2 module: 2 MiB QUAD PSRAM (AP_3v3)
+# ------------------------------------------------------------------------------
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_QUAD=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+# 40 MHz is the conservative, widely-used default for Quad (not Octal) PSRAM
+# on the S3; hw_config.h does not record a PSRAM speed (it was never part of
+# the RE pass), so this is a reasonable default rather than RE evidence --
+# see firmware/s3/README.md "Guesses" item 2.
+CONFIG_SPIRAM_SPEED_40M=y
+
+# ------------------------------------------------------------------------------
+# Console: UART0 primary + USB-Serial-JTAG secondary, matching stock
+# (hw_config.h Sec.11). This is a DIFFERENT USB peripheral/PHY-mux state
+# than the TinyUSB CDC-ACM link byok_usb_cdc brings up on the S3's native
+# USB-OTG controller -- see components/byok_usb_cdc/include/byok_usb_cdc.h
+# and README.md "Two USB personalities" for the PHY hand-over this implies.
+# ------------------------------------------------------------------------------
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+CONFIG_ESP_CONSOLE_SECONDARY_USB_SERIAL_JTAG=y
+
+# ------------------------------------------------------------------------------
+# Partition table -- CUSTOM, reproducing the device's own table exactly.
+# See partitions.csv's own header comment; this table is NEVER flashed.
+# ------------------------------------------------------------------------------
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_FILENAME="partitions.csv"
+CONFIG_PARTITION_TABLE_OFFSET=0x8000
+
+# ------------------------------------------------------------------------------
+# App version string
+# ------------------------------------------------------------------------------
+CONFIG_APP_PROJECT_VER_FROM_CONFIG=y
+CONFIG_APP_PROJECT_VER="byok-mod 0.1.15"
+
+# ------------------------------------------------------------------------------
+# 0.1.5 (docs/troubleshooting.md, new device evidence: 0.1.3
+# fully up for 285 s, byok info/status OK, DRAW_TEXT + a full-black IMAGE +
+# a 10..90 contrast sweep all ACK but the panel never changes -- the only text
+# ever seen on the glass was the STOCK updater's own). Conclusion adopted:
+# this firmware has never put a pixel on the glass, and
+# CONFIG_BYOK_DISPLAY_BULK_WRITES=y (default since it was introduced, NEVER
+# exercised on real pixels per its own Kconfig help text, with ACK checking
+# disabled -- BYOK_LCD_I2C_DISABLE_ACK_CHECK=1 -- so a bad burst still reports
+# ESP_OK) is the prime suspect. Flip the project's own documented,
+# already-built fallback ON: components/byok_display/byok_display.c's
+# CONFIG_BYOK_DISPLAY_BULK_WRITES=n path was audited this release against
+# the stock-image disassembly recorded in firmware/common/hw_config.h Sec.1/3
+# and docs/display.md Sec.3.1/4, byte-for-byte -- I2C bus/device
+# config, reset preamble, 21-entry init table, window_program() opcode
+# sequence, per-byte send-with-1000ms-timeout-and-ACK-check-disabled, and the
+# 0xA7-inverse/0xFF-blank convention are ALL already identical to the vendor
+# disassembly (no defect found -- see docs/display.md "0.1.5 vendor-parity
+# audit" for the full comparison). This override exists only to stop using
+# the one path that is NOT vendor-identical (the multi-byte burst) while that
+# burst's real-hardware reliability remains unverified; revert once a real
+# boot with bulk writes back on is watched end-to-end and confirmed clean.
+# ------------------------------------------------------------------------------
+CONFIG_BYOK_DISPLAY_BULK_WRITES=n
+
+# ------------------------------------------------------------------------------
+# 0.1.6 (follow-up to the blank-display entry in docs/troubleshooting.md):
+# with 0.1.5's bulk-write
+# removal ALREADY at vendor parity (2412 I2C transactions per full refresh,
+# 0 errors, byte-for-byte vendor-identical stream -- confirmed on real
+# hardware) and the panel STILL blank, the remaining known divergence from
+# stock in the display init path is this option, which -- ON, the default
+# since 0.1.2 -- sends one EXTRA genuine UC1611 System Reset command (a real
+# CD=0 0xE2) before the vendor's own unchanged 0xE1/0xE2 preamble
+# (components/byok_display/Kconfig's own help text: stock never issues a
+# real reset at all). That extra command is additive and was never expected
+# to matter on a cold boot (the controller's own power-on reset already
+# puts it in a known state before either firmware's init table runs,
+# per that Kconfig's help text) -- but "never expected to matter" is not
+# the same as "confirmed not to matter", and 0.1.6 is specifically
+# auditing every remaining non-vendor-identical byte in this path
+# alongside the new GPIO-parity and ACK-probe changes. Set to OFF here so
+# this build sends the EXACT vendor byte sequence with nothing added or
+# reordered, isolating the GPIO-parity/ACK-probe changes as the only
+# behavioural difference from stock this release tests. The option itself
+# is NOT removed (component Kconfig default is still y) -- this is a
+# build-time override for THIS release's specific diagnostic goal, not a
+# verdict on whether the true-reset command is safe or useful; re-enable
+# once 0.1.6 either confirms or clears GPIO 35/39/47 parity as the cause.
+# ------------------------------------------------------------------------------
+CONFIG_BYOK_DISPLAY_TRUE_SYSTEM_RESET=n
+
+# ------------------------------------------------------------------------------
+# "main" task stack: raised from the bare IDF default (3584 B) to 8192 B,
+# 0.1.3, defence in depth -- docs/troubleshooting.md.
+# The actual fix for that incident is main/app_main.c's dedicated
+# byok_sd_upd task (SD_UPDATER_TASK_STACK_BYTES, sized independently of
+# this value) plus moving byok_sd_updater.c's own buffers off the stack
+# entirely (heap_caps_malloc) -- this bump is a second, independent layer,
+# not a substitute for either: "main" itself now does no more than it ever
+# did (a few ESP_LOGI lines, GPIO config calls, and blocking on the
+# updater task's notification), so this is cheap, permanent headroom
+# against whatever gets added to app_main()'s own body next, not a
+# response to a specific measured need. tests/static/check_stack_budgets.py
+# fails the build if this ever drops back below 8192.
+# ------------------------------------------------------------------------------
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# ------------------------------------------------------------------------------
+# TinyUSB / esp_tinyusb (components/byok_usb_cdc) -- CDC-ACM only.
+# ------------------------------------------------------------------------------
+CONFIG_TINYUSB_CDC_ENABLED=y
+CONFIG_TINYUSB_CDC_COUNT=1
+# Sized to hold one whole BYOK Link frame (BYOK_MAX_FRAME = 4109 B,
+# docs/protocol.md Sec.8) so byok_usb_cdc_send() never partially queues a
+# well-formed reply.
+CONFIG_TINYUSB_CDC_RX_BUFSIZE=4224
+CONFIG_TINYUSB_CDC_TX_BUFSIZE=4224
+
+# VID stays Espressif's own (0x303A) -- this is a hobbyist/community mod
+# built with Espressif silicon, not a claim to be an Espressif product; using
+# their VID for USB enumeration during development is standard practice
+# (their own Kconfig help text: "helpful at product develop stage").
+CONFIG_TINYUSB_DESC_USE_ESPRESSIF_VID=y
+# PID: deliberately NOT the TinyUSB example default (0x4000-range, which
+# collides with the STOCK firmware's own Disk-Mode PID 0x4002 -- see
+# docs/usb-and-boot-modes.md) and NOT 0x1001 (the S3's own USB-Serial-JTAG debug
+# interface, an entirely different peripheral). See firmware/s3/README.md
+# "USB PID choice" for the full reasoning and where this value comes from
+# (espressif/usb-pids on GitHub, the *next available* slot in Espressif's
+# own customer-PID registry as of 2026-09-03).
+CONFIG_TINYUSB_DESC_USE_DEFAULT_PID=n
+CONFIG_TINYUSB_DESC_CUSTOM_PID=0x83B8
+# Manufacturer/product strings below are superseded at runtime by
+# byok_usb_cdc.c's own string array (needed anyway for the MAC-derived
+# serial number, which Kconfig cannot express) -- kept here only so
+# `idf.py menuconfig` shows the same identity a human would expect, and as a
+# fallback if byok_usb_cdc.c's array is ever simplified back to NULL.
+CONFIG_TINYUSB_DESC_MANUFACTURER_STRING="BYOK Lab"
+CONFIG_TINYUSB_DESC_PRODUCT_STRING="BYOK Mod Display"
+
+# ------------------------------------------------------------------------------
+# BYOK Mod app options (main/Kconfig.projbuild) -- explicit default, spelled
+# out here even though it matches the Kconfig default, so it's visible in a
+# diff if anyone ever flips it in this file.
+# ------------------------------------------------------------------------------
+CONFIG_BYOK_ALLOW_OTADATA_WRITE=n
+
+# ------------------------------------------------------------------------------
+# D-017 (docs/design-rationale.md): the SD updater's own OTA write (esp_ota_begin/
+# write/end into esp_ota_get_next_update_partition(NULL) +
+# esp_ota_set_boot_partition, components/byok_sd_updater) is ARMED in this
+# PoC build, on its OWN gate -- separate from CONFIG_BYOK_ALLOW_OTADATA_WRITE
+# above, which stays `n` and continues to gate BOOT_ORIGINAL, the boot-time
+# EXECUTE-hold, and esp_ota_mark_app_valid_cancel_rollback(). Rationale
+# (D-017, in full): this write reproduces exactly the stock updater's own
+# operation -- the designated, maker-documented recovery path (D-011/D-015)
+# -- esp_ota_end() validates the image before the boot selector is ever
+# written, a corrupt image falls back to `factory` on this bootloader
+# regardless (docs/bootloader-analysis.md), esptool erase_region of
+# `otadata` remains the ultimate off-device fallback, and
+# CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=n (below) guarantees esp_ota_begin()
+# never touches the other otadata sector. See
+# components/byok_sd_updater/Kconfig for the option's own help text.
+# ------------------------------------------------------------------------------
+CONFIG_BYOK_SD_UPDATER_ARMED=y
+
+# ------------------------------------------------------------------------------
+# 0.1.14: byok_nvs's own persistence gate (components/byok_nvs/Kconfig
+# CONFIG_BYOK_NVS_PERSIST_ARMED, default n) is armed ON here, the same
+# per-build-override shape as CONFIG_BYOK_SD_UPDATER_ARMED just above --
+# the component's own Kconfig default is UNCHANGED (still n), this line is
+# what makes `idf.py build` in THIS tree produce an armed image, same
+# convention, same reasoning shape as D-017's SD-updater override.
+#
+# What arming this actually does: byok_nvs_init() calls nvs_flash_init()
+# and opens this firmware's OWN namespace ("byokmod") inside the vendor's
+# shared `nvs` partition (0x9000, firmware/s3/partitions.csv -- the only
+# NVS-type partition this device's flash has; there is no dedicated
+# partition to use instead, see byok_nvs.h's own header comment). From
+# then on, byok_note's SET_NOTE text, byok_idle's selected idle submode +
+# backlight index, and (0.1.14) byok_menu's preset list ("presets") +
+# selected preset ("preset") all survive a reboot instead of living in RAM
+# only for the session. byok_nvs.c still never calls nvs_flash_erase()
+# under any condition, armed or not (unchanged), and this firmware still
+# never opens, reads, or writes the vendor's OWN namespace ("BYOK") or any
+# other vendor namespace sharing that same physical partition (RTCI, KBLY,
+# WFST, SODU, SYSI, DFNT, CONTR, CTYP, BTKL, BT_K, WIFI, LWSS, DJWT, BLBR,
+# DMDE, ACPR) -- NVS namespace isolation is a hard boundary the API itself
+# enforces (nvs_open("byokmod", ...) cannot see or touch keys under any
+# other namespace), unaffected by this flag.
+#
+# docs/design-rationale.md D-003 (a verified backup AND a *tested* recovery path,
+# both required before any write to this device) is met for the backup
+# half (the S3's full flash, including `nvs` byte-for-byte, is already
+# backed up -- docs/design-rationale.md's own evidence table) but the tested-
+# recovery-path half has, as of this release, only been rehearsed for the
+# OTA app-partition write path (D-016's Stage A rehearsal, whose outcome
+# D-018 records) -- nobody has yet rehearsed
+# writing to, or restoring, THIS device's `nvs` partition specifically,
+# `byokmod` or otherwise. Arming this in the build is a deliberate release
+# decision, taken explicitly for 0.1.14 and build-armed; it is NOT itself
+# the D-003 sign-off for the
+# owner's own physical device -- CHANGELOG.md's 0.1.14 entry says so
+# explicitly: the owner must confirm they accept that gap before this
+# build is ever installed over USB/SD, the same "read this before you
+# flash" posture every prior armed-gate release in this file already
+# carries.
+# ------------------------------------------------------------------------------
+CONFIG_BYOK_NVS_PERSIST_ARMED=y
+
+# ------------------------------------------------------------------------------
+# OTA rollback: OFF. docs/bootloader-analysis.md Sec.3 settles by disassembly
+# that the STOCK bootloader on this device -- the only bootloader that ever
+# runs, since we never reflash it (SAFETY.md hard rules) -- has
+# CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=n: no PENDING_VERIFY->ABORTED loop,
+# no NEW->PENDING_VERIFY store, a single write_otadata call site. It reacts
+# to ota_state only for values 3/4 (Sec.3.2) and otherwise treats UNDEFINED
+# and VALID identically. There is therefore NO automatic revert on this
+# device: an image that verifies but then crashes or hangs boot-loops
+# forever (Sec.6 scenario 1); the real recovery net is host-esptool-over-USJ
+# (Sec.8.3), not this symbol. Setting it =y here would not add rollback
+# (the app-side symbol cannot change what a bootloader we never flash does)
+# -- it would only arm our OWN esp_ota_begin() to call
+# esp_ota_invalidate_inactive_ota_data_slot(), which erases the *other*
+# otadata sector (a write this bootloader DOES honour as unselectable), the
+# first time CONFIG_BYOK_ALLOW_OTADATA_WRITE is ever turned on -- silently
+# destroying a fallback slot (under D-016 Stage A, the stock-1.1.3 copy).
+# Kept =n (line retained, not deleted, so this reasoning survives in a
+# diff). Anti-rollback (security-version enforcement) stays off too --
+# irrelevant to a hobbyist single-device project, would only make recovery
+# harder, and IDF disallows it without ROLLBACK_ENABLE regardless.
+# ------------------------------------------------------------------------------
+CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=n
+CONFIG_BOOTLOADER_APP_ANTI_ROLLBACK=n
+
+# ------------------------------------------------------------------------------
+# Panic behaviour: with no on-device rollback (above), a panic loop is the
+# worst case this firmware can put itself into, and it is otherwise as tight
+# as possible (IDF default REBOOT_DELAY_SECONDS=0). A few seconds' delay
+# leaves a readable backtrace on the console and widens the esptool-over-USJ
+# recovery window on each loop iteration, at negligible cost.
+# ------------------------------------------------------------------------------
+CONFIG_ESP_SYSTEM_PANIC_REBOOT_DELAY_SECONDS=3
+
+# ------------------------------------------------------------------------------
+# FreeRTOS stack-overflow detection: CANARY method (writes and checks a
+# sentinel word past the end of each task's stack on every context switch --
+# this is exactly what caught the 2026-09-03 incident and produced its
+# "A stack overflow in task main has been detected" message). Already IDF's
+# own default and therefore already in effect even before this line existed
+# (see firmware/s3/sdkconfig, which mirrors whatever the toolchain's default
+# choice is) -- pinned explicitly here, per this file's own top-of-file rule
+# ("change this file... so a clean checkout reproduces the same build"),
+# specifically so a future IDF upgrade changing its own default can't
+# silently turn this off. Never weaken to PTRVAL or NONE.
+# ------------------------------------------------------------------------------
+CONFIG_FREERTOS_CHECK_STACKOVERFLOW_CANARY=y
+
+# ------------------------------------------------------------------------------
+# 0.1.7 (docs/display.md Sec.6 -- re-derived the command(0x38)/data(0x39)
+# I2C address polarity from the vendor disassembly AND the real UltraChip
+# UC1611 datasheet; found NO inversion, CONFIRMED the existing mapping):
+# components/byok_display/Kconfig's new BYOK_DISPLAY_POLARITY_EXPERIMENT
+# defaults to `y` in the component Kconfig itself, so no override line is
+# needed here -- this comment exists only so the option's presence in this
+# release is visible from this file without having to open the component
+# Kconfig. ON (this build): byok_display_run_boot_selftest() is REPLACED by
+# byok_display_run_polarity_experiment() -- see that Kconfig entry's help
+# text for the three-pass (A/B/C) design. `CONFIG_BYOK_DISPLAY_TRUE_SYSTEM_
+# RESET=n` and `CONFIG_BYOK_DISPLAY_BULK_WRITES=n` above are UNCHANGED by
+# this release (still explicit overrides from 0.1.6/0.1.5 respectively) --
+# the polarity experiment's own reinit passes go through the same
+# lcd_hw_reset_and_init()/flush_rect() paths those options already gate, so
+# both settings apply identically across all three passes.
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# 0.1.8 (instruction-level reversal of the vendor's sim_send()/sim_reset() --
+# the functions this project's "I2C GPIO expander" hypothesis was about;
+# published in docs/display.md Sec.6): REFUTED. The vendor's own transport is exactly one 1-byte
+# i2c_master_transmit() per LCD byte to 0x38 (command) / 0x39 (data), no
+# strobe, no control byte, no delay, no read path -- already byte-for-byte
+# and transaction-for-transaction what this driver's lcd_send() does. No
+# transport code changed this release. `CONFIG_BYOK_DISPLAY_POLARITY_
+# EXPERIMENT`'s component-Kconfig default flips back to `n` (that option's
+# own updated help text explains why); no override line is needed here for
+# that, same as no override was needed for `y` in 0.1.7 -- both defaults
+# come from the component Kconfig alone. The one substantive change is
+# code, not config: byok_display_init()/byok_display_full_refresh(true) now
+# also send the vendor's CMD 0xC9 / DATA 0xAD display-enable pair once,
+# immediately after the first full frame reaches display RAM
+# (hw_config.h Sec.3.2.1) -- the one gdisp_init() step byok-mod omitted
+# through 0.1.7.
+# ------------------------------------------------------------------------------

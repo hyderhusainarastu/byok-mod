@@ -1,0 +1,46 @@
+menu "BYOK NVS persistence"
+
+    config BYOK_NVS_PERSIST_ARMED
+        bool "Persist SET_NOTE text / idle-mode selection / backlight level across reboot (writes the shared nvs partition)"
+        default n
+        help
+            With this OFF (the default), byok_note's stored text, byok_idle's
+            selected idle submode (CLOCK/STATIC_NOTE/BLANK) and its selected
+            backlight-level index all live in RAM only -- fully usable for
+            the running session (SET_NOTE works, the back buttons cycle
+            everything), just not remembered across a reboot. No NVS API of
+            any kind is called with this off (byok_nvs_init() returns
+            immediately, see byok_nvs.h/.c).
+
+            Turning this ON makes byok_nvs_init() call nvs_flash_init() and
+            open this firmware's own namespace ("byokmod") inside the
+            vendor's shared `nvs` partition (0x9000, firmware/s3/
+            partitions.csv) -- the ONLY NVS-type partition this specific
+            device's flash actually has; SAFETY.md §1 / partitions.csv's
+            own header comment forbid adding a partition-table entry for a
+            dedicated store instead. Namespace isolation keeps this
+            firmware's keys ("note", "idle_mode", "backlight_lvl", "presets",
+            "preset" -- the last two 0.1.14, byok_menu's preset-menu name
+            list and selection) strictly
+            separate from every vendor namespace (BYOK, RTCI, KBLY, WFST,
+            SODU, SYSI, DFNT, CONTR, CTYP, BTKL, BT_K, WIFI, LWSS, DJWT,
+            BLBR, DMDE, ACPR -- enumerated from the stock NVS partition) -- NVS
+            itself enforces that boundary; nvs_open("byokmod", ...) cannot
+            see or touch keys under any other namespace. byok_nvs.c never
+            calls nvs_flash_erase() under any condition, on or off.
+
+            docs/design-rationale.md D-003 is an AND-gate (a verified backup AND a
+            *tested* recovery path) before any write to this device is
+            authorised. The backup half is met for the S3's full flash
+            (including `nvs`, byte-for-byte, docs/design-rationale.md's own
+            evidence table). The tested-recovery-path half has only been
+            demonstrated for the OTA app-partition write path (D-016's
+            Stage A rehearsal, whose outcome D-018 records) -- nobody has
+            rehearsed writing to, or
+            restoring, this device's `nvs` partition, this namespace or
+            otherwise. Leave this OFF until a decision record (a future
+            D-0xx entry, same shape as D-017 for the SD updater's own OTA
+            writes) specifically clears that gate for this feature -- not as
+            a build-time convenience, and not on a single release's say-so.
+
+endmenu

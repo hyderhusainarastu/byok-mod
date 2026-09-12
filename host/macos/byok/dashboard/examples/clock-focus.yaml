@@ -1,0 +1,54 @@
+# clock-focus.yaml -- a big clock is the whole point of the panel.
+#
+# Three widgets, tuned for the device's real 240x80 1bpp panel: a large
+# HH:MM:SS clock fills the top ~60% of the height, with the date and a
+# battery readout sharing a big, easy-to-read row underneath.
+#
+# Renders fully with the offline/fake providers (`byok.dashboard.preview
+# --offline`, or the bundled tests) -- `mac_stats` degrades to "BATT --%"
+# rather than raising when there's no real `MacStatsProvider` behind it.
+#
+# Try it:
+#   byok dashboard --config clock-focus            # bare example name
+#   byok dashboard --config examples/clock-focus.yaml
+#
+# See docs/host-tools.md for the full widget/option reference.
+
+display:
+  width: 240
+  height: 80
+  bpp: 1
+
+refresh_seconds: 1
+
+layout:
+  grid:
+    cols: 12
+    rows: 5
+
+widgets:
+  # Big clock, seconds included so it visibly ticks every refresh -- fills
+  # the top 3 of 5 rows (48px).
+  - type: clock
+    at: [0, 0]
+    span: [12, 3]
+    options:
+      format: "%H:%M:%S"
+
+  # Date, left half of the remaining 2 rows (32px) -- plenty of room for
+  # the auto-fit font to land well above the 8px "thin-stroke" danger zone
+  # (docs/troubleshooting.md), so this is left at the
+  # default text_case ("as-is") rather than forced upper.
+  - type: date
+    at: [0, 3]
+    span: [6, 2]
+    options:
+      format: "%a, %b %-d"
+
+  # Battery percentage, right half -- same box size/legibility margin as
+  # date above.
+  - type: mac_stats
+    at: [6, 3]
+    span: [6, 2]
+    options:
+      fields: [battery]

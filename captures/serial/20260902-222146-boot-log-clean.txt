@@ -1,0 +1,75 @@
+I (333) esp_psram: Found 2MB PSRAM device
+I (568) esp_psram: SPI SRAM memory test OK
+I (576) cpu_start: GPIO 44 and 43 are used as console UART I/O pins
+I (577) cpu_start: Pro cpu start user code
+I (577) cpu_start: cpu freq: 160000000 Hz
+I (582) app_init: Application information:
+I (586) app_init: Project name:     BYOK
+I (591) app_init: App version:      f764bf4-dirty
+I (596) app_init: Compile time:     Mar 20 2026 08:12:43
+I (602) app_init: ELF file SHA256:  cc5a34b7d...
+I (608) app_init: ESP-IDF:          v5.5.3-dirty
+I (613) efuse_init: Min chip rev:     v0.0
+I (618) efuse_init: Max chip rev:     v0.99 
+I (623) efuse_init: Chip rev:         v0.2
+I (627) heap_init: Initializing. RAM available for dynamic allocation:
+I (635) heap_init: At 3FCAA440 len 0003F2D0 (252 KiB): RAM
+I (641) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (647) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (653) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (659) esp_psram: Adding pool of 2048K of PSRAM memory to heap allocator
+I (667) spi_flash: detected chip: generic
+I (671) spi_flash: flash io: qio
+W (675) rmt(legacy): legacy driver is deprecated, please migrate to `driver/rmt_tx.h` and/or `driver/rmt_rx.h`
+W (686) ADC: legacy driver is deprecated, please migrate to `esp_adc/adc_oneshot.h`
+I (695) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (702) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (710) main_task: Started on CPU0
+I (720) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations
+I (720) main_task: Calling app_main()
+I (730) main_task: Returned from app_main()
+I (730) MAIN_APP: Starting BYOK version 1.1.0
+I (750) SYS_APP: Free space on assets VFS: 159744
+Initializing language system...
+I (870) UI_APP: No language preference found, using default: en
+Loading language: en
+Attempting to load file: /base_path/lang_en.lua
+File loaded successfully, executing...
+Language loaded successfully: en
+Language system initialized with: en
+system init'd, waiting for start
+I (880) LuaManager: Lua initialized successfully
+I (890) SYS_APP: Initializing System
+W (890) i2c.master: Please check pull-up resistances whether be connected properly. Otherwise unexpected behavior would happen. For more detailed information, please read docs
+I (910) POWER_APP: USB state: 2
+I (910) POWER_APP: power app initialized.
+I (920) PCF8563: initialized
+I (920) TIME_MGR: initialized
+I (930) FILE_APP: Free heap: 2202444 bytes, largest block: 2031616 bytes
+I (930) FILE_APP: Allocating large page buffer: 65536 bytes
+I (940) FILE_APP: Mounting filesystem
+Name: APPSD
+Type: SDSC
+Speed: 40.00 MHz (limit: 40.00 MHz)
+Size: 120MB
+CSD: ver=1, sector_size=512, capacity=245760 read_bl_len=10
+SSR: bus_width=1
+I (1000) FILE_APP: Projects directory exists: /SDCARD/Projects
+I (1000) FILE_APP: Updates directory exists: /SDCARD/Updates
+I (1010) FILE_APP: Fonts directory exists: /SDCARD/Fonts
+I (1020) FILE_APP: Projects and Updates directories checked/created
+I (1020) UPDATE_APP: Checking for update
+I (1030) BACKLIGHT: Backlight initialized
+I (1030) gclcd1611: reset
+W (1040) i2c.master: Please check pull-up resistances whether be connected properly. Otherwise unexpected behavior would happen. For more detailed information, please read docs
+I (4080) FILE_APP: SD Card space: 121856 KiB total, 120824 KiB available
+W (4080) FILE_APP: No file is currently open. Cannot count words.
+I (4090) KeyboardMapper: Created new KeyboardMapper instance with layout 0
+I (4090) FILE_APP: Opening file for reading: /SDCARD/Sync/library.json
+I (4100) FILE_APP: Successfully opened file for reading: Sync/library.json
+I (4110) FILE_APP: File closed successfully
+I (4110) LIBRARY_APP: Successfully loaded database from Sync/library.json with 1 projects
+I (4120) LIBRARY_APP: Starting database integrity check
+I (4130) FILE_APP: Found 1 projects.
+I (4130) FILE_APP: Found 0 files in project: lulli
+I (4140) HID_USB: HID Init
