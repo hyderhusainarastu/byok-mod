@@ -139,7 +139,7 @@ it.
 This project — its code and its documentation — is provided **"as is,"
 without warranty of any kind**, express or implied, to the fullest extent
 permitted by law, as stated in [LICENSE](LICENSE) (code, MIT) and
-[LICENSE-DOCS](LICENSE-DOCS) (documentation, CC BY 4.0).
+[LICENSE-DOCS](docs/LICENSE-DOCS) (documentation, CC BY 4.0).
 
 Installing this firmware modifies the application partition of a physical
 device. We describe, and ourselves used, a verified path back to the

@@ -1,5 +1,9 @@
 # byok-mod
 
+**In short:** unofficial reverse-engineering notes, custom ESP-IDF firmware and a macOS host tool for the BYOK v2.1 writing device (ESP32-S3).
+**What you get:** documented flash layout, SD-card updater, USB protocol and recovery path, plus a `byok` CLI that draws on the device panel over USB.
+**What you do not get:** any vendor firmware. You supply your own stock archive, and a verified flash backup comes before any write.
+
 Reverse-engineering notes and replacement firmware for the **BYOK v2.1**
 distraction-free writing device — plus a macOS host tool that draws on its
 panel over USB, and a couple of optional sample projects built on top of
@@ -115,7 +119,7 @@ it illustrates.
 
 ```
 byok-mod/
-  README.md  LEGAL.md  SAFETY.md  CONTRIBUTING.md  CHANGELOG.md  LICENSE  LICENSE-DOCS
+  README.md  LEGAL.md  SAFETY.md  CONTRIBUTING.md  CHANGELOG.md  AGENTS.md  LICENSE  (docs/LICENSE-DOCS)
   firmware/
     common/          Shared headers (hw_config.h) and the protocol/tar code both sides use
     s3/              The ESP32-S3 application (ESP-IDF project) — this project's own firmware,
@@ -276,8 +280,28 @@ The code and documentation in this repository are dual-licensed:
 
 - **Code** — [MIT](LICENSE).
 - **Documentation** (everything under `docs/`, this README, and the other
-  root-level `.md` files) — [CC BY 4.0](LICENSE-DOCS).
+  root-level `.md` files) — [CC BY 4.0](docs/LICENSE-DOCS). The CC BY 4.0
+  text lives in `docs/` so the root `LICENSE` is the plain MIT text.
 
 This licence covers this project's own original code and documentation. It
 does not cover the vendor's firmware, which is not distributed here — see
 [LEGAL.md](LEGAL.md).
+
+## Use from an AI coding agent
+
+[AGENTS.md](AGENTS.md) holds the rules for agents: never flash without a
+verified backup, and the host-tool and test commands. Claude Code, Gemini CLI
+and Copilot read pointer files (`CLAUDE.md`, `GEMINI.md`,
+`.github/copilot-instructions.md`) that lead to it; Codex and Cursor read
+`AGENTS.md` directly. These files are instructions only, so the repo is not an
+agent skill and has no `PROMPT.md`.
+
+## Related
+
+- [hardware-mod-toolkit](https://github.com/hyderhusainarastu/hardware-mod-toolkit):
+  skills, prompts and a 14-phase playbook for modding an embedded device
+  without bricking it. This repo is the worked example.
+- [ai-coding-agent-guardrail-hooks](https://github.com/hyderhusainarastu/ai-coding-agent-guardrail-hooks):
+  guardrail hooks for coding agents working on risky tasks like this one.
+
+Part of palimnote-tools - more at https://github.com/hyderhusainarastu

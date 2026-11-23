@@ -43,7 +43,7 @@ vendor's own boot slot; that's out of scope by design, not by oversight.
 
 By contributing, you agree that your contribution is licensed under this
 project's existing licenses: [MIT](LICENSE) for code, [CC BY
-4.0](LICENSE-DOCS) for documentation. Don't submit a change that includes
+4.0](docs/LICENSE-DOCS) for documentation. Don't submit a change that includes
 vendor firmware, vendor assets, or anything extracted from a firmware
 image beyond the kind of short, attributed, regeneratable excerpt
 described in [LEGAL.md](LEGAL.md) §4.
